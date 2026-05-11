@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { RedisModule } from './redis/redis.module';
 import { SmsModule } from './sms/sms.module';
+import { EmailModule } from './email/email.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { RidersModule } from './riders/riders.module';
@@ -24,6 +25,7 @@ import { AdminService } from './admin/admin.service';
     PrismaModule,
     RedisModule,
     SmsModule,
+    EmailModule,
     AuthModule,
     UsersModule,
     RidersModule,

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Architectural Courier | Customer Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#93000a",
+                    "primary-container": "#004d26",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#3d0511",
+                    "inverse-surface": "#2e312d",
+                    "on-tertiary-fixed-variant": "#753139",
+                    "inverse-primary": "#92d6a2",
+                    "on-surface": "#191d19",
+                    "tertiary-fixed": "#ffdadb",
+                    "surface-bright": "#f8faf4",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#92d6a2",
+                    "secondary-fixed": "#cdead0",
+                    "on-primary-fixed-variant": "#08522a",
+                    "primary": "#003418",
+                    "secondary": "#4b6450",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#adf2bc",
+                    "surface-tint": "#296b40",
+                    "surface-container-high": "#e6e9e3",
+                    "on-background": "#191d19",
+                    "on-secondary-fixed-variant": "#344c39",
+                    "on-secondary-fixed": "#082010",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb2b8",
+                    "tertiary": "#531620",
+                    "on-primary-container": "#7abd8b",
+                    "tertiary-container": "#6f2c35",
+                    "inverse-on-surface": "#eff2eb",
+                    "surface-variant": "#e0e3dd",
+                    "on-tertiary-container": "#f0959d",
+                    "on-primary-fixed": "#00210d",
+                    "secondary-fixed-dim": "#b2ceb5",
+                    "outline": "#707970",
+                    "surface": "#f8faf4",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#c0c9be",
+                    "on-surface-variant": "#404941",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#516a56",
+                    "secondary-container": "#cdead0",
+                    "surface-container": "#ecefe8",
+                    "surface-dim": "#d8dbd5",
+                    "surface-container-low": "#f2f4ee",
+                    "background": "#f8faf4",
+                    "surface-container-highest": "#e0e3dd",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased pb-32 md:pb-0">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-40 bg-[#f2f4ee] dark:bg-[#232923] shadow-none transition-colors">
+<div class="flex justify-between items-center px-6 py-4 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#003418] dark:text-[#f8faf4] cursor-pointer" data-icon="menu">menu</span>
+<h1 class="text-xl font-bold text-[#003418] dark:text-[#f8faf4] tracking-tighter font-headline">Architectural Courier</h1>
+</div>
+<div class="hidden md:flex gap-8 items-center">
+<nav class="flex gap-6 font-headline font-bold tracking-tight">
+<a class="text-[#003418] dark:text-[#f8faf4]" href="#">Home</a>
+<a class="text-[#404941] dark:text-[#c0c9be] hover:bg-[#e6e9e3] dark:hover:bg-[#2d352d] px-2 py-1 rounded transition-colors" href="#">History</a>
+<a class="text-[#404941] dark:text-[#c0c9be] hover:bg-[#e6e9e3] dark:hover:bg-[#2d352d] px-2 py-1 rounded transition-colors" href="#">Alerts</a>
+</nav>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="User" class="w-full h-full object-cover" data-alt="professional portrait of a man in a modern office setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUw1Pd6IrAQu-IMtrN3DkgM12_2-y32JZvsLT6rOjFIXsd_rFarskz8qtx7UK0_eklidS9frnj2OAsYd13-aA8ADO7_i3lvADyNCINGY4aq6yNQV6Ozg7a9pZ2UHPv0UdWg2uQFJ6Ftzp9aElgXGHyMbowKiKp-osuBjMDRpgjbFaK1lXak-idTlzUIkGVdVlnqYeHsdD-xLSJCuNGg5Ejq4WhH15rbrPSvf3Pjmnqkj9l8gqo4bSVegH-9usqN8D6SlBqjZuzatY"/>
+</div>
+</div>
+<div class="md:hidden flex items-center">
+<div class="w-8 h-8 rounded-full overflow-hidden">
+<img alt="User" class="w-full h-full object-cover" data-alt="professional portrait of a man in a modern office setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAc-YDtHL3QbuyEQhnwsP6IKaluarCyQKvTzRq5H-QYvg2u7rVzPG5VbsUPCqYWsKvM4viBZeOWmnI6tcKbl32wi2jb9JXCokfR8wksNa6EIH4_UHHnCsNJsr7jS2mFI4EL7Y5vdL6CcCKxPpJLY2c9JvdR1QuQEUA5zHfh2ljcrKTN4u7Ib0IBSf6njJVfZyWmVMnuicFFoPdnMJLW-UWcJWAl6ojwhuQqwuA_vYMt2LsWilie55kqJgDbv4uRTbnLH1gmIHwsvU"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-8">
+<!-- Hero / Request Delivery Section -->
+<section class="mb-12">
+<div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-primary-container p-8 md:p-12 shadow-2xl">
+<div class="relative z-10 max-w-2xl">
+<h2 class="text-4xl md:text-5xl font-headline font-extrabold text-white tracking-tight leading-tight mb-4">
+                        Precision Logistics, Delivered.
+                    </h2>
+<p class="text-on-primary-container text-lg md:text-xl mb-8 max-w-lg font-medium">
+                        Schedule a curated delivery experience that respects the architecture of your schedule.
+                    </p>
+<button class="bg-surface-container-lowest text-primary font-headline font-bold px-8 py-4 rounded-xl flex items-center gap-3 active:scale-95 duration-200 transition-all hover:shadow-lg">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+                        Request a Delivery
+                    </button>
+</div>
+<!-- Decorative element -->
+<div class="absolute -right-12 -bottom-12 w-64 h-64 md:w-96 md:h-96 bg-white/5 rounded-full blur-3xl"></div>
+<div class="absolute top-0 right-0 p-8 opacity-20 hidden md:block">
+<span class="material-symbols-outlined text-[12rem]" data-icon="architecture">architecture</span>
+</div>
+</div>
+</section>
+<!-- Main Dashboard Content -->
+<div class="bento-grid">
+<!-- Active Orders Section (8 cols) -->
+<div class="col-span-12 lg:col-span-8 space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="text-2xl font-headline font-bold text-on-surface tracking-tight">Active Orders</h3>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold font-label uppercase tracking-widest">2 In Transit</span>
+</div>
+<!-- Active Order Card 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-primary">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary-container" data-icon="package_2">package_2</span>
+<span class="font-label text-sm text-on-surface-variant font-semibold">Order #AC-8829</span>
+</div>
+<h4 class="text-xl font-headline font-bold text-on-surface">Architectural Prints &amp; Models</h4>
+<p class="text-sm text-on-surface-variant">Destination: 1200 Market St, Philadelphia</p>
+</div>
+<div class="flex-1 max-w-xs">
+<div class="flex justify-between items-end mb-2">
+<span class="text-xs font-bold uppercase tracking-widest text-primary">In Transit</span>
+<span class="text-sm font-semibold text-on-surface">ETA: 2:45 PM</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4 rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 grid grid-cols-4 gap-2">
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="check">check</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-primary">Picked Up</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="check">check</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-primary">Sorting</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="local_shipping">local_shipping</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-primary">Transit</span>
+</div>
+<div class="flex flex-col items-center gap-2 opacity-30">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center border-2 border-outline-variant"></div>
+<span class="text-[10px] font-bold uppercase tracking-tighter text-on-surface-variant">Delivered</span>
+</div>
+</div>
+</div>
+<!-- Active Order Card 2 -->
+<div class="bg-surface-container-low p-6 rounded-xl border-l-4 border-outline-variant">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="box">box</span>
+<span class="font-label text-sm text-on-surface-variant font-semibold">Order #AC-9011</span>
+</div>
+<h4 class="text-xl font-headline font-bold text-on-surface opacity-80">Document Express</h4>
+<p class="text-sm text-on-surface-variant">Destination: 200 Central Ave, Manhattan</p>
+</div>
+<div class="text-right">
+<button class="text-primary font-bold font-headline text-sm flex items-center gap-1 hover:underline">
+                                View Map <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Saved Locations & Profile (4 cols) -->
+<div class="col-span-12 lg:col-span-4 space-y-8">
+<div>
+<h3 class="text-2xl font-headline font-bold text-on-surface tracking-tight mb-6">Saved Locations</h3>
+<div class="space-y-3">
+<!-- Home -->
+<div class="group flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+</div>
+<div>
+<h5 class="font-headline font-bold text-on-surface">Home</h5>
+<p class="text-xs text-on-surface-variant">221B Baker Street, London</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant opacity-0 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Work -->
+<div class="group flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-tertiary-container/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+</div>
+<div>
+<h5 class="font-headline font-bold text-on-surface">Studio X</h5>
+<p class="text-xs text-on-surface-variant">77 Design District, Milan</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant opacity-0 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Add New -->
+<button class="w-full py-4 border-2 border-dashed border-outline-variant rounded-xl flex items-center justify-center gap-2 text-on-surface-variant font-bold font-headline hover:border-primary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                            Add Location
+                        </button>
+</div>
+</div>
+<!-- Recent Activity Visual -->
+<div class="bg-surface-container-highest/30 rounded-3xl p-6 relative overflow-hidden">
+<h4 class="font-headline font-bold text-on-surface mb-4">Route Efficiency</h4>
+<div class="h-32 flex items-end gap-1">
+<div class="flex-1 bg-primary-container h-[40%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary-container h-[60%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary-container h-[45%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary-container h-[80%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary-container h-[70%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary-container h-[95%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary h-full rounded-t-sm"></div>
+</div>
+<div class="mt-4 flex justify-between items-center">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Last 7 Deliveries</p>
+<span class="text-primary font-bold text-xs">+12% Growth</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#f8faf4]/80 dark:bg-[#191d19]/80 backdrop-blur-xl z-50 rounded-t-3xl shadow-[0_-8px_32px_rgba(0,52,24,0.06)]">
+<a class="flex flex-col items-center justify-center bg-[#004d26] text-white rounded-2xl px-5 py-2 active:scale-90 duration-300 ease-out transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-inter text-[11px] font-semibold tracking-wide uppercase mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#404941] dark:text-[#c0c9be] px-5 py-2 hover:bg-[#e0e3dd] dark:hover:bg-[#2d352d] rounded-2xl transition-all active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="font-inter text-[11px] font-semibold tracking-wide uppercase mt-1">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#404941] dark:text-[#c0c9be] px-5 py-2 hover:bg-[#e0e3dd] dark:hover:bg-[#2d352d] rounded-2xl transition-all active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-inter text-[11px] font-semibold tracking-wide uppercase mt-1">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#404941] dark:text-[#c0c9be] px-5 py-2 hover:bg-[#e0e3dd] dark:hover:bg-[#2d352d] rounded-2xl transition-all active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-inter text-[11px] font-semibold tracking-wide uppercase mt-1">Profile</span>
+</a>
+</nav>
+<!-- Floating Action Button (FAB) - Contextual Context: Request Delivery -->
+<div class="fixed bottom-24 right-6 md:bottom-8 md:right-8 z-50">
+<button class="w-16 h-16 rounded-full bg-primary text-white shadow-[0_24px_48px_rgba(0,52,24,0.2)] flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+</div>
+</body></html>

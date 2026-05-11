@@ -4,10 +4,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
   Home,
-  ClockIcon,
+  History,
+  Settings,
+  DollarSign,
+  Clock,
   Bell,
   User,
-  DollarSign,
 } from 'lucide-react'
 import { useAuthStore } from '@/stores/auth.store'
 
@@ -19,16 +21,16 @@ interface NavItem {
 
 const userNav: NavItem[] = [
   { href: '/home', label: 'Home', icon: <Home size={22} /> },
-  { href: '/home/history', label: 'History', icon: <ClockIcon size={22} /> },
-  { href: '/home/notifications', label: 'Notifications', icon: <Bell size={22} /> },
-  { href: '/home/profile', label: 'Profile', icon: <User size={22} /> },
+  { href: '/history', label: 'History', icon: <Clock size={22} /> },
+  { href: '/notifications', label: 'Notifications', icon: <Bell size={22} /> },
+  { href: '/settings', label: 'Profile', icon: <User size={22} /> },
 ]
 
 const riderNav: NavItem[] = [
-  { href: '/rider', label: 'Home', icon: <Home size={22} /> },
+  { href: '/rider/home', label: 'Home', icon: <Home size={22} /> },
   { href: '/rider/earnings', label: 'Earnings', icon: <DollarSign size={22} /> },
-  { href: '/rider/notifications', label: 'Notifications', icon: <Bell size={22} /> },
-  { href: '/rider/profile', label: 'Profile', icon: <User size={22} /> },
+  { href: '/rider/history', label: 'History', icon: <History size={22} /> },
+  { href: '/rider/settings', label: 'Settings', icon: <Settings size={22} /> },
 ]
 
 export default function BottomNav() {
@@ -49,7 +51,7 @@ export default function BottomNav() {
       <ul className="flex items-center justify-around px-2 py-2 max-w-lg mx-auto">
         {items.map((item) => {
           const active =
-            item.href === '/home' || item.href === '/rider'
+            item.href === '/home' || item.href === '/rider/home'
               ? pathname === item.href
               : pathname.startsWith(item.href)
 

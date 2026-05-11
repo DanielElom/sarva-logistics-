@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Architectural Courier Admin - User Settings</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Manrope & Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#4b6450",
+                    "on-primary-container": "#7abd8b",
+                    "secondary-fixed": "#cdead0",
+                    "on-primary-fixed": "#00210d",
+                    "outline-variant": "#c0c9be",
+                    "tertiary": "#531620",
+                    "on-secondary-fixed": "#082010",
+                    "surface-container-low": "#f2f4ee",
+                    "on-tertiary-container": "#f0959d",
+                    "secondary-fixed-dim": "#b2ceb5",
+                    "on-surface": "#191d19",
+                    "tertiary-container": "#6f2c35",
+                    "surface-dim": "#d8dbd5",
+                    "primary-fixed-dim": "#92d6a2",
+                    "on-tertiary-fixed-variant": "#753139",
+                    "error": "#ba1a1a",
+                    "surface-container": "#ecefe8",
+                    "inverse-surface": "#2e312d",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#e0e3dd",
+                    "inverse-primary": "#92d6a2",
+                    "on-secondary-fixed-variant": "#344c39",
+                    "tertiary-fixed": "#ffdadb",
+                    "on-tertiary-fixed": "#3d0511",
+                    "surface-tint": "#296b40",
+                    "surface": "#f8faf4",
+                    "outline": "#707970",
+                    "surface-container-highest": "#e0e3dd",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#f8faf4",
+                    "error-container": "#ffdad6",
+                    "inverse-on-surface": "#eff2eb",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#cdead0",
+                    "background": "#f8faf4",
+                    "primary-container": "#004d26",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#404941",
+                    "on-secondary-container": "#516a56",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "primary": "#003418",
+                    "on-primary-fixed-variant": "#08522a",
+                    "primary-fixed": "#adf2bc",
+                    "tertiary-fixed-dim": "#ffb2b8",
+                    "surface-container-high": "#e6e9e3",
+                    "on-background": "#191d19"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant/20 bg-surface-container-low flex flex-col p-4 space-y-2">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</div>
+<div>
+<h2 class="font-manrope font-extrabold text-primary text-sm leading-none">Admin Panel</h2>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider font-bold mt-1">System Logistics</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                Pricing
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+                Payments
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="alt_route">alt_route</span>
+                Dispatch Logic
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+                System Logs
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 bg-white text-primary rounded-lg shadow-sm font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings_suggest">settings_suggest</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant/10">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-error hover:bg-error-container/20 rounded-lg transition-all font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-64 bg-surface/80 backdrop-blur-md z-10 w-[calc(100%-16rem)] border-b border-outline-variant/20 px-6 py-3 flex justify-between items-center">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20" placeholder="Search system settings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant/20">
+<div class="text-right">
+<p class="text-xs font-bold text-primary">Admin System</p>
+<p class="text-[10px] text-on-surface-variant">Superuser Access</p>
+</div>
+<img class="w-9 h-9 rounded-full object-cover border border-outline-variant/30" data-alt="Close-up professional portrait of a tech executive in a modern minimal office with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQy3UsJjUGTbg7wfwjZT1cVerWg0aK5qJTOM4Aal8HIf89pgcAVcaFbZrDTJODNSMx7w5U6siiJ2Nb6dEyrUoYJjqf-GRS7xZyq8NwBKPmUmhn-5Wuz8rUiu5kVI18E10zxIAckmwoi6dehzyxd819kVFyWB8xbNLuS3z1hltXQxdcPEDu95Lq98bJhPaBcGk_wAyUg7cnnlwFUazS5zlSJFQsRjEDVFLgYYS7o5YLcy1IscPhuCUYmHd6vxIfU8hqf9dZSWtfp_s"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-20 p-8 min-h-screen">
+<div class="max-w-6xl mx-auto">
+<!-- Header Section -->
+<div class="mb-10">
+<h1 class="text-3xl font-manrope font-extrabold tracking-tight text-primary">User Governance</h1>
+<p class="text-on-surface-variant mt-2 max-w-2xl">Configure global requirements for Riders and Drivers, manage security protocols, and set automated fraud detection thresholds.</p>
+</div>
+<!-- Bento Grid Layout for Settings -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Rider Requirements Card (Large) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/10">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="person_search">person_search</span>
+</div>
+<h3 class="text-xl font-bold font-manrope">Rider Requirements</h3>
+</div>
+<span class="px-3 py-1 bg-primary/5 text-primary text-xs font-bold rounded-full">Active Policy</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Documents section -->
+<div class="space-y-4">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Required Documentation</label>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="identity_platform">identity_platform</span>
+<span class="text-sm font-medium">Government Photo ID</span>
+</div>
+<input checked="" class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="description">description</span>
+<span class="text-sm font-medium">Proof of Address</span>
+</div>
+<input checked="" class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="verified_user">verified_user</span>
+<span class="text-sm font-medium">Background Check Opt-in</span>
+</div>
+<input class="rounded text-primary focus:ring-primary h-5 w-5" type="checkbox"/>
+</div>
+</div>
+</div>
+<!-- Thresholds section -->
+<div class="space-y-4">
+<label class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Quality Thresholds</label>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-sm font-medium">Max Cancellation Rate</span>
+<span class="text-sm font-bold text-primary">12%</span>
+</div>
+<input class="w-full h-2 bg-surface-container-high rounded-full appearance-none accent-primary" type="range"/>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-sm font-medium">Min Rider Rating</span>
+<span class="text-sm font-bold text-primary">4.2</span>
+</div>
+<input class="w-full h-2 bg-surface-container-high rounded-full appearance-none accent-primary" max="5" min="1" step="0.1" type="range"/>
+</div>
+<div>
+<label class="text-sm font-medium block mb-2">Approval Type</label>
+<select class="w-full bg-surface-container-low border-none rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary/20">
+<option>Automated via AI Verification</option>
+<option>Manual Admin Review</option>
+<option>Hybrid (Priority Manual)</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- OTP & Verification (Side Card) -->
+<div class="col-span-12 lg:col-span-4 bg-primary text-white rounded-xl p-6 shadow-xl relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="vibration">vibration</span>
+</div>
+<h3 class="text-xl font-bold font-manrope">Verification</h3>
+</div>
+<div class="space-y-6">
+<div class="p-4 bg-white/10 rounded-lg backdrop-blur-sm border border-white/10">
+<p class="text-xs font-medium text-white/70 mb-3 uppercase tracking-tighter">Primary Protocol</p>
+<div class="flex items-center justify-between">
+<span class="font-bold">Account OTP (SMS)</span>
+<div class="w-10 h-5 bg-on-primary-container rounded-full relative flex items-center px-1">
+<div class="w-3 h-3 bg-white rounded-full ml-auto"></div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-white/10 rounded-lg backdrop-blur-sm border border-white/10">
+<p class="text-xs font-medium text-white/70 mb-3 uppercase tracking-tighter">Identity Validation</p>
+<div class="flex items-center justify-between">
+<span class="font-bold">Liveness Detection</span>
+<div class="w-10 h-5 bg-white/30 rounded-full relative flex items-center px-1">
+<div class="w-3 h-3 bg-white/60 rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full bg-white text-primary font-bold py-3 rounded-xl hover:bg-surface-container-low transition-colors text-sm">
+                                    Update Auth Rules
+                                </button>
+</div>
+</div>
+</div>
+<!-- Aesthetic texture -->
+<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-on-primary-container opacity-20 rounded-full blur-3xl"></div>
+</div>
+<!-- Fraud Detection (Medium Card) -->
+<div class="col-span-12 md:col-span-6 bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined" data-icon="gpp_maybe">gpp_maybe</span>
+</div>
+<h3 class="text-lg font-bold font-manrope">Fraud Detection</h3>
+</div>
+<div class="space-y-4">
+<div class="flex items-start gap-4 p-4 hover:bg-surface-container-low rounded-lg transition-all border border-transparent hover:border-outline-variant/20">
+<div class="mt-1">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="location_off">location_off</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">GPS Spoofing Shield</p>
+<p class="text-xs text-on-surface-variant">Auto-ban drivers using mock location apps.</p>
+</div>
+<input checked="" class="mt-1" type="checkbox"/>
+</div>
+<div class="flex items-start gap-4 p-4 hover:bg-surface-container-low rounded-lg transition-all border border-transparent hover:border-outline-variant/20">
+<div class="mt-1">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="group_add">group_add</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Multi-Account Detection</p>
+<p class="text-xs text-on-surface-variant">Flag hardware IDs linked to &gt;2 accounts.</p>
+</div>
+<input checked="" class="mt-1" type="checkbox"/>
+</div>
+<div class="flex items-start gap-4 p-4 hover:bg-surface-container-low rounded-lg transition-all border border-transparent hover:border-outline-variant/20">
+<div class="mt-1">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="payments">payments</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold">Payment Velocity Limit</p>
+<p class="text-xs text-on-surface-variant">Limit riders to 3 card changes per week.</p>
+</div>
+<input class="mt-1" type="checkbox"/>
+</div>
+</div>
+</div>
+<!-- Driver Specific Settings (Medium Card) -->
+<div class="col-span-12 md:col-span-6 bg-surface-container-low rounded-xl p-6">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+</div>
+<h3 class="text-lg font-bold font-manrope">Courier Standards</h3>
+</div>
+<div class="bg-white rounded-xl overflow-hidden divide-y divide-outline-variant/10 shadow-sm border border-outline-variant/10">
+<div class="p-4 flex items-center justify-between">
+<div>
+<p class="text-xs font-bold text-on-surface-variant uppercase">Vehicle Age Limit</p>
+<p class="text-sm font-medium">Maximum 10 years old</p>
+</div>
+<button class="text-primary text-xs font-bold hover:underline">Edit</button>
+</div>
+<div class="p-4 flex items-center justify-between">
+<div>
+<p class="text-xs font-bold text-on-surface-variant uppercase">Mandatory Break</p>
+<p class="text-sm font-medium">30m per 4 hours active</p>
+</div>
+<button class="text-primary text-xs font-bold hover:underline">Edit</button>
+</div>
+<div class="p-4 flex items-center justify-between">
+<div>
+<p class="text-xs font-bold text-on-surface-variant uppercase">Background Expiry</p>
+<p class="text-sm font-medium">Renew every 12 months</p>
+</div>
+<button class="text-primary text-xs font-bold hover:underline">Edit</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Action Bar -->
+<div class="mt-12 p-4 bg-surface-container-high rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="info">info</span>
+<span class="text-xs font-medium">Last system-wide sync: 14 minutes ago by User 001</span>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2 text-sm font-bold text-on-surface hover:bg-surface transition-colors rounded-lg">Discard Changes</button>
+<button class="px-8 py-2 text-sm font-bold bg-primary text-white rounded-lg shadow-lg shadow-primary/20 hover:scale-[0.98] transition-all">Publish Policies</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e6e9e3",
+                    "inverse-on-surface": "#eff2eb",
+                    "secondary-fixed-dim": "#b2ceb5",
+                    "tertiary-fixed": "#ffdadb",
+                    "tertiary-container": "#6f2c35",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#2e312d",
+                    "outline": "#707970",
+                    "on-tertiary-fixed": "#3d0511",
+                    "on-primary-fixed": "#00210d",
+                    "surface-dim": "#d8dbd5",
+                    "on-surface": "#191d19",
+                    "primary-fixed": "#adf2bc",
+                    "on-secondary-container": "#516a56",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "background": "#f8faf4",
+                    "surface-container-highest": "#e0e3dd",
+                    "primary-container": "#004d26",
+                    "surface-container": "#ecefe8",
+                    "inverse-primary": "#92d6a2",
+                    "on-secondary-fixed-variant": "#344c39",
+                    "on-primary-container": "#7abd8b",
+                    "surface-container-low": "#f2f4ee",
+                    "surface-variant": "#e0e3dd",
+                    "primary-fixed-dim": "#92d6a2",
+                    "on-secondary-fixed": "#082010",
+                    "on-error": "#ffffff",
+                    "surface": "#f8faf4",
+                    "error-container": "#ffdad6",
+                    "surface-bright": "#f8faf4",
+                    "outline-variant": "#c0c9be",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#08522a",
+                    "on-surface-variant": "#404941",
+                    "tertiary-fixed-dim": "#ffb2b8",
+                    "secondary": "#4b6450",
+                    "primary": "#003418",
+                    "on-background": "#191d19",
+                    "secondary-fixed": "#cdead0",
+                    "on-tertiary-container": "#f0959d",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#531620",
+                    "on-tertiary": "#ffffff",
+                    "secondary-container": "#cdead0",
+                    "on-tertiary-fixed-variant": "#753139",
+                    "surface-tint": "#296b40"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "1rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-nav {
+        background: rgba(248, 250, 244, 0.8);
+        backdrop-filter: blur(16px);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 bg-[#f8faf4] dark:bg-[#191d19] flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<button class="text-[#003418] dark:text-[#f8faf4] active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Manrope'] font-bold text-lg tracking-tight text-[#003418] dark:text-[#f8faf4]">Review Booking</h1>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden">
+<img class="w-full h-auto" data-alt="close-up portrait of a professional woman with a friendly smile, soft natural office lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEy2_aQmtyQtT-crh_dTw9AqVm6eaZ3TVo8-m0fHDvzyg5LGTHFfIqqH0VsRuomEmOk2nRYNKdmb0DOrpQZ37U_qTe_YdrqGhrlKwK1QDrbaXSL4E5iavHghBrcYr0xEIymi662kqAlXTcHaqL7aPokUy_NHkO27H5SypI6ebtm5gXz6JI-glExtnohg8P3u_mrrjL8uejCumLDwrAzQaZjaJhOb5mSOxKObIxRhl0JmEbqwAX8NSC6jON3YIZwHIfKv7MNplA1Zw"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow px-6 pt-4 pb-32">
+<div class="max-w-md mx-auto space-y-6">
+<!-- Map Preview Section -->
+<section class="relative h-48 w-full rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="minimalist map view with a green delivery route line connecting two points in a clean urban layout" data-location="Seattle, WA" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaN7QtW3bkrDYKadAP7yDdN7RV9edynwYZjM6AqYro5ow_C6tBgFx2-dw61wHmzsX_vzfYsYLbwPF0s-3gIqS_HsX0Qari6HqC_i-48uDrj0S8uzqnhgihmX3W4tTN5SPhOc0n2f3MBbBR4pT6TNGQZFID3THVPIQNt0pRf4BN2sKMWX2dAD0f7ZxPwvg4uVhn3vnhPSxgYlgKh7sAP-B1_KFbd_m2hi2NdnYjAN4_LUElzldgxfYj2eXpSDmwY0W1rwaL7gk5mJg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+<div class="absolute bottom-4 left-4 bg-surface-container-lowest px-3 py-1.5 rounded-full flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="distance">distance</span>
+<span class="text-xs font-semibold text-on-surface">4.2 miles total</span>
+</div>
+</section>
+<!-- Route Details -->
+<section class="bg-surface-container-lowest rounded-xl p-6 space-y-6">
+<div class="relative pl-8 space-y-8">
+<!-- Vertical Connector -->
+<div class="absolute left-[11px] top-2 bottom-2 w-0.5 bg-outline-variant/30"></div>
+<!-- Pickup -->
+<div class="relative">
+<div class="absolute -left-[27px] top-0 w-4 h-4 rounded-full border-2 border-primary bg-surface-container-lowest"></div>
+<div class="space-y-1">
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Pickup</p>
+<p class="font-headline font-bold text-on-surface">221B Baker Street</p>
+<p class="text-sm text-on-surface-variant">London, NW1 6XE</p>
+</div>
+</div>
+<!-- Drop-off -->
+<div class="relative">
+<div class="absolute -left-[27px] top-0 w-4 h-4 rounded-full bg-primary flex items-center justify-center">
+<div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+</div>
+<div class="space-y-1">
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Drop-off</p>
+<p class="font-headline font-bold text-on-surface">42 High Street</p>
+<p class="text-sm text-on-surface-variant">London, EC3V 3RH</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Service & Summary Grid -->
+<div class="grid grid-cols-2 gap-4">
+<!-- Delivery Type Card -->
+<div class="bg-surface-container-low rounded-xl p-4 flex flex-col justify-between aspect-square">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary" data-icon="electric_moped">electric_moped</span>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Service</p>
+<p class="font-headline font-bold text-primary">Priority</p>
+<p class="text-[11px] text-on-surface-variant leading-tight">Delivery in 30-45 mins</p>
+</div>
+</div>
+<!-- Package Details Card -->
+<div class="bg-surface-container-low rounded-xl p-4 flex flex-col justify-between aspect-square">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary" data-icon="inventory_2">inventory_2</span>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Package</p>
+<p class="font-headline font-bold text-on-surface">Small Box</p>
+<p class="text-[11px] text-on-surface-variant leading-tight">Under 2.5 kg</p>
+</div>
+</div>
+</div>
+<!-- Price Breakdown -->
+<section class="bg-surface-container-low rounded-xl p-6">
+<h3 class="font-headline font-bold text-on-surface mb-4">Payment Summary</h3>
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Delivery Fee</span>
+<span class="text-sm font-medium text-on-surface">$14.25</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Priority Surcharge</span>
+<span class="text-sm font-medium text-on-surface">$3.50</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Service Tax</span>
+<span class="text-sm font-medium text-on-surface">$0.75</span>
+</div>
+<div class="pt-3 mt-3 border-t border-outline-variant/20 flex justify-between items-center">
+<span class="font-headline font-extrabold text-on-surface">Total Price</span>
+<span class="font-headline font-extrabold text-xl text-primary">$18.50</span>
+</div>
+</div>
+</section>
+<!-- Payment Method -->
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-sm active:scale-[0.98] transition-transform">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="account_balance_wallet">account_balance_wallet</span>
+<div class="text-left">
+<p class="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Payment Method</p>
+<p class="font-bold text-on-surface">Apple Pay •••• 9402</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- Fixed Action Footer -->
+<div class="fixed bottom-0 left-0 w-full p-6 glass-nav rounded-t-2xl">
+<div class="max-w-md mx-auto">
+<button class="w-full py-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl font-headline font-bold text-lg shadow-[0_8px_30px_rgb(0,52,24,0.2)] active:opacity-80 transition-all hover:scale-[1.01]">
+                Confirm Booking
+            </button>
+<p class="text-center text-[10px] text-on-surface-variant mt-3 px-8 leading-tight">
+                By confirming, you agree to our Terms of Service and Privacy Policy regarding courier operations.
+            </p>
+</div>
+</div>
+</body></html>

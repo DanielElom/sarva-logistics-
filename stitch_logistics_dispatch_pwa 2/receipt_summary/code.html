@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Delivery Summary - Emerald Courier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-high": "#e6e9e3",
+                        "inverse-on-surface": "#eff2eb",
+                        "secondary-fixed-dim": "#b2ceb5",
+                        "tertiary-fixed": "#ffdadb",
+                        "tertiary-container": "#6f2c35",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#2e312d",
+                        "outline": "#707970",
+                        "on-tertiary-fixed": "#3d0511",
+                        "on-primary-fixed": "#00210d",
+                        "surface-dim": "#d8dbd5",
+                        "on-surface": "#191d19",
+                        "primary-fixed": "#adf2bc",
+                        "on-secondary-container": "#516a56",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "background": "#f8faf4",
+                        "surface-container-highest": "#e0e3dd",
+                        "primary-container": "#004d26",
+                        "surface-container": "#ecefe8",
+                        "inverse-primary": "#92d6a2",
+                        "on-secondary-fixed-variant": "#344c39",
+                        "on-primary-container": "#7abd8b",
+                        "surface-container-low": "#f2f4ee",
+                        "surface-variant": "#e0e3dd",
+                        "primary-fixed-dim": "#92d6a2",
+                        "on-secondary-fixed": "#082010",
+                        "on-error": "#ffffff",
+                        "surface": "#f8faf4",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f8faf4",
+                        "outline-variant": "#c0c9be",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#08522a",
+                        "on-surface-variant": "#404941",
+                        "tertiary-fixed-dim": "#ffb2b8",
+                        "secondary": "#4b6450",
+                        "primary": "#003418",
+                        "on-background": "#191d19",
+                        "secondary-fixed": "#cdead0",
+                        "on-tertiary-container": "#f0959d",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#531620",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#cdead0",
+                        "on-tertiary-fixed-variant": "#753139",
+                        "surface-tint": "#296b40"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-glass {
+            background: rgba(248, 250, 244, 0.8);
+            backdrop-filter: blur(16px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface min-h-screen pb-24">
+<!-- Top Navigation Shell -->
+<header class="w-full sticky top-0 z-50 bg-[#f8faf4] dark:bg-[#191d19] flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#003418] dark:text-[#f8faf4] cursor-pointer">arrow_back</span>
+<h1 class="font-['Manrope'] font-extrabold text-[#003418] dark:text-[#f8faf4] italic text-lg tracking-tight">Emerald Courier</h1>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="professional headshot of a person in a clean studio setting with soft lighting and a neutral expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJMWdsoy2TGCy_jGQSod1ejs3YTEX-34fkxiUFCxQOzwcOAEz3Dr1Ov8g7e7_rzAv-O2EdFHan1gdtJAujFrJcLQJKyuAquumzPZYYgqb06Wh6m3ZjqSgncgoubkpIROn3GtV3wRj4Gagh5ZrQV5EiYJzPPhXEPksn4TNZybM0HTovZ_LGty07wvE5CBKfnpoz_l7iOPCdw5ENmfrVQJ8T6AYVVb9CG8DAXaZelryFLeIfsS3YU5oUALstruMc0iJP7p0Ih1mTQnE"/>
+</div>
+</header>
+<main class="max-w-2xl mx-auto px-6 py-8">
+<!-- Success Confirmation Section -->
+<section class="mb-10 text-center">
+<div class="inline-flex items-center justify-center w-20 h-20 bg-primary-container rounded-full mb-6">
+<span class="material-symbols-outlined text-white text-4xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-headline text-3xl font-extrabold text-primary mb-2 tracking-tight">Delivery Complete</h2>
+<p class="text-on-surface-variant text-lg">Your package has been safely architecturalized.</p>
+</section>
+<!-- Bento Grid Layout for Summary -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Map Card (Route Replay) -->
+<div class="md:col-span-2 bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_4px_24px_rgba(25,29,25,0.04)]">
+<div class="p-6 pb-2">
+<h3 class="font-headline font-bold text-on-surface uppercase tracking-widest text-xs opacity-60">Route Replay</h3>
+</div>
+<div class="relative h-64 bg-surface-container-low m-4 rounded-lg overflow-hidden border border-outline-variant/10">
+<img class="w-full h-full object-cover grayscale opacity-40" data-alt="minimalist clean city map with thin green lines tracing a delivery route across urban blocks" data-location="London" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1xfpPC89n6RBZkimlR9O_rwkcKgkaH9GHV75U9DcFXIGn3ZXcFF0BeXrqsWaQyk2xOKA92Z9PBCAoi8nIi_9uttmndGd_zwV9iU_4iKw11aEy_1A9ONm-Ho3PtbENVAjHwbGuF87z77tZ0R2ehPv7Wa8UQQZbHRMFF6QIG-qyF2ueo_vu7YyWC18TIOwrD7v_zEgoeTxrpGN7eg5YbwgCzmBTWIWuDwzwaGbomAIX48MDl10lDdrZijEEYQfJnX61lTe4A3FDkRA"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<svg class="w-full h-full p-8" viewbox="0 0 400 200">
+<path d="M50 150 Q 150 50 250 150 T 350 50" fill="none" stroke="#003418" stroke-dasharray="8 12" stroke-linecap="round" stroke-width="4"></path>
+<circle cx="50" cy="150" fill="#004d26" r="6"></circle>
+<circle cx="350" cy="50" fill="#531620" r="6"></circle>
+</svg>
+</div>
+<div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+<div class="bg-glass px-3 py-1.5 rounded-full text-xs font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">near_me</span>
+                            8.4 km Total
+                        </div>
+</div>
+</div>
+</div>
+<!-- Total Cost Card -->
+<div class="bg-surface-container-lowest p-8 rounded-xl flex flex-col justify-between shadow-[0_4px_24px_rgba(25,29,25,0.04)]">
+<div>
+<h3 class="font-headline font-bold text-on-surface-variant uppercase tracking-widest text-xs mb-4">Total Cost</h3>
+<p class="font-headline text-5xl font-extrabold text-primary tracking-tighter">£42.50</p>
+</div>
+<div class="mt-6 pt-4 border-t border-outline-variant/20">
+<div class="flex justify-between text-sm text-on-surface-variant">
+<span>Standard Rate</span>
+<span>£35.00</span>
+</div>
+<div class="flex justify-between text-sm text-on-surface-variant mt-1">
+<span>Express Priority</span>
+<span>£7.50</span>
+</div>
+</div>
+</div>
+<!-- Time Taken Card -->
+<div class="bg-primary-container p-8 rounded-xl text-white shadow-[0_4px_24px_rgba(0,77,38,0.15)] flex flex-col justify-between">
+<div>
+<h3 class="font-headline font-bold text-white/60 uppercase tracking-widest text-xs mb-4">Time Taken</h3>
+<p class="font-headline text-5xl font-extrabold tracking-tighter">24<span class="text-2xl font-medium opacity-70 ml-1">min</span></p>
+</div>
+<div class="mt-6 flex items-center gap-3">
+<div class="p-2 bg-white/10 rounded-lg">
+<span class="material-symbols-outlined text-white">bolt</span>
+</div>
+<span class="text-sm font-medium">Faster than 92% of routes</span>
+</div>
+</div>
+<!-- Rating Section -->
+<div class="md:col-span-2 bg-surface-container-low p-8 rounded-xl text-center">
+<h3 class="font-headline font-bold text-on-surface mb-4">Rate your Courier</h3>
+<div class="flex justify-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary text-4xl cursor-pointer" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary text-4xl cursor-pointer" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary text-4xl cursor-pointer" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary text-4xl cursor-pointer" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-outline-variant text-4xl cursor-pointer">star</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-lg flex items-center gap-4 text-left max-w-sm mx-auto">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="friendly courier driver smiling warmly, wearing a professional green uniform polo shirt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVmcdvVB_P0uMRd-FBabD1zjhACjqRSadqh3NJH_ir_KLD8cbN63Ls1Ttag4dAxyQdm9MiiKLW4bEcksNa_9bvEuHRAFKaAbTJEFtnaNtN0ccfy4uUZqNTzbliUYsQj7LWmGE8T-mGYuHzZMFEHvr0oUo6HGmi5qBr3vRVOG2doAPRe9NQJf6d8UbpA9xuKtEiiPIoERglKZDhJFd1WfKsFGZ9zUaZSfT32YcOFgYGt4AYF6tS81BGxNssR1g_G3Jy74P9VEKvz98"/>
+<div>
+<p class="font-bold text-on-surface">James D.</p>
+<p class="text-xs text-on-surface-variant">Emerald Elite Courier</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-primary-container">chat</span>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-12 flex flex-col gap-4">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-5 rounded-xl font-bold text-lg shadow-[0_8px_32px_rgba(0,52,24,0.15)] flex items-center justify-center gap-3 active:scale-95 transition-all">
+<span class="material-symbols-outlined">download</span>
+                Download Receipt
+            </button>
+<button class="w-full bg-surface-container-high text-on-surface py-5 rounded-xl font-bold text-lg active:scale-95 transition-all">
+                Back to Activity
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full bg-[#f8faf4]/80 dark:bg-[#191d19]/80 backdrop-blur-lg flex justify-around items-center px-4 pb-6 pt-3 z-50 border-t border-[#c0c9be]/20 shadow-[0_-4px_24px_rgba(25,29,25,0.06)]">
+<a class="flex flex-col items-center justify-center text-[#404941] dark:text-[#c0c9be] py-2 px-4 hover:bg-[#f2f4ee] dark:hover:bg-[#2d322d] transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider mt-1">Book</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#004d26] text-white rounded-xl py-2 px-4 transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider mt-1">Activity</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#404941] dark:text-[#c0c9be] py-2 px-4 hover:bg-[#f2f4ee] dark:hover:bg-[#2d322d] transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider mt-1">Wallet</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#404941] dark:text-[#c0c9be] py-2 px-4 hover:bg-[#f2f4ee] dark:hover:bg-[#2d322d] transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

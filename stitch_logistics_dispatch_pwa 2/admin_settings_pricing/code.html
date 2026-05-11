@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pricing &amp; Commissions | Architectural Courier Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#4b6450",
+                    "on-primary-container": "#7abd8b",
+                    "secondary-fixed": "#cdead0",
+                    "on-primary-fixed": "#00210d",
+                    "outline-variant": "#c0c9be",
+                    "tertiary": "#531620",
+                    "on-secondary-fixed": "#082010",
+                    "surface-container-low": "#f2f4ee",
+                    "on-tertiary-container": "#f0959d",
+                    "secondary-fixed-dim": "#b2ceb5",
+                    "on-surface": "#191d19",
+                    "tertiary-container": "#6f2c35",
+                    "surface-dim": "#d8dbd5",
+                    "primary-fixed-dim": "#92d6a2",
+                    "on-tertiary-fixed-variant": "#753139",
+                    "error": "#ba1a1a",
+                    "surface-container": "#ecefe8",
+                    "inverse-surface": "#2e312d",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#e0e3dd",
+                    "inverse-primary": "#92d6a2",
+                    "on-secondary-fixed-variant": "#344c39",
+                    "tertiary-fixed": "#ffdadb",
+                    "on-tertiary-fixed": "#3d0511",
+                    "surface-tint": "#296b40",
+                    "surface": "#f8faf4",
+                    "outline": "#707970",
+                    "surface-container-highest": "#e0e3dd",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#f8faf4",
+                    "error-container": "#ffdad6",
+                    "inverse-on-surface": "#eff2eb",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#cdead0",
+                    "background": "#f8faf4",
+                    "primary-container": "#004d26",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#404941",
+                    "on-secondary-container": "#516a56",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "primary": "#003418",
+                    "on-primary-fixed-variant": "#08522a",
+                    "primary-fixed": "#adf2bc",
+                    "tertiary-fixed-dim": "#ffb2b8",
+                    "surface-container-high": "#e6e9e3",
+                    "on-background": "#191d19"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-[#c0c9be]/20 bg-[#f2f4ee] flex flex-col p-4 space-y-2 z-50">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="architecture">architecture</span>
+</div>
+<div>
+<h2 class="font-manrope font-extrabold text-[#003418] text-lg leading-tight">Admin Panel</h2>
+<p class="text-xs text-on-surface-variant">System Logistics</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-[#ffffff] text-[#003418] rounded-lg shadow-sm transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-medium text-sm">Pricing</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-medium text-sm">Payments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="alt_route">alt_route</span>
+<span class="font-medium text-sm">Dispatch Logic</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-medium text-sm">System Logs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings_suggest">settings_suggest</span>
+<span class="font-medium text-sm">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant/20 space-y-1">
+<button class="w-full mb-4 bg-primary text-on-primary py-2.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Dispatch Rule
+            </button>
+<a class="flex items-center gap-3 px-4 py-3 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-medium text-sm">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-medium text-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar -->
+<header class="w-full bg-[#f8faf4] text-[#003418] border-b border-[#c0c9be]/20 px-6 py-3 flex justify-between items-center sticky top-0 z-40">
+<div class="flex items-center gap-8">
+<h1 class="text-xl font-bold tracking-tight text-[#003418] font-manrope">Architectural Courier Admin</h1>
+<div class="hidden lg:flex items-center bg-surface-container-low rounded-full px-4 py-1.5 w-64">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-on-surface-variant/50" placeholder="Search pricing tiers..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e6e9e3] transition-colors relative">
+<span class="material-symbols-outlined text-[#003418]" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e6e9e3] transition-colors">
+<span class="material-symbols-outlined text-[#003418]" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant/30 mx-2"></div>
+<img alt="Administrator Profile" class="w-10 h-10 rounded-full object-cover border-2 border-primary-fixed" data-alt="portrait of a professional administrator in a clean office environment with soft natural lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxsT7JMufVfnSbKDMRgI_mU-w1RPHjCbrpvo5fNXbw9ZHeoAm-6TbDLgTCRqDoAC4QCwfUhkXlwkJ_4rJxmcmkVOeX_OCxVG7Ow0nXGs7O2vskEkcswtsxkQgRpaDb2HeXOSmCZpYpL_9IO9fv4DC5hEQI9KVD4ytCfWUfh7NjTYE9CuiM-h1URKYV4QMxu35oe7fNoC7HvJxJgKkKsuC2xZ-EMGDZz8IwZUdykN1TBcQTry-uSago3Ze8ZbPu9Z53NtnEtKeStjs"/>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-8 max-w-7xl mx-auto space-y-12">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<span class="text-primary font-bold tracking-widest text-xs uppercase mb-2 block">Configuration Shell</span>
+<h2 class="text-4xl font-extrabold text-on-surface tracking-tight">Pricing &amp; Commissions</h2>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-3 rounded-xl bg-surface-container-high text-on-surface font-semibold text-sm hover:bg-surface-container-highest transition-colors">Reset Defaults</button>
+<button class="px-6 py-3 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-semibold text-sm shadow-xl shadow-primary/10 active:scale-[0.98] transition-all">Save Architecture</button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Base Fare Controls (Bento Large) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+</div>
+<div>
+<h3 class="text-xl font-bold">Standard Fare Logic</h3>
+<p class="text-sm text-on-surface-variant">Core unit pricing for all standard vehicle types</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Input Group -->
+<div class="space-y-6">
+<div class="relative">
+<label class="label-md font-semibold text-on-surface-variant block mb-2 px-1">Base Fare (Start)</label>
+<div class="flex items-center bg-surface-container-low rounded-xl px-4 py-3 focus-within:bg-surface-container-lowest focus-within:ring-1 focus-within:ring-primary transition-all">
+<span class="text-on-surface-variant font-medium mr-2">$</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-bold text-lg" type="text" value="5.50"/>
+</div>
+</div>
+<div class="relative">
+<label class="label-md font-semibold text-on-surface-variant block mb-2 px-1">Price per Kilometre</label>
+<div class="flex items-center bg-surface-container-low rounded-xl px-4 py-3 focus-within:bg-surface-container-lowest focus-within:ring-1 focus-within:ring-primary transition-all">
+<span class="text-on-surface-variant font-medium mr-2">$</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-bold text-lg" type="text" value="1.20"/>
+</div>
+</div>
+</div>
+<!-- Input Group -->
+<div class="space-y-6">
+<div class="relative">
+<label class="label-md font-semibold text-on-surface-variant block mb-2 px-1">Minimum Total Fare</label>
+<div class="flex items-center bg-surface-container-low rounded-xl px-4 py-3 focus-within:bg-surface-container-lowest focus-within:ring-1 focus-within:ring-primary transition-all">
+<span class="text-on-surface-variant font-medium mr-2">$</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-bold text-lg" type="text" value="12.00"/>
+</div>
+</div>
+<div class="relative">
+<label class="label-md font-semibold text-on-surface-variant block mb-2 px-1">Price per Minute (Wait)</label>
+<div class="flex items-center bg-surface-container-low rounded-xl px-4 py-3 focus-within:bg-surface-container-lowest focus-within:ring-1 focus-within:ring-primary transition-all">
+<span class="text-on-surface-variant font-medium mr-2">$</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-bold text-lg" type="text" value="0.45"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Platform Commission (Bento Medium) -->
+<div class="col-span-12 lg:col-span-4 bg-primary text-on-primary rounded-xl p-8 relative overflow-hidden flex flex-col justify-between">
+<div class="relative z-10">
+<h3 class="text-xl font-bold mb-2">Platform Cut</h3>
+<p class="text-on-primary-container text-sm mb-8">System revenue percentage per trip</p>
+<div class="flex items-baseline gap-2">
+<input class="bg-transparent border-none focus:ring-0 text-6xl font-extrabold w-24 p-0" type="text" value="18"/>
+<span class="text-4xl font-bold">%</span>
+</div>
+</div>
+<div class="relative z-10 mt-12 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
+<div class="flex justify-between items-center mb-4">
+<span class="text-sm font-medium">Rider Loyalty Bonus</span>
+<div class="w-10 h-5 bg-on-primary-container rounded-full relative cursor-pointer">
+<div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow-sm"></div>
+</div>
+</div>
+<p class="text-xs text-on-primary-container">Automatically deduct 2% of commission for credit pool.</p>
+</div>
+<!-- Aesthetic element -->
+<div class="absolute -bottom-10 -right-10 w-40 h-40 bg-on-primary-container opacity-20 blur-3xl"></div>
+</div>
+<!-- Cancellation Fee (Bento Small) -->
+<div class="col-span-12 md:col-span-6 lg:col-span-4 bg-surface-container-low rounded-xl p-6 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-tertiary mb-4" data-icon="cancel_presentation">cancel_presentation</span>
+<h4 class="font-bold text-lg">Cancellation Fee</h4>
+<p class="text-xs text-on-surface-variant mt-1">Charged after 5 minutes of dispatch</p>
+</div>
+<div class="mt-6 flex items-center justify-between">
+<span class="text-3xl font-extrabold">$7.50</span>
+<button class="text-primary font-bold text-sm underline underline-offset-4">Edit Rule</button>
+</div>
+</div>
+<!-- Surge Pricing Rules (Bento Grid Main) -->
+<div class="col-span-12 md:col-span-6 lg:col-span-8 bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/10">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</div>
+<h3 class="text-xl font-bold">Surge Pricing Architecture</h3>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-high rounded-full text-xs font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                            Add Tier
+                        </button>
+</div>
+<div class="space-y-4">
+<!-- Rule Row -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-2 h-10 bg-primary rounded-full"></div>
+<div>
+<p class="font-bold text-sm">Rush Hour (Morning)</p>
+<p class="text-xs text-on-surface-variant">07:30 - 09:30 • Mon-Fri</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<p class="text-xs font-bold text-primary">Multiplier</p>
+<p class="text-lg font-extrabold">1.4x</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-on-surface" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+<!-- Rule Row -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-2 h-10 bg-secondary rounded-full"></div>
+<div>
+<p class="font-bold text-sm">Weekend Late Night</p>
+<p class="text-xs text-on-surface-variant">23:00 - 04:00 • Sat-Sun</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<p class="text-xs font-bold text-primary">Multiplier</p>
+<p class="text-lg font-extrabold">1.8x</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-on-surface" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+<!-- Rule Row -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl opacity-60 grayscale">
+<div class="flex items-center gap-4">
+<div class="w-2 h-10 bg-outline-variant rounded-full"></div>
+<div>
+<p class="font-bold text-sm">Extreme Weather Event</p>
+<p class="text-xs text-on-surface-variant">Trigger: Rain &gt; 10mm/hr</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<p class="text-xs font-bold text-primary">Multiplier</p>
+<p class="text-lg font-extrabold">2.2x</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer" data-icon="toggle_off">toggle_off</span>
+</div>
+</div>
+</div>
+</div>
+<!-- System Simulation Card -->
+<div class="col-span-12 bg-surface-container-high rounded-xl p-8 border border-outline-variant/20 overflow-hidden relative">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+<div class="md:col-span-1">
+<h3 class="text-2xl font-bold mb-2">Revenue Forecaster</h3>
+<p class="text-sm text-on-surface-variant mb-6">Simulation based on current architectural parameters and 30-day historical data.</p>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-bold mb-1">
+<span>SYSTEM LOAD</span>
+<span>78%</span>
+</div>
+<div class="w-full h-1.5 bg-outline-variant/30 rounded-full">
+<div class="h-full bg-primary rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<div class="flex justify-between border-t border-outline-variant/20 pt-4">
+<span class="text-sm font-medium">Est. Daily Rev</span>
+<span class="text-sm font-bold">$14,240.00</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-2">
+<div class="bg-surface-container-lowest h-48 rounded-xl p-4 flex items-end justify-between gap-1">
+<div class="w-full bg-primary-fixed/40 h-24 rounded-t-sm"></div>
+<div class="w-full bg-primary-fixed/40 h-32 rounded-t-sm"></div>
+<div class="w-full bg-primary-fixed/40 h-40 rounded-t-sm"></div>
+<div class="w-full bg-primary-fixed/40 h-36 rounded-t-sm"></div>
+<div class="w-full bg-primary-fixed/40 h-28 rounded-t-sm"></div>
+<div class="w-full bg-primary-fixed h-44 rounded-t-sm"></div>
+<div class="w-full bg-primary-fixed h-38 rounded-t-sm"></div>
+<div class="w-full bg-primary-fixed h-42 rounded-t-sm"></div>
+<div class="w-full bg-primary-fixed h-48 rounded-t-sm"></div>
+<div class="w-full bg-primary-fixed h-40 rounded-t-sm"></div>
+<div class="w-full bg-primary-fixed h-44 rounded-t-sm"></div>
+<div class="w-full bg-primary-fixed h-46 rounded-t-sm"></div>
+</div>
+<div class="flex justify-between mt-2 text-[10px] font-bold text-on-surface-variant px-1">
+<span>00:00</span>
+<span>06:00</span>
+<span>12:00</span>
+<span>18:00</span>
+<span>23:59</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB Suppression Logic: Not rendered on Settings/Admin screen -->
+</body></html>

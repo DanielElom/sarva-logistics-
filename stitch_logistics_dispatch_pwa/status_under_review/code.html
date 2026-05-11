@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#f0959d",
+                    "surface": "#f8faf4",
+                    "primary-fixed-dim": "#92d6a2",
+                    "background": "#f8faf4",
+                    "on-primary-fixed-variant": "#08522a",
+                    "surface-bright": "#f8faf4",
+                    "on-primary": "#ffffff",
+                    "surface-container": "#ecefe8",
+                    "tertiary-container": "#6f2c35",
+                    "secondary-fixed-dim": "#b2ceb5",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#404941",
+                    "surface-container-low": "#f2f4ee",
+                    "outline": "#707970",
+                    "surface-container-highest": "#e0e3dd",
+                    "surface-container-high": "#e6e9e3",
+                    "on-secondary-container": "#516a56",
+                    "primary": "#003418",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed": "#3d0511",
+                    "on-secondary-fixed": "#082010",
+                    "on-secondary": "#ffffff",
+                    "surface-variant": "#e0e3dd",
+                    "tertiary": "#531620",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#c0c9be",
+                    "inverse-surface": "#2e312d",
+                    "on-surface": "#191d19",
+                    "on-secondary-fixed-variant": "#344c39",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb2b8",
+                    "secondary-container": "#cdead0",
+                    "on-primary-fixed": "#00210d",
+                    "secondary": "#4b6450",
+                    "on-tertiary-fixed-variant": "#753139",
+                    "primary-fixed": "#adf2bc",
+                    "inverse-on-surface": "#eff2eb",
+                    "on-primary-container": "#7abd8b",
+                    "inverse-primary": "#92d6a2",
+                    "tertiary-fixed": "#ffdadb",
+                    "primary-container": "#004d26",
+                    "on-background": "#191d19",
+                    "surface-dim": "#d8dbd5",
+                    "secondary-fixed": "#cdead0",
+                    "error-container": "#ffdad6",
+                    "surface-tint": "#296b40"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-gap { margin-bottom: 2.5rem; }
+        .glass-nav { background: rgba(248, 250, 244, 0.8); backdrop-filter: blur(12px); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#f8faf4] dark:bg-[#191d19] flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#003418] dark:text-[#f8faf4]">arrow_back</span>
+<h1 class="font-['Manrope'] font-bold text-lg tracking-tight text-[#003418] dark:text-[#f8faf4]">Fair-Ride</h1>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="more_vert">more_vert</span>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-lg mx-auto">
+<!-- Status Hero Section: Architectural Layering -->
+<section class="editorial-gap">
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low p-8 text-center">
+<!-- Decorative Layer -->
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-20 h-20 bg-primary-container rounded-full flex items-center justify-center mb-6 shadow-xl">
+<span class="material-symbols-outlined text-on-primary text-4xl" data-icon="pending_actions">pending_actions</span>
+</div>
+<h2 class="font-headline font-extrabold text-3xl text-on-surface tracking-tight mb-3">Application Under Review</h2>
+<p class="text-on-surface-variant font-medium leading-relaxed">
+                        Our team is verifying your documents. This usually takes 24-48 hours.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Bento Grid: Document Progress -->
+<section class="editorial-gap">
+<h3 class="font-headline font-bold text-sm uppercase tracking-widest text-on-surface-variant mb-4 px-1">Verification Status</h3>
+<div class="grid grid-cols-1 gap-3">
+<!-- Driver License Card -->
+<div class="bg-surface-container-lowest rounded-lg p-5 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="badge">badge</span>
+</div>
+<div>
+<p class="font-headline font-bold text-on-surface">Driver License</p>
+<p class="text-xs text-on-surface-variant">Submitted Oct 24, 2023</p>
+</div>
+</div>
+<div class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase rounded-full">
+                        Received
+                    </div>
+</div>
+<!-- Vehicle Insurance Card -->
+<div class="bg-surface-container-lowest rounded-lg p-5 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="policy">policy</span>
+</div>
+<div>
+<p class="font-headline font-bold text-on-surface">Vehicle Insurance</p>
+<p class="text-xs text-on-surface-variant">Submitted Oct 24, 2023</p>
+</div>
+</div>
+<div class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase rounded-full">
+                        Received
+                    </div>
+</div>
+<!-- Background Check Card (Active/Pending) -->
+<div class="bg-surface-container-lowest rounded-lg p-5 flex items-center justify-between border-l-4 border-primary shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary-container/10 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="shield_person">shield_person</span>
+</div>
+<div>
+<p class="font-headline font-bold text-on-surface">Background Check</p>
+<p class="text-xs text-on-surface-variant">In Progress</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="schedule">schedule</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Informational Sheet: Layered over background -->
+<section class="bg-surface-container-high rounded-xl p-6 relative">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="info">info</span>
+<div>
+<h4 class="font-headline font-bold text-on-surface mb-1">What's next?</h4>
+<p class="text-sm text-on-surface-variant leading-snug">
+                        Once your documents are approved, you will receive a push notification to complete your mandatory online safety orientation.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Visual Anchor: Contextual Image -->
+<div class="mt-8 rounded-xl overflow-hidden h-40 relative group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="close-up of professional courier equipment including a green logistics vest and document folder on a clean wooden desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcw6kKPT_xMvbCiwS-gn7FWOTzshKO3nNKGvZeu0m6rrcTm-7YToCwJpgoxcArJRRzcWxIWKUO-TdiREtstIiTkidrOaSyE2KesMucYKFwoGPgPaQSpt0CznBSDCmMbgLRJljaifGUSZ5EnoNQdqkAmG4xO56CdknHY3n_0iWWAGdfKy-lbZmlp6F-8U4TP3pmiItwgcAlANbsfvSTSSNqP5g6E8GdvR1EBHl3M3yO2CJxrosaTCOC21rAA0IcL4wcA68Cke1mT8U"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent flex items-end p-6">
+<p class="text-white text-sm font-semibold">Join the 12,000+ Fair-Ride partners.</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar - Contextual Suppression Check: Active tab maps to Account as per JSON -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-[#f8faf4]/80 dark:bg-[#191d19]/80 backdrop-blur-md rounded-t-2xl z-50 shadow-[0_-4px_24px_rgba(25,29,25,0.06)] border-t border-[#c0c9be]/20">
+<a class="flex flex-col items-center justify-center bg-[#004d26] text-white rounded-xl py-1.5 px-4" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider">Account</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#404941] dark:text-[#c0c9be] py-1.5 px-4 hover:text-[#003418] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="headset_mic">headset_mic</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider">Support</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#404941] dark:text-[#c0c9be] py-1.5 px-4 hover:text-[#003418] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider">Help</span>
+</a>
+</nav>
+</body></html>

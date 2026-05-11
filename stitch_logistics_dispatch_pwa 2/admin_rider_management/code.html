@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rider Management | Fair-Ride Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#7abd8b",
+                        "surface-variant": "#e0e3dd",
+                        "surface-container-low": "#f2f4ee",
+                        "primary-fixed-dim": "#92d6a2",
+                        "on-secondary-fixed": "#082010",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#f8faf4",
+                        "outline-variant": "#c0c9be",
+                        "on-primary": "#ffffff",
+                        "surface": "#f8faf4",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#08522a",
+                        "tertiary-fixed-dim": "#ffb2b8",
+                        "secondary": "#4b6450",
+                        "primary": "#003418",
+                        "on-background": "#191d19",
+                        "on-surface-variant": "#404941",
+                        "secondary-fixed": "#cdead0",
+                        "on-tertiary-container": "#f0959d",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#531620",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#cdead0",
+                        "on-tertiary-fixed-variant": "#753139",
+                        "surface-tint": "#296b40",
+                        "surface-container-high": "#e6e9e3",
+                        "inverse-on-surface": "#eff2eb",
+                        "tertiary-fixed": "#ffdadb",
+                        "tertiary-container": "#6f2c35",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#2e312d",
+                        "secondary-fixed-dim": "#b2ceb5",
+                        "outline": "#707970",
+                        "on-tertiary-fixed": "#3d0511",
+                        "on-primary-fixed": "#00210d",
+                        "surface-dim": "#d8dbd5",
+                        "primary-fixed": "#adf2bc",
+                        "on-surface": "#191d19",
+                        "on-secondary-container": "#516a56",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e0e3dd",
+                        "primary-container": "#004d26",
+                        "error": "#ba1a1a",
+                        "background": "#f8faf4",
+                        "surface-container": "#ecefe8",
+                        "inverse-primary": "#92d6a2",
+                        "on-secondary-fixed-variant": "#344c39"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar -->
+<aside class="fixed top-0 left-0 h-screen w-64 z-40 bg-[#003418] dark:bg-stone-950 flex flex-col p-4 gap-2 shadow-[4px_0_24px_rgba(0,0,0,0.08)]">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="local_shipping">local_shipping</span>
+</div>
+<div>
+<h2 class="font-['Manrope'] text-2xl font-black text-white leading-none">Fair-Ride</h2>
+<p class="text-white/50 text-[10px] uppercase tracking-widest mt-1">Logistics Admin</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="potted_plant">potted_plant</span>
+<span class="font-medium text-sm">Live Ops</span>
+</a>
+<!-- Riders Active State -->
+<a class="flex items-center gap-3 px-4 py-3 bg-[#004d26] text-white rounded-lg shadow-sm font-semibold transition-all duration-200 transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="motorcycle" style="font-variation-settings: 'FILL' 1;">motorcycle</span>
+<span class="font-medium text-sm">Riders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-medium text-sm">Users</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-medium text-sm">Payments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="font-medium text-sm">Trips</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-medium text-sm">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-medium text-sm">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="sell">sell</span>
+<span class="font-medium text-sm">Pricing</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium text-sm">Settings</span>
+</a>
+</nav>
+<button class="mt-auto bg-white/10 text-white rounded-xl py-3 px-4 font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white/20 transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+            Request Delivery
+        </button>
+</aside>
+<!-- TopNavBar -->
+<header class="w-full sticky top-0 z-30 bg-[#f8faf4] dark:bg-stone-950 flex justify-between items-center px-6 py-3 ml-64 max-w-[calc(100%-16rem)]">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-sm focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" placeholder="Search by name or ID..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-[#e0e3dd] dark:hover:bg-stone-800 transition-colors relative">
+<span class="material-symbols-outlined text-on-surface" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 rounded-full hover:bg-[#e0e3dd] dark:hover:bg-stone-800 transition-colors">
+<span class="material-symbols-outlined text-on-surface" data-icon="apps">apps</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant opacity-30"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-primary tracking-tight">Admin Profile Avatar</p>
+<p class="text-[10px] text-on-surface-variant">Fleet Manager</p>
+</div>
+<img alt="Admin Profile Avatar" class="w-10 h-10 rounded-full border-2 border-primary-container object-cover" data-alt="professional portrait of a middle-aged male administrator wearing a clean shirt in a bright office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXF7L52lpoTVkt3wxJAt1RRkM4GqoQ8NTsoEMhF54hdIkpYkuZI4ogigtxyWuilbYmrVDLqWBDviA8bELMqN6aTuZBO3kuJ_QImBNWEHc_LzXg7w_26qfpGPd5FgEF0iMgha7kuFNn50cUEij1Zd56oo35_Ko4DoKrdUV2ggL2Ma5XlAPYovT4G-6md40GzjikxFMNZQxvl1CRIEELqQWK6Nkt8DbwJSOWoItVU3QwrPHSIhvRnNoeQfv0cAGLva4N61c3WV9RQFc"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 p-8 min-h-screen">
+<!-- Header Section -->
+<div class="mb-8">
+<h1 class="text-3xl font-extrabold text-primary tracking-tight mb-2">Rider Management</h1>
+<p class="text-on-surface-variant">Oversee your fleet, verify documents, and monitor real-time performance.</p>
+</div>
+<!-- Quick Stats Row (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-b-4 border-primary/20">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 rounded-full bg-primary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="groups">groups</span>
+</div>
+<span class="text-xs font-bold text-primary-container bg-primary-container/10 px-2 py-1 rounded">+12%</span>
+</div>
+<p class="text-sm text-on-surface-variant font-medium">Total Fleet</p>
+<p class="text-3xl font-black text-primary">1,200</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-b-4 border-tertiary/20">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 rounded-full bg-tertiary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" data-icon="pending_actions">pending_actions</span>
+</div>
+<span class="text-xs font-bold text-tertiary bg-tertiary/10 px-2 py-1 rounded">Action Needed</span>
+</div>
+<p class="text-sm text-on-surface-variant font-medium">Pending Approval</p>
+<p class="text-3xl font-black text-on-surface">45</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-b-4 border-on-primary-container/20">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 rounded-full bg-on-primary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="text-xs font-bold text-on-primary-container bg-on-primary-container/10 px-2 py-1 rounded">Top 25%</span>
+</div>
+<p class="text-sm text-on-surface-variant font-medium">Top Rated</p>
+<p class="text-3xl font-black text-on-surface">320</p>
+</div>
+</div>
+<!-- Filters Section -->
+<div class="bg-surface-container-low p-4 rounded-xl mb-6 flex flex-col md:flex-row gap-4 items-center">
+<div class="flex-1 w-full">
+<label class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant ml-1 mb-1 block">Filter by Status</label>
+<select class="w-full bg-surface-container-lowest border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary">
+<option>All Statuses</option>
+<option>Online</option>
+<option>Offline</option>
+<option>Pending</option>
+</select>
+</div>
+<div class="flex-1 w-full">
+<label class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant ml-1 mb-1 block">Document Status</label>
+<select class="w-full bg-surface-container-lowest border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary">
+<option>All Documents</option>
+<option>Approved</option>
+<option>Pending Review</option>
+<option>Rejected</option>
+</select>
+</div>
+<div class="flex items-end gap-2">
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-bold text-sm shadow-md hover:brightness-110 active:scale-95 transition-all">Apply Filters</button>
+<button class="bg-surface-container-high text-on-surface px-4 py-2 rounded-lg font-bold text-sm transition-all hover:bg-surface-variant">Reset</button>
+</div>
+</div>
+<!-- Data Table Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-surface-container-low flex justify-between items-center">
+<h3 class="font-bold text-lg text-primary">Rider Fleet Directory</h3>
+<button class="text-primary text-sm font-bold flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+                    Export CSV
+                </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant">Rider Name</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant">Status</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant">Rating</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant">Trips Completed</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant">Earnings</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="headshot of a smiling young man wearing a professional delivery uniform against a neutral backdrop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1eYMXevEl3H-8LyT-ehGXu5K5qxmM41PWQkHow57vP5jrbsYbAgXtvQ45oEUu1XKrgn7XbcEVQadanrZodizimp7Y2_L9dDQXr5bRiJf-67rJ4nfUisMFq8cScBM1yWequyO09j1Gq13uudgkF4UNk0H4iNQSGL6GSG8fjFjKg-YQc2et9lJydWAaJ7Vgui7_H-haI3uE_x80bGru7IPew3jBASP_x1b3QUZaZhQiHUk0bMzOmrnkRYyyc6rAhq0v2JDeZSWqA3c"/>
+</div>
+<div>
+<p class="font-bold text-sm text-on-surface">Marcus Chen</p>
+<p class="text-[10px] text-on-surface-variant">ID: FR-90210</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary-fixed-dim/20 text-primary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                                    Online
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-[#FFB800]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold">4.9</span>
+</div>
+</td>
+<td class="px-6 py-4 font-medium text-sm">1,240</td>
+<td class="px-6 py-4 font-bold text-sm text-primary">$12,450.00</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 rounded-lg bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+<button class="p-2 rounded-lg bg-error-container/10 text-error hover:bg-error-container transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="block">block</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="headshot of a confident woman in a professional polo shirt for a delivery company" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLc9rrW7eUqhd6fH0FjN7ymXZG9Lv1ywih0kAWiaRiqWkYbYyOX5Xc_ti5VjBTrdh3ELA044D5bkwUenCLk7vpNXCVYgkDgcwgZ5jbmteB8_yruRMKyW6K-HBEjDwptBmFv7-pewrOb-hKhp9m8jg-mzJk-nw-J4XC_YSimCPkViLEKT-aG1jIKgXxK_Qu9xI4kCWowtSAQFIauunMj4HG-PtD_TD1UtJO6gflm9N3fOSPuRvZPKCnhYcrIFMTlEFbyF6J5gQMKW8"/>
+</div>
+<div>
+<p class="font-bold text-sm text-on-surface">Elena Rodriguez</p>
+<p class="text-[10px] text-on-surface-variant">ID: FR-88432</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-surface-container-high text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                                    Offline
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-[#FFB800]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold">4.7</span>
+</div>
+</td>
+<td class="px-6 py-4 font-medium text-sm">856</td>
+<td class="px-6 py-4 font-bold text-sm text-primary">$8,920.50</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 rounded-lg bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+<button class="p-2 rounded-lg bg-error-container/10 text-error hover:bg-error-container transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="block">block</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="headshot of an elderly experienced courier with a friendly smile wearing a baseball cap" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDy5J9pagMwrYMqxYRs45NcSPquRTiItx2vZIV3QoPWUnd7eGuJ_J1XXNo74LnDvaANWoH1zBTQXhKY6RS1lImTdbziJwzApgfI7aTN-pSEeimkoaFB9FGd8OjfEHFE9cenw6SnrtJYmtCSDbeckOKdfHbbJdGwNttYc04w66EGOufnxDw1KNEi3yofO49x1ppEljCFB9L6fySJBZTRNqDzYLpZwC6GKPdLfbWWp2CPe8HGihpPF1tN8Pg4krJRgPAcIk5ZpOsqNUU"/>
+</div>
+<div>
+<p class="font-bold text-sm text-on-surface">Samuel Thompson</p>
+<p class="text-[10px] text-on-surface-variant">ID: FR-77219</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-tertiary-fixed/20 text-tertiary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                                    Pending
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-outline-variant" data-icon="star" style="font-variation-settings: 'FILL' 0;">star</span>
+<span class="text-sm font-bold text-outline-variant">N/A</span>
+</div>
+</td>
+<td class="px-6 py-4 font-medium text-sm">0</td>
+<td class="px-6 py-4 font-bold text-sm text-primary">$0.00</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 rounded-lg bg-primary text-on-primary hover:brightness-110 transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="how_to_reg">how_to_reg</span>
+</button>
+<button class="p-2 rounded-lg bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="close up headshot of a young professional delivery rider looking forward with confidence" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyNtH6XJeSSpV_yjbqCKEzKX6vL2iOdSLl3FasyReytTqj7crE-JG-jeNh7I9t_7mK--ILb9IHUmKD2HA_TkQxb6dAVb4bj2lujHqTc3GnH_WDWxtCpXRCuVjiWfGE0C_mXM88V8bo3Wtc3hQ9STPZKzdXZPq68px_xoaMVC5E20hE9LUBw1xSye1w6AqDsM67A-c0kua9gaAgCQdlMNQEx04hjv6onJ1Gbn2SX9DCQu1QycuvqyGhCU0QgViTUsxnuMZMc6SmE9g"/>
+</div>
+<div>
+<p class="font-bold text-sm text-on-surface">Priya Sharma</p>
+<p class="text-[10px] text-on-surface-variant">ID: FR-66504</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary-fixed-dim/20 text-primary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                                    Online
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-[#FFB800]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold">5.0</span>
+</div>
+</td>
+<td class="px-6 py-4 font-medium text-sm">2,104</td>
+<td class="px-6 py-4 font-bold text-sm text-primary">$28,140.75</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 rounded-lg bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+</button>
+<button class="p-2 rounded-lg bg-error-container/10 text-error hover:bg-error-container transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="block">block</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-surface-container-low/30 border-t border-surface-container-low flex items-center justify-between">
+<p class="text-xs text-on-surface-variant font-medium">Showing 4 of 1,200 riders</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded bg-white shadow-sm text-on-surface hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span></button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-on-primary font-bold text-xs">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-white shadow-sm text-on-surface hover:bg-surface-container-high transition-colors font-bold text-xs">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-white shadow-sm text-on-surface hover:bg-surface-container-high transition-colors font-bold text-xs">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-white shadow-sm text-on-surface hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span></button>
+</div>
+</div>
+</div>
+<!-- Asymmetric Detail Section -->
+<div class="mt-12 grid grid-cols-1 lg:grid-cols-5 gap-8">
+<div class="lg:col-span-3 bg-surface-container-lowest p-8 rounded-xl shadow-sm relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="text-xl font-extrabold text-primary mb-2">Fleet Integrity Monitor</h3>
+<p class="text-on-surface-variant max-w-md mb-6">Real-time verification of rider licenses and insurance documents is currently active for 98.4% of the fleet.</p>
+<div class="flex items-center gap-8">
+<div>
+<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">Success Rate</p>
+<p class="text-2xl font-black text-primary-container">98.4%</p>
+</div>
+<div class="w-px h-10 bg-outline-variant opacity-30"></div>
+<div>
+<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">Auto-Suspensions</p>
+<p class="text-2xl font-black text-tertiary">12</p>
+</div>
+</div>
+</div>
+<div class="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-primary-container/10 to-transparent flex items-center justify-center">
+<span class="material-symbols-outlined text-7xl text-primary opacity-10" data-icon="verified_user">verified_user</span>
+</div>
+</div>
+<div class="lg:col-span-2 bg-[#003418] text-white p-8 rounded-xl shadow-lg flex flex-col justify-between">
+<div>
+<span class="inline-block px-3 py-1 rounded-full bg-white/10 text-[10px] font-black uppercase tracking-widest mb-4">Quick Tip</span>
+<h3 class="text-xl font-bold mb-3 leading-tight">Reward high performance with Tier-1 bonuses.</h3>
+<p class="text-white/70 text-sm mb-6">Riders with a 4.9+ rating and over 500 trips are eligible for reduced commission fees this month.</p>
+</div>
+<button class="w-full bg-white text-primary font-black text-sm py-3 rounded-lg hover:bg-surface transition-all active:scale-95">Configure Rewards</button>
+</div>
+</div>
+</main>
+</body></html>

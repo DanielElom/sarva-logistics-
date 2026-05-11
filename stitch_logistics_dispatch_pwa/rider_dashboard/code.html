@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rider Dashboard | Architectural Courier</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#93000a",
+                    "primary-container": "#004d26",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#3d0511",
+                    "inverse-surface": "#2e312d",
+                    "on-tertiary-fixed-variant": "#753139",
+                    "inverse-primary": "#92d6a2",
+                    "on-surface": "#191d19",
+                    "tertiary-fixed": "#ffdadb",
+                    "surface-bright": "#f8faf4",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#92d6a2",
+                    "secondary-fixed": "#cdead0",
+                    "on-primary-fixed-variant": "#08522a",
+                    "primary": "#003418",
+                    "secondary": "#4b6450",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#adf2bc",
+                    "surface-tint": "#296b40",
+                    "surface-container-high": "#e6e9e3",
+                    "on-background": "#191d19",
+                    "on-secondary-fixed-variant": "#344c39",
+                    "on-secondary-fixed": "#082010",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb2b8",
+                    "tertiary": "#531620",
+                    "on-primary-container": "#7abd8b",
+                    "tertiary-container": "#6f2c35",
+                    "inverse-on-surface": "#eff2eb",
+                    "surface-variant": "#e0e3dd",
+                    "on-tertiary-container": "#f0959d",
+                    "on-primary-fixed": "#00210d",
+                    "secondary-fixed-dim": "#b2ceb5",
+                    "outline": "#707970",
+                    "surface": "#f8faf4",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#c0c9be",
+                    "on-surface-variant": "#404941",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#516a56",
+                    "secondary-container": "#cdead0",
+                    "surface-container": "#ecefe8",
+                    "surface-dim": "#d8dbd5",
+                    "surface-container-low": "#f2f4ee",
+                    "background": "#f8faf4",
+                    "surface-container-highest": "#e0e3dd",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-40 bg-[#f2f4ee] dark:bg-[#232923] shadow-none">
+<div class="flex justify-between items-center px-6 py-4 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#003418] dark:text-[#f8faf4]">menu</span>
+<span class="text-xl font-bold text-[#003418] dark:text-[#f8faf4] tracking-tighter font-manrope">Architectural Courier</span>
+</div>
+<div class="flex items-center gap-6">
+<!-- Availability Toggle -->
+<div class="hidden md:flex items-center gap-3 bg-surface-container-highest px-4 py-2 rounded-full">
+<span class="text-label text-[12px] font-bold uppercase tracking-widest text-on-surface-variant">Online</span>
+<button class="w-10 h-5 bg-primary-container rounded-full relative flex items-center px-1">
+<div class="w-3 h-3 bg-white rounded-full ml-auto"></div>
+</button>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="User profile photo" data-alt="Professional portrait of a delivery courier in a clean green uniform with a focused and friendly expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC41npeFiOPqJtTGdx8I0VYqISo8DiuK73pQifv8iT7R-YPqZZGHOOKWjeNRatoh0x8-k5OJg-TuAfOAMPrcQxmJI_Ga3JcLKHKP14xPweoA38bhfQryZ3-B5twPeAeZCD4Ygw-RfQsPViqefqfyp5prY09pOaNex9c6GXvHP0dNpHbWmT6GvJYpEjBA_iV85xPKeNFKxJxVYcYTJz1AASrtt63lLbk11r5kknArGrkOm3Bt303Z-emEh6EEIcT1AynsubkmZ5j9so"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-8">
+<!-- Dashboard Header -->
+<div class="mb-10">
+<p class="text-label-md text-on-surface-variant font-semibold tracking-wide uppercase mb-1">Welcome back, Marcus</p>
+<h1 class="text-4xl font-extrabold text-primary tracking-tight">Rider Dashboard</h1>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Primary Actions & Active Task -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Active Delivery Card (Glassmorphism & Map Snippet) -->
+<section class="relative bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm group">
+<div class="absolute inset-0 bg-cover bg-center opacity-40 grayscale-[0.5]" data-alt="Minimalist map view of city streets with a single green navigation path highlighted and a courier icon" data-location="London" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCAUsKjb8ERvcOulsOuxpPCR1NHm5Eydzmyo-QHgywS27TNEHUON7YlZfGC9S0JqTQAMkOmRk5VvP7XvmmfwdB2niC1bsQLKEUZsDmULDcwC8HsO97GhAwNCnbShvrbH43gXkULwt5P9R46iIjsF9SgnrTBAg_8sy17g3f76Xr5iiF3o8HS62MR1KttcUylPXFu5hQRjvrKyAUo4R8uLj3UhD852fNRqf3RDYG3u6-lYUea_xwpubIKXCX_ddKpkOFdShxVX65RbwY')">
+</div>
+<div class="relative z-10 p-8 backdrop-blur-md bg-white/60">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div>
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary text-white text-[10px] font-bold uppercase tracking-widest mb-4">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+                                    In Transit
+                                </span>
+<h2 class="text-2xl font-bold text-on-surface mb-2">Package #AC-8832</h2>
+<p class="text-on-surface-variant max-w-md">Delivering architectural blueprints to Studio Nine on 42nd St.</p>
+</div>
+<div class="flex flex-col items-end">
+<p class="text-sm font-bold text-on-surface-variant uppercase tracking-tighter">Est. Arrival</p>
+<p class="text-4xl font-extrabold text-primary-container">12 min</p>
+</div>
+</div>
+<div class="mt-8 flex gap-4">
+<button class="flex-1 bg-primary text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-primary-container transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">directions</span>
+                                Open Navigation
+                            </button>
+<button class="px-6 py-4 rounded-xl bg-surface-container-high text-on-surface font-bold hover:bg-surface-variant transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">call</span>
+</button>
+</div>
+</div>
+</section>
+<!-- New Requests (Asymmetric Bento Style) -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold text-on-surface">New Requests</h3>
+<a class="text-sm font-bold text-primary-container underline underline-offset-4" href="#">View All</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Request 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-primary shadow-sm hover:translate-y-[-2px] transition-transform">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest">Express Delivery</p>
+<h4 class="text-lg font-bold">The Marble House</h4>
+</div>
+<span class="text-lg font-bold text-primary">$18.50</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-on-surface-variant mb-6">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span>2.4 miles away</span>
+</div>
+<button class="w-full py-3 bg-surface-container-high text-on-surface font-bold rounded-full hover:bg-primary hover:text-white transition-colors uppercase text-[12px] tracking-widest">Accept Delivery</button>
+</div>
+<!-- Request 2 -->
+<div class="bg-surface-container-low p-6 rounded-xl shadow-sm opacity-90">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest">Scheduled</p>
+<h4 class="text-lg font-bold">Civic Hall Documents</h4>
+</div>
+<span class="text-lg font-bold text-primary">$12.00</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-on-surface-variant mb-6">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span>Pickup at 2:30 PM</span>
+</div>
+<button class="w-full py-3 border border-outline-variant text-on-surface font-bold rounded-full hover:bg-primary hover:text-white transition-colors uppercase text-[12px] tracking-widest">Details</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Earnings & Stats -->
+<div class="lg:col-span-4 space-y-8">
+<!-- Earnings Card -->
+<section class="bg-primary-container text-white p-8 rounded-xl relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-32 h-32 bg-primary rounded-full opacity-30"></div>
+<p class="text-[10px] font-bold uppercase tracking-[0.2em] mb-2 text-on-primary-container/80">Today's Earnings</p>
+<h3 class="text-5xl font-extrabold mb-8 tracking-tighter">$142.25</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center text-sm">
+<span class="opacity-70">Completed Deliveries</span>
+<span class="font-bold">14</span>
+</div>
+<div class="w-full h-[2px] bg-white/10"></div>
+<div class="flex justify-between items-center text-sm">
+<span class="opacity-70">Hours Active</span>
+<span class="font-bold">5h 22m</span>
+</div>
+</div>
+<button class="mt-8 w-full py-4 bg-white text-primary font-extrabold rounded-xl hover:bg-surface-bright transition-colors uppercase text-[12px] tracking-widest">Cash Out</button>
+</section>
+<!-- Performance Stats -->
+<section class="bg-surface-container-low p-8 rounded-xl">
+<h3 class="text-lg font-bold mb-6 text-on-surface">Weekly Metrics</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-sm font-semibold text-on-surface-variant">Rating</span>
+<span class="text-sm font-bold">4.9 / 5.0</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="w-[98%] h-full bg-primary"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-sm font-semibold text-on-surface-variant">Acceptance Rate</span>
+<span class="text-sm font-bold">92%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="w-[92%] h-full bg-primary"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Support Card -->
+<section class="bg-tertiary-container text-on-tertiary-container p-6 rounded-xl flex items-center justify-between">
+<div>
+<h4 class="font-bold">Need Help?</h4>
+<p class="text-sm opacity-80">Courier support is online.</p>
+</div>
+<span class="material-symbols-outlined text-3xl">contact_support</span>
+</section>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#f8faf4]/80 dark:bg-[#191d19]/80 backdrop-blur-xl z-50 rounded-t-3xl shadow-[0_-8px_32px_rgba(0,52,24,0.06)]">
+<div class="flex flex-col items-center justify-center bg-[#004d26] text-white rounded-2xl px-5 py-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-inter text-[11px] font-semibold tracking-wide uppercase mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#404941] dark:text-[#c0c9be] px-5 py-2 hover:bg-[#e0e3dd] dark:hover:bg-[#2d352d] rounded-2xl transition-all">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-inter text-[11px] font-semibold tracking-wide uppercase mt-1">History</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#404941] dark:text-[#c0c9be] px-5 py-2 hover:bg-[#e0e3dd] dark:hover:bg-[#2d352d] rounded-2xl transition-all">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-inter text-[11px] font-semibold tracking-wide uppercase mt-1">Alerts</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#404941] dark:text-[#c0c9be] px-5 py-2 hover:bg-[#e0e3dd] dark:hover:bg-[#2d352d] rounded-2xl transition-all">
+<span class="material-symbols-outlined">person</span>
+<span class="font-inter text-[11px] font-semibold tracking-wide uppercase mt-1">Profile</span>
+</div>
+</nav>
+<!-- Floating Availability Mobile -->
+<div class="md:hidden fixed bottom-24 right-6 z-50">
+<button class="bg-primary text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-3xl">power_settings_new</span>
+</button>
+</div>
+</body></html>

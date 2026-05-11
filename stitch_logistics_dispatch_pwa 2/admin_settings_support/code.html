@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Architectural Courier Admin - Support Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#4b6450",
+                    "on-primary-container": "#7abd8b",
+                    "secondary-fixed": "#cdead0",
+                    "on-primary-fixed": "#00210d",
+                    "outline-variant": "#c0c9be",
+                    "tertiary": "#531620",
+                    "on-secondary-fixed": "#082010",
+                    "surface-container-low": "#f2f4ee",
+                    "on-tertiary-container": "#f0959d",
+                    "secondary-fixed-dim": "#b2ceb5",
+                    "on-surface": "#191d19",
+                    "tertiary-container": "#6f2c35",
+                    "surface-dim": "#d8dbd5",
+                    "primary-fixed-dim": "#92d6a2",
+                    "on-tertiary-fixed-variant": "#753139",
+                    "error": "#ba1a1a",
+                    "surface-container": "#ecefe8",
+                    "inverse-surface": "#2e312d",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#e0e3dd",
+                    "inverse-primary": "#92d6a2",
+                    "on-secondary-fixed-variant": "#344c39",
+                    "tertiary-fixed": "#ffdadb",
+                    "on-tertiary-fixed": "#3d0511",
+                    "surface-tint": "#296b40",
+                    "surface": "#f8faf4",
+                    "outline": "#707970",
+                    "surface-container-highest": "#e0e3dd",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#f8faf4",
+                    "error-container": "#ffdad6",
+                    "inverse-on-surface": "#eff2eb",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#cdead0",
+                    "background": "#f8faf4",
+                    "primary-container": "#004d26",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#404941",
+                    "on-secondary-container": "#516a56",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "primary": "#003418",
+                    "on-primary-fixed-variant": "#08522a",
+                    "primary-fixed": "#adf2bc",
+                    "tertiary-fixed-dim": "#ffb2b8",
+                    "surface-container-high": "#e6e9e3",
+                    "on-background": "#191d19"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 24px 48px -12px rgba(25, 29, 25, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- SideNavBar (Authority: JSON) -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-[#c0c9be]/20 bg-[#f2f4ee] flex flex-col p-4 space-y-2 z-50">
+<div class="flex items-center gap-3 px-2 py-4 mb-6">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="architecture">architecture</span>
+</div>
+<div>
+<h1 class="font-manrope font-extrabold text-[#003418] leading-tight">Admin Panel</h1>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">System Logistics</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-medium">Pricing</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-medium">Payments</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="alt_route">alt_route</span>
+<span class="font-medium">Dispatch Logic</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-medium">System Logs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 bg-[#ffffff] text-[#003418] rounded-lg shadow-sm font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="settings_suggest">settings_suggest</span>
+<span class="font-medium">Settings</span>
+</a>
+</nav>
+<div class="pt-4 border-t border-outline-variant/20 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-medium">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-medium">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar (Authority: JSON) -->
+<header class="w-full border-b border-[#c0c9be]/20 bg-[#f8faf4] flex justify-between items-center px-8 py-4 sticky top-0 z-40">
+<div class="flex items-center gap-6">
+<h2 class="text-xl font-manrope font-bold tracking-tight text-[#003418]">Support System</h2>
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-sm w-64 focus:ring-1 focus:ring-primary outline-none" placeholder="Search settings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-[#404941] hover:bg-[#e6e9e3] rounded-full transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-[#404941] hover:bg-[#e6e9e3] rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="professional male administrator in a clean white shirt with a focused expression, high-end corporate headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfy5LAnCZnDHER9UqDSq3KQGOHHIdz_s5j7cqFLRs85BfiSeiyJbIZeaecsy5wFgJlQenubPlWiMSuAd9_PdXSXtVgHEF-SEhA--o7N5AUg3-n1F17bkU3_jslNuIXOP9Zam2OVnU4geHb6YIY10v0JSDu_JT06Cm9HOURmhS2343f_wuLHwmzHr_p9OW1y3mNM9gGZld6rQ_N4CcluBxNUQBes1h2YPrigQK3jxSpkvOtqgHK5z62QL2rDNUkqxh4IPn7k5MI_Bo"/>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<section class="p-8 max-w-7xl mx-auto w-full">
+<!-- Hero Header Section -->
+<div class="mb-10">
+<span class="text-sm font-bold text-primary-container tracking-widest uppercase mb-2 block">Configuration Hub</span>
+<h3 class="text-4xl font-manrope font-extrabold text-on-surface mb-4">Support &amp; Logistics Ethics</h3>
+<p class="text-on-surface-variant max-w-2xl leading-relaxed">Define the structural boundaries of your customer relations. Manage response latencies, approval hierarchies, and automated communication protocols.</p>
+</div>
+<!-- Bento Grid Management Interface -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Ticket Categories (Bento Large) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl editorial-shadow p-8 flex flex-col border border-outline-variant/10">
+<div class="flex justify-between items-center mb-6">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-secondary-container rounded-lg">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="category">category</span>
+</div>
+<h4 class="text-xl font-bold font-manrope">Ticket Categories</h4>
+</div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                            Add Category
+                        </button>
+</div>
+<div class="space-y-4">
+<!-- Category Row -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl group transition-all hover:bg-surface-container-high">
+<div class="flex items-center gap-4">
+<div class="w-1 h-8 bg-primary rounded-full"></div>
+<div>
+<p class="font-bold text-on-surface">Critical Logistics Failure</p>
+<p class="text-xs text-on-surface-variant">Priority: High • Auto-assign: Senior Dispatcher</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="bg-primary-fixed text-on-primary-fixed text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-tighter">SLA: 15m</span>
+<button class="p-2 opacity-0 group-hover:opacity-100 transition-opacity text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<!-- Category Row -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl group transition-all hover:bg-surface-container-high">
+<div class="flex items-center gap-4">
+<div class="w-1 h-8 bg-secondary rounded-full"></div>
+<div>
+<p class="font-bold text-on-surface">Refund &amp; Billing</p>
+<p class="text-xs text-on-surface-variant">Priority: Medium • Auto-assign: Finance Admin</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="bg-secondary-fixed text-on-secondary-fixed text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-tighter">SLA: 2h</span>
+<button class="p-2 opacity-0 group-hover:opacity-100 transition-opacity text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<!-- Category Row -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl group transition-all hover:bg-surface-container-high">
+<div class="flex items-center gap-4">
+<div class="w-1 h-8 bg-outline rounded-full"></div>
+<div>
+<p class="font-bold text-on-surface">General Inquiry</p>
+<p class="text-xs text-on-surface-variant">Priority: Low • Auto-assign: Junior Support</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="bg-surface-variant text-on-surface-variant text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-tighter">SLA: 24h</span>
+<button class="p-2 opacity-0 group-hover:opacity-100 transition-opacity text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- SLA Timing (Bento Square) -->
+<div class="col-span-12 lg:col-span-4 bg-primary text-on-primary rounded-xl editorial-shadow p-8 flex flex-col justify-between overflow-hidden relative">
+<div class="z-10">
+<div class="p-2 bg-primary-container rounded-lg inline-block mb-4">
+<span class="material-symbols-outlined" data-icon="timer">timer</span>
+</div>
+<h4 class="text-xl font-bold font-manrope mb-2">Global SLA Status</h4>
+<p class="text-primary-fixed-dim text-sm leading-relaxed mb-6">Current system performance metrics across all active regions.</p>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-bold mb-1">
+<span>MEDIAN RESPONSE</span>
+<span>8.2m</span>
+</div>
+<div class="w-full bg-primary-container h-1 rounded-full">
+<div class="bg-primary-fixed w-[70%] h-full rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-1">
+<span>RESOLUTION RATE</span>
+<span>94%</span>
+</div>
+<div class="w-full bg-primary-container h-1 rounded-full">
+<div class="bg-primary-fixed w-[94%] h-full rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Decoration -->
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="analytics">analytics</span>
+</div>
+</div>
+<!-- Refund Approval Rules (Bento Bottom Left) -->
+<div class="col-span-12 lg:col-span-5 bg-surface-container-lowest rounded-xl editorial-shadow p-8 border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-6">
+<div class="p-2 bg-error-container rounded-lg">
+<span class="material-symbols-outlined text-error" data-icon="rule">rule</span>
+</div>
+<h4 class="text-xl font-bold font-manrope text-on-surface">Refund Protocols</h4>
+</div>
+<ul class="space-y-4">
+<li class="flex items-start gap-4">
+<input checked="" class="mt-1 rounded text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<div>
+<p class="text-sm font-bold text-on-surface">Auto-approve under $25.00</p>
+<p class="text-xs text-on-surface-variant">Only for 'Item Damaged' claims with photo proof.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<input checked="" class="mt-1 rounded text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<div>
+<p class="text-sm font-bold text-on-surface">Dual-Admin Approval required &gt; $150</p>
+<p class="text-xs text-on-surface-variant">Escalates automatically to Finance Supervisor.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<input class="mt-1 rounded text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<div>
+<p class="text-sm font-bold text-on-surface">Stripe Instant Payout Sync</p>
+<p class="text-xs text-on-surface-variant">Enable real-time transaction reversal.</p>
+</div>
+</li>
+</ul>
+<div class="mt-8 p-4 bg-tertiary-fixed rounded-xl border border-tertiary-container/10">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-on-tertiary-fixed text-sm" data-icon="warning">warning</span>
+<span class="text-xs font-bold text-on-tertiary-fixed uppercase">Risk Warning</span>
+</div>
+<p class="text-[11px] text-on-tertiary-fixed-variant leading-tight">Changing these rules will bypass manual oversight for current active disputes.</p>
+</div>
+</div>
+<!-- Auto-response Messages (Bento Bottom Right) -->
+<div class="col-span-12 lg:col-span-7 bg-surface-container-low rounded-xl editorial-shadow p-8 flex flex-col relative overflow-hidden">
+<div class="flex items-center gap-3 mb-6">
+<div class="p-2 bg-secondary-container rounded-lg">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="chat_bubble">chat_bubble</span>
+</div>
+<h4 class="text-xl font-bold font-manrope text-on-surface">Auto-response Logic</h4>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest p-4 rounded-xl">
+<div class="flex justify-between mb-2">
+<span class="text-[10px] font-bold text-primary uppercase">Trigger: Ticket Opened</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">E-mail + Push</span>
+</div>
+<p class="text-sm italic text-on-surface-variant border-l-2 border-primary-fixed pl-4 mb-3">"Greetings, Your inquiry regarding [TICKET_ID] has been etched into our dispatch queue. Expect a resolution within [SLA_TIME]..."</p>
+<div class="flex justify-end">
+<button class="text-[10px] font-bold text-primary hover:underline">Edit Template</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl opacity-60">
+<div class="flex justify-between mb-2">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Trigger: Out of Hours</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">WhatsApp</span>
+</div>
+<p class="text-sm italic text-on-surface-variant border-l-2 border-outline-variant pl-4">"Our couriers are currently off the grid. We return at 08:00 AM PST..."</p>
+</div>
+</div>
+<!-- Ambient Shadow Layer -->
+<div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-surface-container-low to-transparent pointer-events-none"></div>
+</div>
+</div>
+<!-- Footer Meta -->
+<div class="mt-12 flex flex-col md:flex-row justify-between items-center border-t border-outline-variant/20 pt-8 text-on-surface-variant">
+<div class="flex items-center gap-4 mb-4 md:mb-0">
+<p class="text-xs uppercase tracking-widest font-bold">System Integrity: 99.9%</p>
+<div class="w-2 h-2 bg-secondary rounded-full"></div>
+<p class="text-xs">Last change: 2 hours ago by admin_jake</p>
+</div>
+<div class="flex gap-4">
+<button class="text-xs font-bold hover:text-primary transition-colors uppercase tracking-widest">Documentation</button>
+<button class="text-xs font-bold hover:text-primary transition-colors uppercase tracking-widest">Audit Logs</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button (As defined in Guidelines) -->
+<!-- Not rendered on Settings page per shell visibility rules -->
+</body></html>

@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
@@ -135,7 +135,9 @@ model User {
   cacDocument        String?
   verificationStatus VerificationStatus?
 
-  fcmToken     String?
+  fcmToken      String?
+  password      String?
+  refreshToken  String?
 
   otpCode      String?
   otpExpiresAt DateTime?

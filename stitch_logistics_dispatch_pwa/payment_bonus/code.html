@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#f8faf4",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-background": "#191d19",
+                    "outline-variant": "#c0c9be",
+                    "surface-bright": "#f8faf4",
+                    "tertiary-container": "#6f2c35",
+                    "tertiary-fixed": "#ffdadb",
+                    "secondary-fixed": "#cdead0",
+                    "inverse-on-surface": "#eff2eb",
+                    "inverse-surface": "#2e312d",
+                    "tertiary-fixed-dim": "#ffb2b8",
+                    "primary-container": "#004d26",
+                    "on-tertiary-fixed-variant": "#753139",
+                    "on-secondary-fixed-variant": "#344c39",
+                    "secondary": "#4b6450",
+                    "on-error-container": "#93000a",
+                    "secondary-container": "#cdead0",
+                    "surface-container": "#ecefe8",
+                    "secondary-fixed-dim": "#b2ceb5",
+                    "background": "#f8faf4",
+                    "on-primary": "#ffffff",
+                    "outline": "#707970",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#adf2bc",
+                    "on-secondary-container": "#516a56",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#e0e3dd",
+                    "on-secondary-fixed": "#082010",
+                    "inverse-primary": "#92d6a2",
+                    "on-tertiary-container": "#f0959d",
+                    "on-surface": "#191d19",
+                    "on-primary-container": "#7abd8b",
+                    "surface-dim": "#d8dbd5",
+                    "surface-container-low": "#f2f4ee",
+                    "on-tertiary-fixed": "#3d0511",
+                    "surface-variant": "#e0e3dd",
+                    "on-primary-fixed": "#00210d",
+                    "on-surface-variant": "#404941",
+                    "tertiary": "#531620",
+                    "surface-tint": "#296b40",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#e6e9e3",
+                    "on-primary-fixed-variant": "#08522a",
+                    "primary": "#003418",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#92d6a2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .editorial-gap { margin-bottom: 2.5rem; }
+      .glass-nav {
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-emerald-950/80 backdrop-blur-lg shadow-xl shadow-emerald-950/20">
+<div class="flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="p-2 text-white hover:bg-emerald-900/40 transition-colors rounded-full active:scale-95 active:duration-75">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="text-lg font-extrabold tracking-tighter text-emerald-50 font-headline">Delivery Hub</span>
+</div>
+<div class="h-10 w-10 rounded-full border-2 border-emerald-500 overflow-hidden">
+<img alt="Rider Profile" class="w-full h-full object-cover" data-alt="close up headshot of a smiling professional courier driver wearing a dark uniform with soft outdoor lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRI2OFvqwb7UjrWmwaty8DSxa62wgwThjlTLt7yHaL-nvei0XZF24NWJewJ_dPUZv_OtSpXTto2aZ6p6uRVYLHMXCMvH1LiJpHQLpz6Jo2qHEqnOEzzZsDs1NS-6fc0P5Vpopj5E8gfMZSybiTUy5XcwxaphTVfq56A7yD3j0Yx0jkxcWoKBUNmrA3faJbLHJm6-jswipMuPmeiwoKDHX49HekwSuTCU9hls70f6zu_66OmukSFtNGKbcoJ5mapdtEK3YoyE34-Uw"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-lg mx-auto">
+<!-- Success State Visualization -->
+<section class="flex flex-col items-center text-center editorial-gap">
+<div class="w-24 h-24 mb-6 rounded-full bg-primary-container flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-on-primary-container !text-5xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h1 class="font-headline font-extrabold text-4xl tracking-tight text-on-surface mb-2">Delivery Complete</h1>
+<p class="font-label text-on-surface-variant font-medium">Order #DLV-4920 has been fulfilled</p>
+</section>
+<!-- Earnings Bento Card -->
+<section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm mb-6 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined !text-8xl">payments</span>
+</div>
+<div class="relative z-10">
+<span class="text-sm font-label font-semibold text-primary uppercase tracking-widest block mb-1">Earning Summary</span>
+<h2 class="font-headline font-extrabold text-5xl text-on-surface mb-6">Total Earnings: $18.50</h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-surface-container-low rounded-lg">
+<span class="block text-xs font-label font-semibold text-on-surface-variant uppercase">Base Fare</span>
+<span class="text-lg font-bold text-on-surface">$12.00</span>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg">
+<span class="block text-xs font-label font-semibold text-on-surface-variant uppercase">Tip</span>
+<span class="text-lg font-bold text-on-surface">$4.50</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Premium Bonus Banner -->
+<section class="bg-primary bg-gradient-to-br from-primary to-primary-container rounded-xl p-6 text-on-primary flex items-start gap-4 mb-10 shadow-xl shadow-primary/10">
+<div class="mt-1">
+<span class="material-symbols-outlined !text-3xl text-primary-fixed" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-lg leading-tight mb-1">Premium Order Bonus Applied</h3>
+<p class="font-body text-sm text-on-primary/80">Thank you for completing a premium order! A +$2.00 completion incentive has been credited to your wallet.</p>
+</div>
+</section>
+<!-- Action Area -->
+<section class="space-y-4">
+<button class="w-full py-5 px-8 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold text-lg shadow-2xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all duration-300">
+                Confirm Payment Received
+            </button>
+<div class="flex justify-center">
+<button class="flex items-center gap-2 px-6 py-3 rounded-full text-on-surface-variant font-label font-semibold hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">help_outline</span>
+                    Report a discrepancy
+                </button>
+</div>
+</section>
+<!-- Performance Context Card -->
+<section class="mt-12 p-6 border border-outline-variant/20 rounded-xl bg-surface-container-low/50">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label font-bold text-xs uppercase text-on-surface-variant tracking-wider">Session Stats</span>
+<span class="text-primary font-bold text-sm">82% Daily Goal</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 82%"></div>
+</div>
+<div class="mt-4 flex justify-between">
+<div class="text-center">
+<p class="text-xs font-label text-on-surface-variant">Time</p>
+<p class="font-bold">22m</p>
+</div>
+<div class="text-center">
+<p class="text-xs font-label text-on-surface-variant">Distance</p>
+<p class="font-bold">4.2 km</p>
+</div>
+<div class="text-center">
+<p class="text-xs font-label text-on-surface-variant">Rank</p>
+<p class="font-bold">Gold</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-3xl z-50 bg-white/80 backdrop-blur-xl shadow-[0_-8px_30px_rgb(0,0,0,0.04)] tonal-shift bg-emerald-50/50">
+<div class="flex justify-around items-center pt-3 pb-8 px-4 w-full">
+<a class="flex flex-col items-center justify-center text-zinc-500 px-5 py-2 hover:text-emerald-700 transition-all duration-300 ease-out" href="#">
+<span class="material-symbols-outlined mb-1">pending_actions</span>
+<span class="font-inter text-xs font-semibold">Requests</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-emerald-900 text-white rounded-2xl px-5 py-2 transition-all duration-300 ease-out" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-inter text-xs font-semibold">Earnings</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-500 px-5 py-2 hover:text-emerald-700 transition-all duration-300 ease-out" href="#">
+<span class="material-symbols-outlined mb-1">map</span>
+<span class="font-inter text-xs font-semibold">Route</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-500 px-5 py-2 hover:text-emerald-700 transition-all duration-300 ease-out" href="#">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="font-inter text-xs font-semibold">Settings</span>
+</a>
+</div>
+</nav>
+</body></html>

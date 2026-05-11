@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Architectural Courier Admin - Integrations</title>
+<!-- Google Fonts: Manrope & Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#4b6450",
+                    "on-primary-container": "#7abd8b",
+                    "secondary-fixed": "#cdead0",
+                    "on-primary-fixed": "#00210d",
+                    "outline-variant": "#c0c9be",
+                    "tertiary": "#531620",
+                    "on-secondary-fixed": "#082010",
+                    "surface-container-low": "#f2f4ee",
+                    "on-tertiary-container": "#f0959d",
+                    "secondary-fixed-dim": "#b2ceb5",
+                    "on-surface": "#191d19",
+                    "tertiary-container": "#6f2c35",
+                    "surface-dim": "#d8dbd5",
+                    "primary-fixed-dim": "#92d6a2",
+                    "on-tertiary-fixed-variant": "#753139",
+                    "error": "#ba1a1a",
+                    "surface-container": "#ecefe8",
+                    "inverse-surface": "#2e312d",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#e0e3dd",
+                    "inverse-primary": "#92d6a2",
+                    "on-secondary-fixed-variant": "#344c39",
+                    "tertiary-fixed": "#ffdadb",
+                    "on-tertiary-fixed": "#3d0511",
+                    "surface-tint": "#296b40",
+                    "surface": "#f8faf4",
+                    "outline": "#707970",
+                    "surface-container-highest": "#e0e3dd",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#f8faf4",
+                    "error-container": "#ffdad6",
+                    "inverse-on-surface": "#eff2eb",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#cdead0",
+                    "background": "#f8faf4",
+                    "primary-container": "#004d26",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#404941",
+                    "on-secondary-container": "#516a56",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "primary": "#003418",
+                    "on-primary-fixed-variant": "#08522a",
+                    "primary-fixed": "#adf2bc",
+                    "tertiary-fixed-dim": "#ffb2b8",
+                    "surface-container-high": "#e6e9e3",
+                    "on-background": "#191d19"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .glass-nav {
+            background: rgba(248, 250, 244, 0.8);
+            backdrop-filter: blur(16px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- SideNavBar (The Anchor) -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-[#c0c9be]/20 bg-[#f2f4ee] dark:bg-emerald-950/40 flex flex-col p-4 space-y-2 z-50">
+<div class="mb-8 px-2">
+<div class="flex items-center gap-3 mb-1">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary" data-icon="architecture">architecture</span>
+</div>
+<span class="font-manrope font-extrabold text-[#003418] text-lg">Admin Panel</span>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-bold px-1">System Logistics</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-inter text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-inter text-sm font-medium">Pricing</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-inter text-sm font-medium">Payments</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="alt_route">alt_route</span>
+<span class="font-inter text-sm font-medium">Dispatch Logic</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-inter text-sm font-medium">System Logs</span>
+</a>
+<!-- Active Tab: Settings (Determined by Intent: Admin Settings) -->
+<a class="flex items-center gap-3 px-3 py-2 bg-[#ffffff] text-[#003418] rounded-lg shadow-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings_suggest">settings_suggest</span>
+<span class="font-inter text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="pt-4 border-t border-outline-variant/20 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-inter text-sm font-medium">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#404941] hover:bg-[#e6e9e3] rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-inter text-sm font-medium">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="w-full border-b border-[#c0c9be]/20 bg-[#f8faf4] flex justify-between items-center px-8 py-4 sticky top-0 z-40">
+<div class="flex items-center gap-6">
+<h1 class="font-manrope font-bold text-[#003418] text-xl">Integrations</h1>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/50" data-icon="search">search</span>
+<input class="bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 text-sm w-64 focus:ring-1 focus:ring-primary" placeholder="Search services..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e6e9e3] transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e6e9e3] transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant/30 mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-xs font-bold text-[#003418]">Admin User</p>
+<p class="text-[10px] text-on-surface-variant">System Master</p>
+</div>
+<img alt="Administrator Profile" class="w-10 h-10 rounded-full border-2 border-primary-container/20" data-alt="portrait of a professional administrator in a minimalist office setting with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK-N-5KFXKF6FMQl82zlhhpKxuLN6P4yxIZ6YB1VxfFKAeh820rsG8S_CRWUTv9xEey9JkizYIlqILzbIJQt9NZNfu7VabddU9mQUL8EOP7QoKZa8IQfJtOIrB0AmM_3mFoGEHX1GHVMPYEJU2834yV7KQfZz_SDNK_loYx2QkinkOTXNJp1DysZNKj1QeH5TwGrsHGH5TVviCoNBcSqONApfmMp5amteB0X4drmYILmwvNz9j48Ektj3dEwiUG_fML9ktB0VNCdI"/>
+</div>
+</div>
+</header>
+<!-- Content Body -->
+<div class="p-8 space-y-10 max-w-7xl mx-auto w-full">
+<!-- Hero Breadcrumb/Intro -->
+<section class="flex justify-between items-end">
+<div class="space-y-1">
+<nav class="flex gap-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/50">
+<span>Settings</span>
+<span>/</span>
+<span class="text-primary">External Integrations</span>
+</nav>
+<h2 class="text-3xl font-manrope font-extrabold text-[#003418]">Service Architecture</h2>
+<p class="text-on-surface-variant max-w-lg">Manage the foundational external connections that power the Architectural Courier ecosystem.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-sm transition-transform active:scale-[0.98]">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                    Connect New Service
+                </button>
+</section>
+<!-- Bento Grid Layout for Integrations -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Payment Gateways Section -->
+<div class="col-span-12 lg:col-span-8 space-y-6">
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/10">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="account_balance">account_balance</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-[#003418]">Payment Gateways</h3>
+<p class="text-xs text-on-surface-variant">Financial settlement &amp; transaction processing</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded-full uppercase tracking-tighter">2 Active Systems</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Stripe Integration -->
+<div class="bg-surface-container-low rounded-xl p-5 border border-outline-variant/10 group hover:bg-surface-container-high transition-all">
+<div class="flex justify-between items-start mb-4">
+<img alt="Stripe" class="h-6 object-contain" data-alt="Stripe logo on a clean white background with professional branding" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsYN1MG5OsgIPbHPxTP2jeUKbQr2Z-BmAI8qVoVcTGd8FrHGOn8crU0zsS0PeAihILhQQDlP37VkjLsvpGsP7Bp1OhgDSbzW5Hks6uJ32HuWu-uavg9VatVQnuekLOS7fOfo2RzrU86y1IKYA_C3wIefGnsTZQC6M5LRzCUbkK2t5bTlUXGGVV4MhlYwwSRI5TiWJzcOg3QnSFnk6PIcJ9coW0M3HUOKmTlqrlW2xVphl6f8KeHgkKcisWiWmTT86S3UcFYLzEl9Q"/>
+<div class="flex items-center gap-1.5 text-primary">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-[10px] font-bold uppercase">Operational</span>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant mb-4 leading-relaxed">Handles all international courier payments and local disbursements.</p>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/20">
+<span class="text-[10px] font-mono text-on-surface-variant/60">ID: strp_9242...</span>
+<button class="text-primary text-xs font-bold hover:underline">Configure</button>
+</div>
+</div>
+<!-- PayPal Integration -->
+<div class="bg-surface-container-low rounded-xl p-5 border border-outline-variant/10 group hover:bg-surface-container-high transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="h-6 flex items-center font-bold italic text-blue-900 text-lg">PayPal</div>
+<div class="flex items-center gap-1.5 text-error">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span class="text-[10px] font-bold uppercase">Action Required</span>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant mb-4 leading-relaxed">Backup gateway for merchant settlements. API credentials expiring soon.</p>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/20">
+<span class="text-[10px] font-mono text-on-surface-variant/60">ID: payp_0081...</span>
+<button class="text-error text-xs font-bold hover:underline">Renew Auth</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Maps & Logistics Logic -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/10">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary" data-icon="map">map</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-[#003418]">Logistics &amp; Mapping</h3>
+<p class="text-xs text-on-surface-variant">Real-time routing and spatial intelligence</p>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Google Maps Platform -->
+<div class="flex items-center justify-between p-4 rounded-lg bg-surface hover:bg-surface-container-low transition-colors border border-outline-variant/5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-blue-500" data-icon="google_plus_rescale">google_plus_reshare</span>
+</div>
+<div>
+<p class="text-sm font-bold text-[#003418]">Google Maps API</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-semibold">Active Traffic Layer • Autocomplete</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<p class="text-[10px] text-on-surface-variant">Usage this month</p>
+<p class="text-sm font-mono font-bold">$1,240.82</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<!-- Mapbox -->
+<div class="flex items-center justify-between p-4 rounded-lg bg-surface hover:bg-surface-container-low transition-colors border border-outline-variant/5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-black flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white" data-icon="pentagon">pentagon</span>
+</div>
+<div>
+<p class="text-sm font-bold text-[#003418]">Mapbox Studio</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-semibold">Custom Cartography • WebGL Render</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<p class="text-[10px] text-on-surface-variant">Usage this month</p>
+<p class="text-sm font-mono font-bold">$412.00</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Communication & Health Section -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<!-- System Health Visualizer -->
+<div class="bg-primary text-on-primary rounded-xl p-6 relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="text-lg font-bold mb-2">Network Integrity</h3>
+<div class="flex items-baseline gap-2 mb-6">
+<span class="text-4xl font-manrope font-extrabold tracking-tighter">99.98%</span>
+<span class="text-xs opacity-70">Uptime</span>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between text-[10px] uppercase font-bold tracking-widest">
+<span>API Latency</span>
+<span>42ms</span>
+</div>
+<div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-fixed h-full w-[85%] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Abstract Texture -->
+<div class="absolute -right-10 -bottom-10 w-48 h-48 bg-primary-container rounded-full opacity-50 blur-3xl"></div>
+</div>
+<!-- SMS & Email Providers -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/10">
+<h3 class="text-sm font-manrope font-bold text-[#003418] mb-6 uppercase tracking-widest">Communication</h3>
+<div class="space-y-6">
+<!-- Twilio -->
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-red-600" data-icon="sms">sms</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-sm font-bold">Twilio SMS</span>
+<span class="text-[10px] text-primary font-bold">ACTIVE</span>
+</div>
+<p class="text-xs text-on-surface-variant">Transactional delivery alerts</p>
+<div class="mt-2 text-[10px] font-mono bg-surface-container-low p-1 rounded px-2 inline-block">1.2M sent/mo</div>
+</div>
+</div>
+<!-- SendGrid -->
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-blue-600" data-icon="mail">mail</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-sm font-bold">SendGrid Email</span>
+<span class="text-[10px] text-primary font-bold">ACTIVE</span>
+</div>
+<p class="text-xs text-on-surface-variant">Invoices &amp; system reports</p>
+<div class="mt-2 text-[10px] font-mono bg-surface-container-low p-1 rounded px-2 inline-block">450k sent/mo</div>
+</div>
+</div>
+<!-- Push Notifications -->
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-amber-600" data-icon="notifications_active">notifications_active</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-sm font-bold">Firebase Cloud</span>
+<span class="text-[10px] text-on-surface-variant font-bold opacity-40 uppercase">Idle</span>
+</div>
+<p class="text-xs text-on-surface-variant">Mobile app push services</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Webhook Logs Snippet -->
+<div class="bg-surface-container-low rounded-xl p-6">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xs font-bold text-[#003418]">Latest Webhooks</h3>
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="refresh">refresh</span>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-[10px]">
+<span class="font-mono text-primary bg-primary-fixed/30 px-1 rounded">POST 200</span>
+<span class="text-on-surface-variant">stripe.checkout.success</span>
+</div>
+<div class="flex justify-between items-center text-[10px]">
+<span class="font-mono text-primary bg-primary-fixed/30 px-1 rounded">POST 200</span>
+<span class="text-on-surface-variant">twilio.delivery_receipt</span>
+</div>
+<div class="flex justify-between items-center text-[10px]">
+<span class="font-mono text-error bg-error-container/50 px-1 rounded">POST 500</span>
+<span class="text-on-surface-variant">maps.route_update</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Global Configuration Summary -->
+<section class="bg-surface-container-low rounded-xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 border-t-4 border-primary">
+<div class="flex items-center gap-6">
+<div class="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="security" data-weight="fill" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-[#003418]">Vault Security Protocols</h3>
+<p class="text-sm text-on-surface-variant">All API keys and secrets are encrypted with AES-256 and stored in an isolated environment.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2 bg-white text-on-surface font-bold rounded-lg hover:bg-surface-container-high transition-colors">Rotate Keys</button>
+<button class="px-6 py-2 bg-[#003418] text-white font-bold rounded-lg transition-transform active:scale-95 shadow-md">View Audit Log</button>
+</div>
+</section>
+</div>
+</main>
+<!-- Mobile Navigation Overlay (For responsive intent) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 glass-nav h-20 flex items-center justify-around px-6 z-50 border-t border-outline-variant/10">
+<button class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-bold mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="alt_route">alt_route</span>
+<span class="text-[10px] font-bold mt-1">Logic</span>
+</button>
+<button class="flex flex-col items-center text-primary">
+<span class="material-symbols-outlined" data-icon="settings_suggest" data-weight="fill" style="font-variation-settings: 'FILL' 1;">settings_suggest</span>
+<span class="text-[10px] font-bold mt-1">Settings</span>
+</button>
+<button class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-bold mt-1">Account</span>
+</button>
+</nav>
+</body></html>

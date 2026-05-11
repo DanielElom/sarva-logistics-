@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Emerald Courier - Tracking</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e6e9e3",
+                    "inverse-on-surface": "#eff2eb",
+                    "secondary-fixed-dim": "#b2ceb5",
+                    "tertiary-fixed": "#ffdadb",
+                    "tertiary-container": "#6f2c35",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#2e312d",
+                    "outline": "#707970",
+                    "on-tertiary-fixed": "#3d0511",
+                    "on-primary-fixed": "#00210d",
+                    "surface-dim": "#d8dbd5",
+                    "on-surface": "#191d19",
+                    "primary-fixed": "#adf2bc",
+                    "on-secondary-container": "#516a56",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "background": "#f8faf4",
+                    "surface-container-highest": "#e0e3dd",
+                    "primary-container": "#004d26",
+                    "surface-container": "#ecefe8",
+                    "inverse-primary": "#92d6a2",
+                    "on-secondary-fixed-variant": "#344c39",
+                    "on-primary-container": "#7abd8b",
+                    "surface-container-low": "#f2f4ee",
+                    "surface-variant": "#e0e3dd",
+                    "primary-fixed-dim": "#92d6a2",
+                    "on-secondary-fixed": "#082010",
+                    "on-error": "#ffffff",
+                    "surface": "#f8faf4",
+                    "error-container": "#ffdad6",
+                    "surface-bright": "#f8faf4",
+                    "outline-variant": "#c0c9be",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#08522a",
+                    "on-surface-variant": "#404941",
+                    "tertiary-fixed-dim": "#ffb2b8",
+                    "secondary": "#4b6450",
+                    "primary": "#003418",
+                    "on-background": "#191d19",
+                    "secondary-fixed": "#cdead0",
+                    "on-tertiary-container": "#f0959d",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#531620",
+                    "on-tertiary": "#ffffff",
+                    "secondary-container": "#cdead0",
+                    "on-tertiary-fixed-variant": "#753139",
+                    "surface-tint": "#296b40"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "1rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .map-gradient-overlay {
+            background: linear-gradient(to bottom, rgba(248, 250, 244, 0.4) 0%, transparent 20%, transparent 80%, rgba(248, 250, 244, 0.9) 100%);
+        }
+        .glass-panel {
+            background: rgba(248, 250, 244, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<header class="w-full sticky top-0 z-50 bg-[#f8faf4] dark:bg-[#191d19] flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#003418] dark:text-[#f8faf4] hover:bg-[#e6e9e3] dark:hover:bg-[#2d322d] transition-colors p-2 rounded-full active:scale-95 duration-150">arrow_back</button>
+<h1 class="font-['Manrope'] font-extrabold text-[#003418] dark:text-[#f8faf4] italic text-lg tracking-tight">Emerald Courier</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="User Profile" data-alt="professional headshot of a smiling man with clean styling in a bright modern studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA4S7om-fQ8DRWUn5DfZ1_qqquj_W3_SPY6BS0Am245zXsQ-mCdh-NNTFls2pwjPGGcwxwpVCI0cAyHnYKgpvls36hblfzhAAU12W66y5nJ14LzagQp5r39HiiXEo4B1-jiqNBSW1wCG1COI4OjYK4h6nzSCcELlcci19s3FKm2OtYN0iWbZdLxPP4X-MYuZVGxdIB2zZwiMxcSMb7WLhkeaY32iGHhLqWfa5smamabB_AIKpnqq23XOQAzX3D50loDlfOsJM52hg"/>
+</div>
+</header>
+<main class="relative h-[calc(100vh-72px)] overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="clean minimalist vector style city map with soft green and grey tones showing street layout and blocks" data-location="San Francisco" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpMEzDCBQ8EYYB1Qkf9KoqBg2pDYSxvZc3zv1Pb83F9ZgDs4VmEmtcLKQLTIRlbtFdQX0Ul_Qcmx5xaMuALhLdKx8zMJT8Rr4B3pKTwt6x0G3O0yTgBiKIfKkZLD1TzosXTdf8nn6FzHt6SxNFzotczmUjrrFKizNJjSY_3cav2aQAZFN_1OtTjAdkTRMd502jwU96F_jxnXvtGP9sAoc3YNuenpH3H5uGqOZq2BpE-CA5JKXXaqjAHWo1eDgZbqquBk8rm70umUw"/>
+<div class="absolute inset-0 map-gradient-overlay pointer-events-none"></div>
+<div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center">
+<div class="bg-primary p-3 rounded-full shadow-lg border-4 border-white">
+<span class="material-symbols-outlined text-white block" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+</div>
+<div class="mt-2 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest shadow-sm">
+                    4 mins
+                </div>
+</div>
+<div class="absolute top-1/2 left-1/4 z-10">
+<div class="w-4 h-4 bg-primary-container rounded-full ring-4 ring-primary-container/20 ring-offset-2 ring-offset-white shadow-md"></div>
+</div>
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
+<path d="M 25% 50% Q 35% 45%, 50% 33%" fill="none" opacity="0.4" stroke="#003418" stroke-dasharray="8 8" stroke-width="4"></path>
+</svg>
+</div>
+<section class="absolute bottom-0 left-0 w-full z-20 px-4 pb-8">
+<div class="max-w-md mx-auto">
+<div class="glass-panel rounded-xl shadow-[0_-4px_24px_rgba(25,29,25,0.06)] overflow-hidden">
+<div class="p-6">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img class="w-16 h-16 rounded-xl object-cover shadow-sm" data-alt="friendly courier driver Marcus with a warm smile wearing a professional dark green polo shirt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuQD8v4hdult9qrdGxoQAmQMD9gzZVGzpbRV9wDqKBI-zF-3VvXg1saBeGBYNijTp3FLj9NEiNg2_fEkrNm4VhcdV2ARGjkBBHkjJn9xf7De0uw3yEXrogJ03WpvEaoWHHC3zlFEgzC0gv5GuVHIiZzVaVxmjF-Icz_BY5GdUgYT6msBjFKeZiGs-ieJLxEih2Jovp7Vj3xTN8mdKuZZoX9gNIzSjP3u0sGvGuItGb6XjBNLqpoa4iG2G1wtJf4FU2bzPB5c_svyc"/>
+<div class="absolute -bottom-1 -right-1 bg-primary text-white p-1 rounded-lg">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div>
+<h2 class="font-headline font-bold text-xl text-on-surface tracking-tight">Marcus G.</h2>
+<p class="text-on-surface-variant text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">pedal_bike</span>
+                                        Green Specialized E-Bike
+                                    </p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface">4.9</span>
+<span class="text-xs text-on-surface-variant">(1.2k deliveries)</span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<span class="block text-primary font-headline font-extrabold text-2xl tracking-tighter italic">4 min</span>
+<span class="block text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Estimated Arrival</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<button class="flex items-center justify-center gap-2 py-4 rounded-xl bg-surface-container-high text-on-surface font-semibold hover:bg-surface-container-highest transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined">call</span>
+                                Call
+                            </button>
+<button class="flex items-center justify-center gap-2 py-4 rounded-xl bg-primary text-white font-semibold hover:opacity-90 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">chat_bubble</span>
+                                Chat
+                            </button>
+</div>
+<div class="flex flex-col items-center gap-2 pt-2 border-t border-outline-variant/20">
+<button class="text-error font-medium text-sm hover:underline decoration-2 underline-offset-4">Cancel Request</button>
+<p class="text-[11px] text-on-surface-variant text-center max-w-[240px]">
+                                A small fee of $2.50 may apply if you cancel after 2 minutes of rider confirmation.
+                            </p>
+</div>
+</div>
+<div class="px-6 py-4 bg-primary-container/10 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-xs font-semibold text-primary uppercase tracking-wider">Picking up your order</span>
+</div>
+<span class="text-[11px] text-on-primary-container font-medium">Order #EM-9921</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<div class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#f8faf4]/80 dark:bg-[#191d19]/80 backdrop-blur-lg border-t border-[#c0c9be]/20 shadow-[0_-4px_24px_rgba(25,29,25,0.06)] z-50 rounded-t-2xl">
+<div class="flex flex-col items-center justify-center text-[#404941] dark:text-[#c0c9be] py-2 px-4 hover:bg-[#f2f4ee] dark:hover:bg-[#2d322d] active:opacity-80 transition-all">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider mt-1">Book</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#004d26] text-white rounded-xl py-2 px-4 active:opacity-80 transition-all">
+<span class="material-symbols-outlined" data-icon="history" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider mt-1">Activity</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#404941] dark:text-[#c0c9be] py-2 px-4 hover:bg-[#f2f4ee] dark:hover:bg-[#2d322d] active:opacity-80 transition-all">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider mt-1">Wallet</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#404941] dark:text-[#c0c9be] py-2 px-4 hover:bg-[#f2f4ee] dark:hover:bg-[#2d322d] active:opacity-80 transition-all">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider mt-1">Profile</span>
+</div>
+</div>
+</body></html>

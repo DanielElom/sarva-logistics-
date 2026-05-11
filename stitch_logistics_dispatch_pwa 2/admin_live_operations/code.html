@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Live Operations | Fair-Ride Admin</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#7abd8b",
+                        "surface-variant": "#e0e3dd",
+                        "surface-container-low": "#f2f4ee",
+                        "primary-fixed-dim": "#92d6a2",
+                        "on-secondary-fixed": "#082010",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#f8faf4",
+                        "outline-variant": "#c0c9be",
+                        "on-primary": "#ffffff",
+                        "surface": "#f8faf4",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#08522a",
+                        "tertiary-fixed-dim": "#ffb2b8",
+                        "secondary": "#4b6450",
+                        "primary": "#003418",
+                        "on-background": "#191d19",
+                        "on-surface-variant": "#404941",
+                        "secondary-fixed": "#cdead0",
+                        "on-tertiary-container": "#f0959d",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#531620",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#cdead0",
+                        "on-tertiary-fixed-variant": "#753139",
+                        "surface-tint": "#296b40",
+                        "surface-container-high": "#e6e9e3",
+                        "inverse-on-surface": "#eff2eb",
+                        "tertiary-fixed": "#ffdadb",
+                        "tertiary-container": "#6f2c35",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#2e312d",
+                        "secondary-fixed-dim": "#b2ceb5",
+                        "outline": "#707970",
+                        "on-tertiary-fixed": "#3d0511",
+                        "on-primary-fixed": "#00210d",
+                        "surface-dim": "#d8dbd5",
+                        "primary-fixed": "#adf2bc",
+                        "on-surface": "#191d19",
+                        "on-secondary-container": "#516a56",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e0e3dd",
+                        "primary-container": "#004d26",
+                        "error": "#ba1a1a",
+                        "background": "#f8faf4",
+                        "surface-container": "#ecefe8",
+                        "inverse-primary": "#92d6a2",
+                        "on-secondary-fixed-variant": "#344c39"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .map-gradient-overlay {
+            background: radial-gradient(circle at 30% 40%, rgba(0, 52, 24, 0.1) 0%, rgba(248, 250, 244, 0) 60%);
+        }
+        .dotted-path {
+            stroke-dasharray: 4 4;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface overflow-hidden">
+<!-- SideNavBar Shell -->
+<aside class="fixed top-0 left-0 h-screen w-64 z-40 bg-[#003418] dark:bg-stone-950 flex flex-col p-4 gap-2 shadow-[4px_0_24px_rgba(0,0,0,0.08)]">
+<div class="mb-8 px-2">
+<h1 class="font-['Manrope'] text-2xl font-black text-white tracking-tighter">Fair-Ride</h1>
+<p class="text-white/60 text-xs font-medium uppercase tracking-widest mt-1">Logistics Admin</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 transform hover:translate-x-1 font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<!-- ACTIVE TAB: Live Ops -->
+<a class="flex items-center gap-3 px-4 py-3 bg-[#004d26] text-white rounded-lg shadow-sm font-semibold transition-all duration-200 transform hover:translate-x-1 font-['Inter'] text-sm" href="#">
+<span class="material-symbols-outlined">potted_plant</span>
+                Live Ops
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 transform hover:translate-x-1 font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined">motorcycle</span>
+                Riders
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 transform hover:translate-x-1 font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined">group</span>
+                Users
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 transform hover:translate-x-1 font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined">payments</span>
+                Payments
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 transform hover:translate-x-1 font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+                Trips
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 transform hover:translate-x-1 font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 transform hover:translate-x-1 font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+                Analytics
+            </a>
+</nav>
+<div class="mt-auto pt-4 border-t border-white/10">
+<button class="w-full bg-[#004d26] text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+                Request Delivery
+            </button>
+</div>
+</aside>
+<!-- Main Canvas Area -->
+<main class="ml-64 relative h-screen w-[calc(100%-16rem)]">
+<!-- TopNavBar Shell (Floating Version) -->
+<header class="absolute top-0 left-0 right-0 z-30 flex justify-between items-center px-6 py-4 pointer-events-none">
+<div class="flex items-center gap-4 pointer-events-auto">
+<div class="bg-surface-container-lowest/80 backdrop-blur-md rounded-xl p-2 px-4 shadow-lg border border-outline-variant/20 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64 text-on-surface" placeholder="Search rider, trip ID or area..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3 pointer-events-auto">
+<div class="bg-surface-container-lowest/80 backdrop-blur-md p-2 rounded-xl shadow-lg border border-outline-variant/20 flex gap-1">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">apps</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest/80 backdrop-blur-md p-1 pr-4 pl-1 rounded-full shadow-lg border border-outline-variant/20 flex items-center gap-3">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="close-up portrait of a professional male manager in office setting with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmJpJDxbkRDwotWKLpNP26lK3W0UNZERqRV9DWl7NC03RUdKIRSHmMzozxMsEx1TRC7if1H3jMLJn5eiu63FryAOEpaldu3er7d6VsHuJIYrc-Yvy58a1PTZL0lOpmeYXZDFS70IgnMLmTk9RLU67BeRgH1iCQbuFWwqJT0vNKwQW4Cx8mbIlU8eA2uV-c_0hZvc6L0f9lCO7GZO_krSeZdZcl-XtWWd6VvwBFDqixZdMI5fNWPsFN8govsufCCaEXN4D7TnUUPIE"/>
+<span class="text-xs font-bold text-primary font-headline tracking-tight">Admin Profile</span>
+</div>
+</div>
+</header>
+<!-- Interactive Map Content -->
+<section class="absolute inset-0 bg-[#e5e7eb] overflow-hidden">
+<!-- Simulated Map Image Layer -->
+<img class="w-full h-full object-cover opacity-60 grayscale-[0.2]" data-alt="Top down aerial view of city streets and intersections with clean architectural lines and neutral urban tones" data-location="Chicago" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOIQT9O5-J861RridlWkJgGlpOl8uf56R85rdvgNMSMo4JO8nQ_l8wiHXO4JTIgNpMiZnT2E7UiQHC0axJkcqPkW63VguVfP1KrkfB_anqedb-Zarsv4UKxGLLlFBTnocXVwhAEJH6AN6BLbf6CQ8ZU4v5ldTb0HC_p8KjAF-QHiBwqF1iGxu0YeaRdpItzO6yVPZEAZZfBzjfY71Hk7PzexitPmoDjDvqLZlJGKyfyIBCEkyMBVaE9jRTL07-8Eo7P_GhrVGM5hY"/>
+<!-- Surge Heatmap Overlays (Simulated) -->
+<div class="absolute inset-0 pointer-events-none">
+<div class="absolute top-[20%] left-[30%] w-64 h-64 bg-primary/10 rounded-full blur-[80px]"></div>
+<div class="absolute bottom-[30%] right-[25%] w-96 h-96 bg-tertiary/10 rounded-full blur-[100px]"></div>
+</div>
+<!-- SVG Overlay for Paths & Markers -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none">
+<!-- Trip Path 1 -->
+<path class="dotted-path opacity-60" d="M400,300 Q500,350 600,450" fill="none" stroke="#003418" stroke-width="2"></path>
+<!-- Trip Path 2 -->
+<path class="dotted-path opacity-60" d="M800,200 L950,350" fill="none" stroke="#003418" stroke-width="2"></path>
+</svg>
+<!-- Interactive Map Elements -->
+<!-- Rider Icon 1 -->
+<div class="absolute top-[40%] left-[45%] group cursor-pointer" style="transform: translate(-50%, -50%);">
+<div class="relative">
+<div class="bg-primary text-white p-2 rounded-full shadow-xl animate-pulse">
+<span class="material-symbols-outlined text-sm">motorcycle</span>
+</div>
+<!-- Popup on Click/Hover -->
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-56 bg-surface-container-lowest rounded-xl shadow-2xl p-4 border border-outline-variant/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-auto">
+<div class="flex items-center gap-3 mb-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="portrait of a young delivery rider with a friendly expression wearing a green helmet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG0FvaJmjJePI6lqp8v0_yzjAG8cLHkcnOdXd9UEErTw1p8j6fKK0BmUS55pMQ2NlqmGz6ld_WKocV_kYNQHgRFPYKebtlOoAwf51ATTLl5IioXTh9tm4qv7tgxNoK9-VmDRcshbXWJ3Hoykgk48V_37HAvzjyoqoGtkekPDsdP3naByCfAhlOolhFmmOnFPe6x1MCMcqy8vcSrPt61AF_HLEzdB6n6IVRvEjlJ88w61W8UM2M25lcNgj_8WCYEtpJgJY166zS28I"/>
+<div>
+<p class="text-sm font-bold">Marcus Chen</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-[10px] font-bold text-on-surface-variant">4.98</span>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-white text-[10px] py-2 rounded-lg font-bold hover:brightness-110">Message</button>
+<button class="flex-1 bg-surface-container-high text-tertiary text-[10px] py-2 rounded-lg font-bold hover:bg-error-container">Deactivate</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pickup Pin -->
+<div class="absolute top-[28%] left-[30%]">
+<div class="flex flex-col items-center">
+<div class="bg-white p-1 rounded-full shadow-lg border-2 border-primary">
+<div class="w-2 h-2 bg-primary rounded-full"></div>
+</div>
+<div class="bg-primary text-white text-[8px] font-bold px-2 py-0.5 rounded-full mt-1">PICKUP</div>
+</div>
+</div>
+<!-- Drop-off Pin -->
+<div class="absolute bottom-[20%] right-[35%]">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-tertiary text-3xl" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<div class="bg-tertiary text-white text-[8px] font-bold px-2 py-0.5 rounded-full mt-[-4px]">DROP-OFF</div>
+</div>
+</div>
+<!-- Sidebar Overlay: Active Events -->
+<aside class="absolute left-6 top-24 bottom-6 w-80 bg-surface-container-lowest/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-outline-variant/10 flex flex-col overflow-hidden">
+<div class="p-5 border-b border-outline-variant/20">
+<div class="flex items-center justify-between">
+<h2 class="font-headline text-lg font-bold text-primary">Active Events</h2>
+<span class="bg-primary-container text-primary text-[10px] font-bold px-2 py-1 rounded-full">12 LIVE</span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-4">
+<!-- Event Item 1 -->
+<div class="group bg-surface-container-low p-4 rounded-xl hover:bg-surface-container-high transition-colors cursor-pointer border-l-4 border-primary">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold text-primary tracking-tighter">TRIP #FR-8892</span>
+<span class="text-[10px] text-on-surface-variant font-medium">2 mins ago</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 bg-primary rounded-full"></div>
+<p class="text-xs font-semibold truncate">Pickup: Artisan Bakery Central</p>
+</div>
+<div class="mt-3 flex items-center justify-between">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="headshot of a smiling female driver" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSmiAttl-_CwOD9pgUSTxVeNJQmTFhiV51BwIuJ2ONQPb_yUBqTDYiPtmyyDebN9pz7RCLDZG4Qj2jUwm-6nT2c53PYciD-VItBxhnSFOQbDO9tA37A8uNj0Fzk7cPIcSqqcCUPitzFAT0xZ4LoQ1zZUdfzR3pLfjhM7kYJcH418Eb_D-mQXVQvDe6nGYmqdd_8RsneTfjIulMq2MAbF89GE7W6heCYTkm-l72D5ufMUXMloeeicoWvssJ2Qte1V4ZmxqypgSHVEI"/>
+<div class="w-6 h-6 rounded-full bg-primary-container border-2 border-white flex items-center justify-center">
+<span class="text-[8px] text-primary font-bold">S.W</span>
+</div>
+</div>
+<span class="text-[10px] font-bold text-primary uppercase">Heading to Dropoff</span>
+</div>
+</div>
+<!-- Event Item 2 -->
+<div class="bg-surface p-4 rounded-xl border border-outline-variant/10">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold text-on-surface-variant tracking-tighter">TRIP #FR-8894</span>
+<span class="text-[10px] text-tertiary font-bold">DELAYED</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 bg-tertiary rounded-full animate-pulse"></div>
+<p class="text-xs font-semibold truncate">Route: West Gate → Downtown</p>
+</div>
+<div class="mt-3 flex items-center justify-between">
+<p class="text-[10px] text-on-surface-variant">Traffic Incident Reported</p>
+<button class="text-[10px] font-bold text-primary underline">Intervene</button>
+</div>
+</div>
+<!-- Event Item 3 -->
+<div class="bg-surface p-4 rounded-xl border border-outline-variant/10 opacity-70">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold text-on-surface-variant tracking-tighter">TRIP #FR-8895</span>
+<span class="text-[10px] text-on-surface-variant font-medium">12 mins ago</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 bg-secondary rounded-full"></div>
+<p class="text-xs font-semibold truncate">Pickup: South Wharf Terminal</p>
+</div>
+</div>
+</div>
+<!-- Live Feed Stats -->
+<div class="bg-primary p-5">
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="text-[10px] text-white/60 font-bold uppercase">On Trip</p>
+<p class="text-xl font-headline font-extrabold text-white">42</p>
+</div>
+<div>
+<p class="text-[10px] text-white/60 font-bold uppercase">Idle Riders</p>
+<p class="text-xl font-headline font-extrabold text-white">18</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Map Controls (Bottom Right) -->
+<div class="absolute bottom-6 right-6 flex flex-col gap-3">
+<!-- Layer Toggles -->
+<div class="bg-surface-container-lowest/90 backdrop-blur-md rounded-2xl shadow-xl border border-outline-variant/10 p-2 flex flex-col gap-1">
+<button class="p-3 bg-primary text-white rounded-xl shadow-lg transition-all" title="Riders View">
+<span class="material-symbols-outlined">motorcycle</span>
+</button>
+<button class="p-3 hover:bg-surface-container-high rounded-xl text-on-surface-variant transition-all" title="Heatmap View">
+<span class="material-symbols-outlined">local_fire_department</span>
+</button>
+<button class="p-3 hover:bg-surface-container-high rounded-xl text-on-surface-variant transition-all" title="Traffic View">
+<span class="material-symbols-outlined">traffic</span>
+</button>
+</div>
+<!-- Zoom Controls -->
+<div class="bg-surface-container-lowest/90 backdrop-blur-md rounded-2xl shadow-xl border border-outline-variant/10 p-2 flex flex-col gap-1">
+<button class="p-3 hover:bg-surface-container-high rounded-xl text-on-surface-variant transition-all">
+<span class="material-symbols-outlined">add</span>
+</button>
+<div class="h-px bg-outline-variant/20 mx-2"></div>
+<button class="p-3 hover:bg-surface-container-high rounded-xl text-on-surface-variant transition-all">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+<!-- Center/Locate -->
+<button class="bg-surface-container-lowest/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-outline-variant/10 text-primary hover:bg-primary hover:text-white transition-all group">
+<span class="material-symbols-outlined group-active:rotate-180 transition-transform">my_location</span>
+</button>
+</div>
+<!-- Surge Alert Toast (Mobile/Bottom style) -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-tertiary text-white px-6 py-3 rounded-full shadow-2xl border border-white/10 animate-bounce">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="text-sm font-bold tracking-tight">Surge detected in Downtown District (2.4x)</span>
+<button class="bg-white/20 px-3 py-1 rounded-full text-[10px] font-black uppercase hover:bg-white/30 transition-colors">Assign Riders</button>
+</div>
+</section>
+</main>
+</body></html>
