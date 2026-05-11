@@ -1,3 +1,8 @@
+/**
+ * @page SupportPage
+ * @description Customer support page — FAQs, contact channels, and dispute filing.
+ * @route /shared/support
+ */
 'use client'
 
 import { useState } from 'react'

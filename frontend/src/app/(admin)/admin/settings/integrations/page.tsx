@@ -1,3 +1,8 @@
+/**
+ * @page AdminIntegrationsPage
+ * @description Third-party integration settings — Paystack, OPay, Google Maps, FCM.
+ * @route /admin/settings/integrations
+ */
 'use client'
 
 export default function AdminSettingsIntegrationsPage() {

@@ -1,3 +1,8 @@
+/**
+ * @page HistoryPage
+ * @description Paginated order history with status filters and re-order action.
+ * @route /history
+ */
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'

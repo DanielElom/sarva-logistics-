@@ -1,3 +1,8 @@
+/**
+ * @page AdminNotificationsSettingsPage
+ * @description Platform notification rules — push, SMS, email triggers per order event.
+ * @route /admin/settings/notifications
+ */
 'use client'
 
 import { useState } from 'react'

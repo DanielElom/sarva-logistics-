@@ -1,3 +1,8 @@
+/**
+ * @page RegisterProfilePage
+ * @description Collects name and email to complete new user profile.
+ * @route /register/profile
+ */
 'use client'
 
 import { useRef, useState, useEffect } from 'react'

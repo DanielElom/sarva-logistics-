@@ -1,3 +1,21 @@
+/**
+ * @module AdminService
+ * @description Back-office operations service for Fair-Ride platform operators.
+ *
+ * PRICING CONFIG
+ * Dynamic pricing values are stored in Redis for zero-downtime updates.
+ * Each write also upserts an AppConfig DB row as a durable backup.
+ * seedDefaultPricing() is called at AppModule boot to hydrate Redis from DB
+ * (or fall back to hardcoded defaults) without overwriting live admin changes.
+ *
+ * FINANCE
+ * processPayout() decrements walletBalance atomically with payout record creation.
+ * It validates bank account fields are set before initiating to prevent failed
+ * transfers to riders who haven't completed bank onboarding.
+ *
+ * PRICING_KEYS and PRICING_DEFAULTS are module-scoped constants so default
+ * values and Redis key names are defined in a single place.
+ */
 import {
   BadRequestException,
   Injectable,
@@ -194,7 +212,7 @@ export class AdminService {
   async verifyRider(
     riderId: string,
     status: VerificationStatus,
-    reason?: string,
+    _reason?: string,
   ) {
     const rider = await this.db.riderProfile.findUnique({ where: { id: riderId } });
     if (!rider) throw new NotFoundException('Rider not found');

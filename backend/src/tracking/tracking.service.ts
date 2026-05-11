@@ -1,3 +1,19 @@
+/**
+ * @module TrackingService
+ * @description GPS log persistence and ETA calculation for active deliveries.
+ *
+ * GPS logging rationale:
+ *   Every location_update Socket.io event (throttled to 5s on the client)
+ *   writes a GpsLog row for the active order. This serves three purposes:
+ *   1. Route replay in the receipt screen after delivery
+ *   2. Admin dispute resolution (admin can see the exact route taken)
+ *   3. Evidence in case of delivery complaints
+ *
+ * ETA calculation uses straight-line Haversine distance at 30 km/h average.
+ *   Production upgrade: replace with Google Maps Directions API for real-time
+ *   traffic-aware ETA. Current constant (AVG_SPEED_KMH=30) is calibrated for
+ *   Nigerian urban traffic conditions in Lagos/Abuja.
+ */
 import {
   ForbiddenException,
   Injectable,
@@ -37,6 +53,11 @@ export class TrackingService {
     };
   }
 
+  /**
+   * Persists a GPS log entry and updates the rider's live position in RiderProfile.
+   * Returns the calculated ETA (minutes) and remaining distance (km) to dropoff.
+   * Called from the tracking gateway on every location_update event.
+   */
   async logLocation(
     riderUserId: string,
     orderId: string,

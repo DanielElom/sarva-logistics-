@@ -1,3 +1,15 @@
+/**
+ * @module MapsService
+ * @description Road distance calculation via Google Maps Distance Matrix API.
+ *
+ * Falls back to a hardcoded 5.2 km when GOOGLE_MAPS_API_KEY is not set,
+ * which keeps pricing functional in local development without a Maps key.
+ *
+ * The Distance Matrix response returns actual road distance (not straight-line),
+ * which is more accurate for pricing than Haversine. The OrdersService.getPriceEstimate()
+ * method uses Haversine as a quick pre-booking estimate; createOrder() calls this
+ * service for the final billable distance.
+ */
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';

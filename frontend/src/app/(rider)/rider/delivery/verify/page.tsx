@@ -1,3 +1,8 @@
+/**
+ * @page VerifyDeliveryPage
+ * @description Rider enters or captures the 4-digit delivery verification code from recipient.
+ * @route /rider/delivery/verify
+ */
 'use client'
 
 import { useState, useEffect, useRef } from 'react'

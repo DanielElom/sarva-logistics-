@@ -1,3 +1,8 @@
+/**
+ * @page AdminDispatchSettingsPage
+ * @description Dispatch algorithm settings — radius, timeout, max retries.
+ * @route /admin/settings/dispatch
+ */
 'use client'
 
 import { useState } from 'react'

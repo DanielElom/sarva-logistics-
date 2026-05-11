@@ -387,6 +387,110 @@ npm run dev   # runs on port 3000
 
 ---
 
+## Code Architecture & Developer Notes
+
+### Backend Module Map
+
+```
+AppModule
+├── PrismaModule (@Global)      — PostgreSQL via Prisma 7 + pg pool adapter
+├── RedisModule  (@Global)      — ioredis shared client (OTP, pricing, matching locks)
+├── SmsModule    (@Global)      — Africa's Talking SMS
+├── EmailModule  (@Global)      — Resend transactional email
+├── AuthModule                  — OTP + password auth, JWT dual-token strategy
+├── UsersModule                 — Customer profile, saved addresses, business account
+├── RidersModule                — Rider profile, KYC, online toggle, earnings
+├── OrdersModule ←→ MatchingModule (forwardRef circular)
+│   └── MapsModule              — Google Maps Distance Matrix (Haversine fallback)
+├── MatchingModule              — 5-step geo+EMA matching, Socket.io, BullMQ 30s timeout
+├── TrackingModule              — GPS log, ETA calc, route trail
+├── PaymentsModule              — Paystack + OPay, HMAC webhook, commission split
+├── SubscriptionsModule         — Rider/business plans, BullMQ hourly expiry cron
+├── ChatModule                  — Socket.io /chat namespace, call logs
+├── NotificationsModule         — FCM push + SMS, per-order event fan-out
+└── AdminModule                 — Dashboard, KYC review, disputes, finance, pricing
+```
+
+### Matching Algorithm (5 Steps)
+
+1. **Premium detection** — if `order.isPremium`, only FLEET-type riders are considered
+2. **Geo filter** — Haversine SQL (`$queryRawUnsafe`) finds riders within 3 km who are `isOnline=true` and `verificationStatus=VERIFIED`
+3. **Ranking** — sorted by `acceptanceRate DESC`, `avgResponseTime ASC` (both use EMA α=0.1 so one bad outcome doesn't dominate history)
+4. **Request dispatch** — Redis `setNx` lock with 30s TTL prevents double-dispatch; Socket.io emits `job_request` to rider personal room `user:{userId}`; BullMQ enqueues a `rider-timeout` delayed job
+5. **Timeout / fallback** — if the rider doesn't respond within 30s, `MatchingProcessor` fires `riderRejected()` which advances to the next candidate; if all candidates are exhausted, `no_riders_available` is emitted to the customer
+
+### Dynamic Pricing Formula
+
+```
+finalPrice = (baseFare + distanceKm × perKmRate) × surgeMultiplier
+```
+
+- Redis keys: `config:baseFare` (₦300 default), `config:perKmRate` (₦120), `config:surgeMultiplier` (1.0)
+- Admin can update via `PATCH /admin/pricing` — takes effect immediately on the next order, no server restart needed
+- `GET /orders/estimate` uses Haversine (fast, no API key); `POST /orders` uses Google Maps Distance Matrix (accurate road distance)
+
+### Payment Flow
+
+```
+POST /orders/pay              → initiatePayment() → redirect to Paystack/OPay checkout
+POST /payments/paystack/webhook → verifyWebhookSignature() → splitAndCredit()
+POST /payments/cash-confirm   → confirmCashPayment() → splitAndCredit()
+```
+
+Commission split inside `splitAndCredit()`:
+- Standard rider: platform 15%, rider 85%
+- Subscribed rider: platform 5%, rider 95%
+- Idempotent via Prisma `upsert` — safe to call twice on duplicate webhook delivery
+
+### Token Strategy
+
+- **Access token** — JWT, 30-day expiry, contains `{ sub, phone, role }`
+- **Refresh token** — JWT, 1-year expiry, stored in `User.refreshToken` DB column
+- **Silent refresh** — frontend Axios 401 interceptor exchanges refresh token transparently; concurrent 401s deduplicated via module-level `refreshing` promise
+- **Logout** — clears `User.refreshToken` in DB and removes both localStorage + cookie tokens
+
+### Frontend Route Groups
+
+```
+(auth)/     — unauthenticated: welcome, role picker, OTP, profile completion, KYC status
+(user)/     — customers: home, booking wizard (type→address→confirm), tracking, history, settings
+(rider)/    — riders: home, delivery lifecycle (request→navigate→pickup→transit→complete), earnings
+(admin)/    — operators: dashboard, operations, trips, riders, payments, pricing, settings
+shared/     — cross-role: about, support, menu
+```
+
+### Key Redis Key Namespaces
+
+| Prefix | TTL | Purpose |
+|--------|-----|---------|
+| `otp:{phone}` | 10 min | Registration/login OTP |
+| `forgot:{phone}` | 10 min | Password reset OTP |
+| `match:{orderId}:{riderId}` | 30s | Rider dispatch lock (prevents double-send) |
+| `match:{orderId}:candidates` | 5 min | Candidate list for multi-step fallback |
+| `config:baseFare` | none | Dynamic pricing — base fare |
+| `config:perKmRate` | none | Dynamic pricing — per km rate |
+| `config:surgeMultiplier` | none | Dynamic pricing — surge multiplier |
+
+### Environment Variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `DATABASE_URL` | Yes | PostgreSQL connection string |
+| `REDIS_URL` | Yes | Redis connection string |
+| `JWT_SECRET` | Yes | JWT signing secret |
+| `PAYSTACK_SECRET_KEY` | Prod | Paystack secret key |
+| `OPAY_SECRET_KEY` | Prod | OPay secret key |
+| `OPAY_MERCHANT_ID` | Prod | OPay merchant ID |
+| `GOOGLE_MAPS_API_KEY` | Prod | Distance Matrix API (falls back to 5.2km mock) |
+| `AFRICAS_TALKING_API_KEY` | Prod | SMS gateway |
+| `AFRICAS_TALKING_USERNAME` | Prod | SMS username (default: sandbox) |
+| `RESEND_API_KEY` | Prod | Transactional email |
+| `FCM_SERVER_KEY` | Prod | Firebase Cloud Messaging OAuth2 token |
+| `FCM_PROJECT_ID` | Prod | Firebase project ID |
+| `APP_URL` | Prod | Public frontend URL for payment callbacks |
+
+---
+
 ## License
 
 Private — all rights reserved.

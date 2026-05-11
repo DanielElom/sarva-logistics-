@@ -1,3 +1,8 @@
+/**
+ * @page SharedMenuPage
+ * @description Cross-role navigation menu with profile card, services, account, and help sections.
+ * @route /shared/menu
+ */
 'use client'
 
 import { useRouter } from 'next/navigation'

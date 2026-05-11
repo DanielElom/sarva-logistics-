@@ -1,3 +1,8 @@
+/**
+ * @page AdminPricingPage
+ * @description Dynamic pricing config — base fare, per-km rate, surge multiplier, and surge tier rules.
+ * @route /admin/pricing
+ */
 'use client'
 
 import { useState } from 'react'

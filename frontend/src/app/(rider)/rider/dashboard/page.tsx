@@ -1,3 +1,8 @@
+/**
+ * @page RiderDashboardPage
+ * @description Rider performance dashboard — earnings, trips completed, rating, and support card.
+ * @route /rider/dashboard
+ */
 'use client'
 
 import { useState, useEffect } from 'react'

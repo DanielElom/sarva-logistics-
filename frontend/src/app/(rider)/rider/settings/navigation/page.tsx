@@ -1,3 +1,8 @@
+/**
+ * @page NavigationSettingsPage
+ * @description Rider navigation preferences — map provider and route options.
+ * @route /rider/settings/navigation
+ */
 'use client'
 
 import { useState, useEffect } from 'react'

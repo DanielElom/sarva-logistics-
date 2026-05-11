@@ -1,3 +1,8 @@
+/**
+ * @page AdminUserSettingsPage
+ * @description User management policies — role permissions, account verification requirements.
+ * @route /admin/settings/users
+ */
 'use client'
 
 import { useState } from 'react'

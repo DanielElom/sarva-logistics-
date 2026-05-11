@@ -1,3 +1,8 @@
+/**
+ * @page LoginPage
+ * @description OTP or password login for returning users.
+ * @route /login
+ */
 'use client'
 
 import { useState } from 'react'

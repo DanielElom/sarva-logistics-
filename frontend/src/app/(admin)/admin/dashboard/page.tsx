@@ -1,3 +1,8 @@
+/**
+ * @page AdminDashboardPage
+ * @description Admin overview — KPIs: trips today, active riders, revenue, disputes.
+ * @route /admin/dashboard
+ */
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'

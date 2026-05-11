@@ -1,3 +1,26 @@
+/**
+ * @module ChatGateway
+ * @description Socket.io gateway on the '/chat' namespace for in-order messaging.
+ *
+ * AUTHENTICATION
+ * Requires a valid JWT in handshake.auth.token (or query.token).
+ * Clients that connect without a token are immediately disconnected.
+ * userId and userRole are extracted from the JWT payload and stored on the socket.
+ *
+ * SOCKET ROOMS
+ *   chat:{orderId}  — per-order chat room; joined via 'join_order_chat' event
+ *   admin:chat      — admin room; admins auto-join on connect to monitor all chats
+ *
+ * EVENTS (client → server):
+ *   join_order_chat  — join room + receive chat_history (past messages)
+ *   send_message     — persist message, broadcast to chat room + admin room
+ *   leave_order_chat — leave order chat room
+ *
+ * EVENTS (server → client):
+ *   chat_history     — sent on room join (full message history)
+ *   new_message      — broadcast on each new message
+ *   call_logged      — emitted to admin room when a call is recorded
+ */
 import { Logger } from '@nestjs/common';
 import {
   ConnectedSocket,

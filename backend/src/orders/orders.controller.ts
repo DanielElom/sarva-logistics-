@@ -41,11 +41,13 @@ export class OrdersController {
     @CurrentUser() user: any,
     @Query('page') page = '1',
     @Query('limit') limit = '10',
+    @Query('status') status?: string,
   ) {
     return this.ordersService.getOrders(
       user.id,
       parseInt(page, 10),
       parseInt(limit, 10),
+      status,
     );
   }
 
@@ -68,6 +70,82 @@ export class OrdersController {
     @Body() dto: CancelOrderDto,
   ) {
     return this.ordersService.cancelOrder(user.id, id, dto.reason);
+  }
+
+  @Post(':id/confirm-delivery')
+  @UseGuards(RolesGuard)
+  @Roles(
+    UserRole.INDIVIDUAL,
+    UserRole.VENDOR,
+    UserRole.RESTAURANT,
+    UserRole.CORPORATE,
+  )
+  confirmDelivery(@CurrentUser() user: any, @Param('id') id: string) {
+    return this.ordersService.confirmDelivery(user.id, id);
+  }
+
+  @Post(':id/rate')
+  @UseGuards(RolesGuard)
+  @Roles(
+    UserRole.INDIVIDUAL,
+    UserRole.VENDOR,
+    UserRole.RESTAURANT,
+    UserRole.CORPORATE,
+  )
+  rateRider(
+    @CurrentUser() user: any,
+    @Param('id') id: string,
+    @Body() dto: { stars: number; comment?: string },
+  ) {
+    return this.ordersService.rateRider(user.id, id, dto);
+  }
+
+  @Post(':id/dispute')
+  @UseGuards(RolesGuard)
+  @Roles(
+    UserRole.INDIVIDUAL,
+    UserRole.VENDOR,
+    UserRole.RESTAURANT,
+    UserRole.CORPORATE,
+  )
+  raiseDispute(
+    @CurrentUser() user: any,
+    @Param('id') id: string,
+    @Body() dto: { issueType: string; description: string },
+  ) {
+    return this.ordersService.raiseDispute(user.id, id, dto);
+  }
+}
+
+// ── Public endpoints (no auth) ──────────────────────────────────────────
+@ApiTags('orders')
+@Controller('orders')
+export class PublicOrdersController {
+  constructor(private ordersService: OrdersService) {}
+
+  @Get('price-estimate')
+  priceEstimate(
+    @Query('pickupLat') pickupLat: string,
+    @Query('pickupLng') pickupLng: string,
+    @Query('dropoffLat') dropoffLat: string,
+    @Query('dropoffLng') dropoffLng: string,
+  ) {
+    return this.ordersService.getPriceEstimate(
+      parseFloat(pickupLat ?? '0'),
+      parseFloat(pickupLng ?? '0'),
+      parseFloat(dropoffLat ?? '0'),
+      parseFloat(dropoffLng ?? '0'),
+    );
+  }
+
+  @Get('places/autocomplete')
+  placesAutocomplete(@Query('input') input = '') {
+    return this.ordersService.getPlacesAutocomplete(input);
+  }
+
+  @Post('ai-address')
+  aiAddress(@Body() body: { description: string }) {
+    return this.ordersService.parseAiAddress(body.description ?? '');
   }
 }
 

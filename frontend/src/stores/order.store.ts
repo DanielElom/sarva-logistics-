@@ -1,3 +1,21 @@
+/**
+ * @store OrderStore
+ * @description Ephemeral active-order state updated in real time via Socket.io.
+ *
+ * Unlike AuthStore and BookingStore, this store is NOT persisted — it holds
+ * live in-flight state that is meaningless after a full page reload. On reload
+ * the tracking page re-fetches the order from the API and re-subscribes to
+ * the Socket.io room.
+ *
+ * REAL-TIME UPDATES
+ * The tracking page subscribes to Socket.io events and calls:
+ *   setOrderStatus(status)         — on order_status_update events
+ *   updateRiderLocation(location)  — on rider_location events
+ *   setEta(minutes)                — on eta_update events
+ *
+ * clearOrder() is called on delivery confirmation or cancellation to
+ * reset state so the next booking starts fresh.
+ */
 import { create } from 'zustand'
 
 export interface RiderLocation {

@@ -1,3 +1,8 @@
+/**
+ * @page RiderArrivedPage
+ * @description Screen shown when rider marks arrival at pickup — prompts package collection.
+ * @route /rider/delivery/arrived
+ */
 'use client'
 
 import { useState, useEffect } from 'react'

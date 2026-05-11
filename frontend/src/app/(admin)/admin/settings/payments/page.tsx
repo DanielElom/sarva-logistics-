@@ -1,3 +1,8 @@
+/**
+ * @page AdminPaymentSettingsPage
+ * @description Payment gateway configuration — active providers, webhook URLs, test mode.
+ * @route /admin/settings/payments
+ */
 'use client'
 
 import { useState } from 'react'

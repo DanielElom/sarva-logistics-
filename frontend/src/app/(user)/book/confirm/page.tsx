@@ -1,3 +1,8 @@
+/**
+ * @page BookConfirmPage
+ * @description Step 3 of booking: review price estimate, select payment, and confirm order.
+ * @route /book/confirm
+ */
 'use client'
 
 import { useEffect, useRef, useState } from 'react'

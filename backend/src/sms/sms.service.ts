@@ -1,3 +1,12 @@
+/**
+ * @module SmsService
+ * @description SMS delivery via Africa's Talking for Nigerian phone numbers.
+ *
+ * Falls back to console.log when AFRICAS_TALKING_API_KEY is unset.
+ * AfricasTalking is require()'d at runtime (not import) because it uses
+ * CommonJS and causes ESM resolution issues with the NestJS build when
+ * imported statically.
+ */
 import { Injectable, Logger } from '@nestjs/common';
 
 @Injectable()

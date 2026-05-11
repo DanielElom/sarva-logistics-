@@ -1,3 +1,8 @@
+/**
+ * @page DeliveryCancelPage
+ * @description Cancellation fee breakdown shown when a customer cancels an in-progress order.
+ * @route /delivery/cancel
+ */
 'use client'
 
 import { useEffect, useState } from 'react'

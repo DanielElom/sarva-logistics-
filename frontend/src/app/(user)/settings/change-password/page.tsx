@@ -1,3 +1,8 @@
+/**
+ * @page ChangePasswordPage
+ * @description Change account password by entering current password and a new one.
+ * @route /settings/change-password
+ */
 'use client'
 
 import { useState } from 'react'

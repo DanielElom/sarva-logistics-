@@ -1,3 +1,32 @@
+/**
+ * @module MatchingService
+ * @description Implements Fair-Ride's rider-matching algorithm.
+ *
+ * MATCHING ALGORITHM
+ * ==================
+ * Step 1 — Premium detection:
+ *   If order.isPremium === true (subscribed business user),
+ *   only FLEET riders are considered. Guarantees SLA for paying business accounts.
+ *
+ * Step 2 — Geo filtering:
+ *   Haversine SQL finds riders within 3km of pickup.
+ *   Only riders where isOnline=true AND verificationStatus=VERIFIED qualify.
+ *   Production upgrade path: replace NEARBY_RIDERS_SQL with ST_DWithin (PostGIS).
+ *
+ * Step 3 — Ranking:
+ *   Riders sorted by: acceptanceRate DESC, avgResponseTime ASC
+ *   High acceptance rate = reliable; low response time = fast.
+ *   Ranking uses EMA (α=0.1) so one bad outcome doesn't tank a rider permanently.
+ *
+ * Step 4 — Request dispatch:
+ *   Top-ranked rider receives Socket.io job_request event.
+ *   Redis key `match:{orderId}:{riderId}` with 30s TTL is the lock.
+ *   BullMQ `rider-timeout` job fires after 30s for non-response.
+ *
+ * Step 5 — Fallback:
+ *   Reject/timeout → next rider in ranked list.
+ *   All exhausted → emit no_riders_available to customer.
+ */
 import {
   Injectable,
   Logger,
@@ -60,14 +89,14 @@ const NEARBY_RIDERS_SQL = `
 @Injectable()
 export class MatchingService implements OnModuleInit, OnModuleDestroy {
   private readonly logger = new Logger(MatchingService.name);
-  private matchQueue: Queue;
-  private queueRedis: Redis;
+  private matchQueue!: Queue;
+  private queueRedis!: Redis;
 
   constructor(
     private prisma: PrismaService,
     private redisService: RedisService,
     @Inject(forwardRef(() => OrdersService))
-    private ordersService: OrdersService,
+    private readonly ordersService: OrdersService,
     @Inject(forwardRef(() => MatchingGateway))
     private gateway: MatchingGateway,
     private notifications: NotificationsService,
@@ -91,6 +120,11 @@ export class MatchingService implements OnModuleInit, OnModuleDestroy {
     return this.prisma as any;
   }
 
+  /**
+   * Entry point for the matching algorithm. Called by OrdersService after order creation.
+   * Queries nearby online/verified riders, applies premium filter, ranks them,
+   * stores candidate list in Redis, then dispatches to the top-ranked rider.
+   */
   async findMatch(orderId: string): Promise<void> {
     const order = await this.db.order.findUnique({ where: { id: orderId } });
     if (!order) {
@@ -139,12 +173,20 @@ export class MatchingService implements OnModuleInit, OnModuleDestroy {
     await this.requestRider(orderId, candidates[0].id, candidates[0].userId);
   }
 
+  /**
+   * Sends a job request to a specific rider and starts the 30s response timer.
+   *
+   * @param orderId - The order awaiting assignment
+   * @param riderId - RiderProfile.id of the target rider
+   * @param riderUserId - User.id of the target rider (for Socket.io room lookup)
+   */
   async requestRider(
     orderId: string,
     riderId: string,
     riderUserId: string,
   ): Promise<void> {
     const requestTime = Date.now();
+    // Store with 30s TTL — auto-expires if rider goes offline without responding
     await this.redisService.set(
       `match:${orderId}:${riderId}`,
       JSON.stringify({ requestTime }),
@@ -157,8 +199,11 @@ export class MatchingService implements OnModuleInit, OnModuleDestroy {
         user: { select: { name: true, phone: true } },
       },
     });
+    // Emit to rider's personal Socket.io room: user:{riderUserId}
     this.gateway.emitJobRequest(riderUserId, order);
 
+    // BullMQ timeout job fires riderRejected() after 30s if rider doesn't respond.
+    // Using BullMQ (not setTimeout) so timeouts survive server restarts.
     await this.matchQueue.add(
       'rider-timeout',
       { orderId, riderId },
@@ -168,6 +213,10 @@ export class MatchingService implements OnModuleInit, OnModuleDestroy {
     this.logger.log(`Dispatched order ${orderId} → rider ${riderId} (30s timeout)`);
   }
 
+  /**
+   * Called when a rider taps Accept. Clears the Redis lock, updates EMA metrics,
+   * sets order status to ASSIGNED, and notifies the customer via Socket.io.
+   */
   async riderAccepted(orderId: string, riderId: string): Promise<void> {
     const key = `match:${orderId}:${riderId}`;
     const raw = await this.redisService.get(key);
@@ -213,6 +262,11 @@ export class MatchingService implements OnModuleInit, OnModuleDestroy {
     );
   }
 
+  /**
+   * Called on explicit reject OR BullMQ 30s timeout.
+   * Updates EMA metrics for this rider then tries the next candidate in the list.
+   * If no candidates remain, emits no_riders_available to the customer.
+   */
   async riderRejected(orderId: string, riderId: string): Promise<void> {
     const key = `match:${orderId}:${riderId}`;
     const raw = await this.redisService.get(key);
@@ -271,6 +325,10 @@ export class MatchingService implements OnModuleInit, OnModuleDestroy {
     await this.requestRider(orderId, nextRiderId, nextProfile.userId);
   }
 
+  /**
+   * Updates rider GPS coordinates in RiderProfile for the live operations map.
+   * Called from MatchingGateway on every location_update Socket.io event.
+   */
   async updateRiderLocation(
     userId: string,
     latitude: number,

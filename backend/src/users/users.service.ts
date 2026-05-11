@@ -1,3 +1,13 @@
+/**
+ * @module UsersService
+ * @description Customer account management — profile, addresses, business account.
+ *
+ * updateFcmToken is called by the frontend after notification permission is granted
+ * so push notifications can be sent to the correct FCM device token.
+ *
+ * upsertBusinessAccount sets verificationStatus=PENDING after update so the
+ * admin team is notified to verify the CAC document before B2B features unlock.
+ */
 import {
   ForbiddenException,
   Injectable,

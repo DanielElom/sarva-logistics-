@@ -1,3 +1,8 @@
+/**
+ * @page ConfirmDeliveryPage
+ * @description Customer enters 4-digit security code to confirm they received the package.
+ * @route /tracking/[orderId]/confirm-delivery
+ */
 'use client'
 
 import { useEffect, useRef, useState } from 'react'

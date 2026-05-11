@@ -1,3 +1,8 @@
+/**
+ * @page BookTypePage
+ * @description Step 1 of booking: select delivery type (On-Demand, Scheduled, Same-Day).
+ * @route /book/type
+ */
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'

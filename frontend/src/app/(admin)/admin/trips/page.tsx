@@ -1,3 +1,8 @@
+/**
+ * @page AdminTripsPage
+ * @description All trips listing with status filters, order detail, and CSV export.
+ * @route /admin/trips
+ */
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'

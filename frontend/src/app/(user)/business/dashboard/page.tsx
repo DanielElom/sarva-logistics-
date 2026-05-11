@@ -1,3 +1,8 @@
+/**
+ * @page BusinessDashboardPage
+ * @description Business account overview with delivery stats and team management.
+ * @route /business/dashboard
+ */
 'use client'
 
 import { useEffect, useState } from 'react'

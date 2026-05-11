@@ -1,3 +1,8 @@
+/**
+ * @page NotificationsPage
+ * @description In-app notification center — order updates, payment confirmations, system alerts.
+ * @route /notifications
+ */
 'use client'
 
 import { useRouter } from 'next/navigation'

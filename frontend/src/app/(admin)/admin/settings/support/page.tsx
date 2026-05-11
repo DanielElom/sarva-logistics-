@@ -1,3 +1,8 @@
+/**
+ * @page AdminSupportSettingsPage
+ * @description Customer support settings — SLA targets, escalation contacts, FAQs.
+ * @route /admin/settings/support
+ */
 'use client'
 
 import { useState } from 'react'

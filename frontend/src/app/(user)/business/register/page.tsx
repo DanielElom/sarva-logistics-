@@ -1,3 +1,8 @@
+/**
+ * @page BusinessRegisterPage
+ * @description Redirect to business registration flow at /register/business.
+ * @route /business/register
+ */
 'use client'
 
 import { useEffect } from 'react'

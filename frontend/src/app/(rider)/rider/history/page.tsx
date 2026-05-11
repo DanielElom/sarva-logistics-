@@ -1,3 +1,8 @@
+/**
+ * @page RiderHistoryPage
+ * @description Rider delivery history with date filter and trip detail cards.
+ * @route /rider/history
+ */
 'use client'
 
 import { useState, useEffect } from 'react'

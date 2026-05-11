@@ -1,3 +1,14 @@
+/**
+ * @module ChatService
+ * @description In-app messaging between customer and rider for an active order.
+ *
+ * Chat is only permitted while an order is in an ACTIVE_ORDER_STATUSES state.
+ * Once the order is DELIVERED_CONFIRMED or CANCELLED, the chat is locked.
+ * This prevents post-delivery contact that could bypass the platform.
+ *
+ * logCall() records call metadata (not audio) — used by admin dispute resolution
+ * to verify that contact was attempted and the call duration.
+ */
 import {
   BadRequestException,
   ForbiddenException,

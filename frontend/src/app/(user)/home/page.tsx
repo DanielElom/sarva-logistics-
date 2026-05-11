@@ -1,3 +1,8 @@
+/**
+ * @page UserHomePage
+ * @description Customer home — booking entry point with address search and delivery type selector.
+ * @route /home
+ */
 'use client'
 
 import { useEffect, useState } from 'react'

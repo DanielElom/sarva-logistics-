@@ -1,3 +1,8 @@
+/**
+ * @page TrackingArrivedPage
+ * @description Status screen shown when rider has arrived at the pickup location.
+ * @route /tracking/[orderId]/arrived
+ */
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'

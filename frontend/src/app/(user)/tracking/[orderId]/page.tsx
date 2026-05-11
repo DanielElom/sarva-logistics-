@@ -1,3 +1,8 @@
+/**
+ * @page TrackingPage
+ * @description Live tracking map showing rider location, ETA, and order status.
+ * @route /tracking/[orderId]
+ */
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'

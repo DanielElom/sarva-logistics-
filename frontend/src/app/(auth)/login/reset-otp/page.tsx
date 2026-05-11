@@ -1,3 +1,8 @@
+/**
+ * @page ResetOtpPage
+ * @description Verifies the OTP received for password reset.
+ * @route /login/reset-otp
+ */
 'use client'
 
 import { useRef, useState, useEffect, useCallback } from 'react'

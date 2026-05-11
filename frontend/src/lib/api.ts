@@ -1,6 +1,33 @@
+/**
+ * @lib api.ts
+ * @description Central Axios instance for all Fair-Ride API calls.
+ *
+ * REQUEST INTERCEPTOR
+ * Reads the JWT access token from localStorage and attaches it as
+ * Authorization: Bearer <token> on every outgoing request.
+ * localStorage is the source of truth; the cookie mirror (set by setAuth)
+ * is for Next.js middleware only and is not read back here.
+ *
+ * RESPONSE INTERCEPTOR — Silent Token Refresh
+ * On any 401 response the interceptor attempts a silent token refresh:
+ *   1. Sets original._retry = true to prevent an infinite retry loop.
+ *   2. Calls POST /auth/refresh with the stored refreshToken.
+ *   3. Deduplication: the module-level `refreshing` promise ensures that
+ *      multiple concurrent 401s trigger only ONE refresh request.
+ *      All parallel requests await the same promise.
+ *   4. On success: updates the token in the store + retries the original request.
+ *   5. On failure (refresh token also expired): calls clearAuth() and redirects
+ *      to /welcome so the user must log in again.
+ *
+ * Token storage strategy:
+ *   localStorage['fair-ride-token']  — read by this interceptor for API calls
+ *   document.cookie fair-ride-token  — read by Next.js middleware for SSR routing
+ *   Zustand store (persisted)        — source of truth for UI state
+ */
 'use client'
 
 import axios from 'axios'
+import { useAuthStore } from '@/stores/auth.store'
 
 const api = axios.create({
   baseURL: 'http://localhost:3001',
@@ -17,14 +44,43 @@ api.interceptors.request.use((config) => {
   return config
 })
 
+let refreshing: Promise<string> | null = null
+
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
-    if (error.response?.status === 401 && typeof window !== 'undefined') {
-      localStorage.removeItem('fair-ride-token')
-      localStorage.removeItem('fair-ride-auth')
-      window.location.href = '/auth/login'
+  async (error) => {
+    const original = error.config
+
+    if (
+      error.response?.status === 401 &&
+      typeof window !== 'undefined' &&
+      !original._retry
+    ) {
+      original._retry = true
+
+      const { refreshToken, setAccessToken, clearAuth } = useAuthStore.getState()
+
+      if (refreshToken) {
+        try {
+          if (!refreshing) {
+            refreshing = axios
+              .post('http://localhost:3001/auth/refresh', { refreshToken })
+              .then((r) => r.data.accessToken)
+              .finally(() => { refreshing = null })
+          }
+          const newToken = await refreshing
+          setAccessToken(newToken)
+          original.headers.Authorization = `Bearer ${newToken}`
+          return api(original)
+        } catch {
+          refreshing = null
+        }
+      }
+
+      clearAuth()
+      window.location.href = '/welcome'
     }
+
     return Promise.reject(error)
   },
 )

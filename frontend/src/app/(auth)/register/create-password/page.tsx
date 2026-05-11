@@ -1,3 +1,8 @@
+/**
+ * @page CreatePasswordPage
+ * @description Optional step to set a password after OTP registration.
+ * @route /register/create-password
+ */
 'use client'
 
 import { useState, useMemo } from 'react'

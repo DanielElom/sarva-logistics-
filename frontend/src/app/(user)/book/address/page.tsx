@@ -1,3 +1,8 @@
+/**
+ * @page BookAddressPage
+ * @description Step 2 of booking: enter pickup and dropoff addresses with autocomplete.
+ * @route /book/address
+ */
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'

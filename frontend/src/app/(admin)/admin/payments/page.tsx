@@ -1,3 +1,8 @@
+/**
+ * @page AdminPaymentsPage
+ * @description Payment management — transaction list, payout processing, commission overview.
+ * @route /admin/payments
+ */
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'

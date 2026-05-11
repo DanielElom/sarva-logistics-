@@ -1,3 +1,8 @@
+/**
+ * @page RiderRateCustomerPage
+ * @description Alternative screen for rider to rate the delivery customer.
+ * @route /rider/rate/customer
+ */
 'use client'
 
 import { useEffect } from 'react'

@@ -1,3 +1,8 @@
+/**
+ * @page RateOrderPage
+ * @description Star rating and comment form for rating a completed delivery.
+ * @route /rate/[orderId]
+ */
 'use client'
 
 import { useEffect, useState } from 'react'

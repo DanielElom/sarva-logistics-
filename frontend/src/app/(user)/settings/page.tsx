@@ -1,3 +1,8 @@
+/**
+ * @page UserSettingsPage
+ * @description Customer account settings — profile, notifications, security.
+ * @route /settings
+ */
 'use client'
 
 import { useEffect, useRef, useState } from 'react'

@@ -1,3 +1,8 @@
+/**
+ * @page RegisterBusinessPage
+ * @description Business account registration — company name, address, CAC document upload.
+ * @route /register/business
+ */
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'

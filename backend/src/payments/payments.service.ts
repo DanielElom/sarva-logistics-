@@ -1,3 +1,26 @@
+/**
+ * @module PaymentsService
+ * @description Payment initiation, webhook handling, and commission split for Fair-Ride.
+ *
+ * COMMISSION SPLIT LOGIC
+ * ======================
+ * Standard riders (no subscription):
+ *   Platform: 15%  |  Rider: 85%
+ *
+ * Subscribed riders (active subscription):
+ *   Platform: 5%   |  Rider: 95%
+ *   (Rider pays a flat weekly/monthly fee instead of high per-trip commission)
+ *
+ * Split only runs on DELIVERED_CONFIRMED orders (called by confirmDelivery).
+ *
+ * Cash payments: rider collects cash from customer, platform reconciles
+ *   commission via periodic payout deductions from rider wallet.
+ * Card/OPay/Bank: platform captures full amount, credits rider share
+ *   to RiderProfile.walletBalance immediately after webhook confirmation.
+ *
+ * Payment reference format: fr-{orderId}-{timestamp}
+ *   Used by webhook handlers to look up the order from the Paystack/OPay callback.
+ */
 import {
   BadRequestException,
   ForbiddenException,
@@ -130,6 +153,14 @@ export class PaymentsService {
     return this.splitAndCredit(orderId, grossAmount, order.rider.userId);
   }
 
+  /**
+   * Calculates platform commission vs rider share, upserts the Payment record,
+   * marks the order as CAPTURED, and increments the rider's wallet balance.
+   * Idempotent: safe to call twice (upsert prevents duplicate Payment rows).
+   *
+   * @param grossAmount - Total fare paid by customer in Naira (not kobo)
+   * @param riderUserId - User.id of the rider (used to check subscription status)
+   */
   async splitAndCredit(
     orderId: string,
     grossAmount: number,
@@ -188,6 +219,13 @@ export class PaymentsService {
     return payment;
   }
 
+  /**
+   * Handles Paystack charge.success webhook events.
+   * Verifies HMAC-SHA512 signature before processing.
+   * Parses orderId from reference (format: fr-{orderId}-{timestamp}),
+   * then calls splitAndCredit to distribute the funds.
+   * Idempotent: skips orders already CAPTURED.
+   */
   async handlePaystackWebhook(rawBody: string, signature: string) {
     if (!this.paystack.verifyWebhookSignature(rawBody, signature)) {
       throw new UnauthorizedException('Invalid Paystack webhook signature');

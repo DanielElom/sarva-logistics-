@@ -1,3 +1,8 @@
+/**
+ * @page AdminRidersPage
+ * @description Rider management — KYC verification queue, fleet type, status, and CSV export.
+ * @route /admin/riders
+ */
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'

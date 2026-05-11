@@ -1,3 +1,8 @@
+/**
+ * @page AdminHubSettingsPage
+ * @description Hub and zone configuration for multi-city dispatch.
+ * @route /admin/settings/hub
+ */
 'use client'
 
 import Link from 'next/link'

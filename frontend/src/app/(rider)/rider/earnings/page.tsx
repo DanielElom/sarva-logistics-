@@ -1,3 +1,8 @@
+/**
+ * @page RiderEarningsPage
+ * @description Rider wallet balance, earnings history, and payout request form.
+ * @route /rider/earnings
+ */
 'use client'
 
 import { useState, useEffect } from 'react'

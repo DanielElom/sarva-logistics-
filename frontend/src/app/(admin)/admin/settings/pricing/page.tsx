@@ -1,3 +1,8 @@
+/**
+ * @page AdminPricingSettingsPage
+ * @description Pricing rules and zone-based overrides for dispatch regions.
+ * @route /admin/settings/pricing
+ */
 'use client'
 
 import Link from 'next/link'

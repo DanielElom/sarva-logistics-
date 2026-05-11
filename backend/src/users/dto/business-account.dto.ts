@@ -1,14 +1,14 @@
-import { IsEmail, IsOptional, IsString, IsUrl, Matches } from 'class-validator';
+import { IsEmail, IsOptional, IsString, Matches } from 'class-validator';
 
 export class BusinessAccountDto {
   @IsString()
-  companyName: string;
+  companyName!: string;
 
   @IsString()
-  businessAddress: string;
+  businessAddress!: string;
 
-  @IsUrl()
-  cacDocument: string;
+  @IsString()
+  cacDocument!: string;
 
   @IsOptional()
   @IsString()
@@ -20,4 +20,16 @@ export class BusinessAccountDto {
   @IsOptional()
   @IsEmail()
   email?: string;
+
+  @IsOptional()
+  @IsString()
+  contactPerson?: string;
+
+  @IsOptional()
+  @IsString()
+  contactDesignation?: string;
+
+  @IsOptional()
+  @IsString()
+  pickupAddress?: string;
 }

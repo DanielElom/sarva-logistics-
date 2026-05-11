@@ -1,3 +1,8 @@
+/**
+ * @page NavigatePage
+ * @description Map navigation screen guiding rider to dropoff location.
+ * @route /rider/delivery/navigate
+ */
 'use client'
 
 import { useState, useEffect, useRef } from 'react'

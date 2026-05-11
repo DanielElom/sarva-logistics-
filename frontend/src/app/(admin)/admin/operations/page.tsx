@@ -1,3 +1,8 @@
+/**
+ * @page AdminOperationsPage
+ * @description Live operations map with active rider positions, GPS pins, and order queue.
+ * @route /admin/operations
+ */
 'use client'
 
 import { useState, useEffect, useRef } from 'react'

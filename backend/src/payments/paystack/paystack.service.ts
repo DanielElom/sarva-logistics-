@@ -1,3 +1,19 @@
+/**
+ * @module PaystackService
+ * @description Paystack payment gateway integration for Fair-Ride.
+ *
+ * initializeTransaction() — creates a Paystack checkout session, returns
+ *   authorizationUrl (redirect user here) and reference (store on order).
+ *
+ * verifyTransaction() — confirms payment status via Paystack verify endpoint.
+ *   Called after redirect from Paystack checkout page.
+ *
+ * verifyWebhookSignature() — validates HMAC-SHA512 signature on incoming
+ *   Paystack webhooks. Returns true in dev (no secret key set) for local testing.
+ *
+ * All methods fall back to mock values when PAYSTACK_SECRET_KEY is not set
+ * so the payment flow can be tested end-to-end in development.
+ */
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';

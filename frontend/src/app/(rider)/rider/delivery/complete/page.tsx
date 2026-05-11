@@ -1,3 +1,8 @@
+/**
+ * @page DeliveryCompletePage
+ * @description Delivery completion screen — 4-digit security code entry with recipient hint.
+ * @route /rider/delivery/complete
+ */
 'use client'
 
 import { useState, useEffect, useRef } from 'react'

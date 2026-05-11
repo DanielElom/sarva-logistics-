@@ -1,3 +1,8 @@
+/**
+ * @page AdminAnalyticsSettingsPage
+ * @description Analytics integration settings — Google Analytics, Mixpanel, Segment.
+ * @route /admin/settings/analytics
+ */
 'use client'
 
 import { useState } from 'react'

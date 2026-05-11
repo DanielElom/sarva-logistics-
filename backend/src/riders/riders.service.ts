@@ -1,3 +1,19 @@
+/**
+ * @module RidersService
+ * @description Rider profile, KYC, online status, and earnings management.
+ *
+ * ensureProfile() is called before any update to lazily create the RiderProfile
+ * row for new riders who have not yet completed their profile wizard.
+ *
+ * verifyRider() atomically updates both RiderProfile.verificationStatus and
+ * User.status — VERIFIED → ACTIVE, REJECTED → SUSPENDED — so role guards
+ * immediately reflect the new state on the next API call.
+ *
+ * getEarnings() returns three figures from the Payout table:
+ *   walletBalance  — current available balance (credited on delivery capture)
+ *   totalEarned    — sum of PAID payouts (historical)
+ *   pendingPayouts — sum of PENDING payout requests (awaiting admin processing)
+ */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { UpdateRiderDto } from './dto/update-rider.dto';

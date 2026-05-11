@@ -1,3 +1,23 @@
+/**
+ * @module SubscriptionsService
+ * @description Rider and business subscription plan management.
+ *
+ * PLAN CATALOGUE (PLANS const — source of truth, no DB table)
+ * ==============
+ * Business Volume Tier 1  — ₦25,000/mo, 50 deliveries
+ * Business Volume Tier 2  — ₦60,000/mo, 150 deliveries
+ * Business Volume Tier 3  — ₦120,000/mo, unlimited
+ * Business Flat           — ₦80,000/mo, unlimited + fleet priority
+ * Rider Weekly            — ₦10,000/wk, 5% commission
+ * Rider Monthly           — ₦25,000/mo, 0% commission
+ *
+ * hasActiveSubscription(userId) — called hot path (every order + every payment).
+ * Returns boolean from a single indexed DB query; intentionally simple.
+ *
+ * checkAndExpireSubscriptions() — called by SubscriptionsProcessor hourly cron.
+ * Bulk-expires all overdue ACTIVE subscriptions and resets rider commissionModel
+ * back to PERCENTAGE so the 15% rate applies immediately.
+ */
 import {
   BadRequestException,
   Inject,

@@ -1,3 +1,8 @@
+/**
+ * @page RootPage
+ * @description Root redirect — sends authenticated users to their role home, unauthenticated to /welcome.
+ * @route /
+ */
 'use client'
 
 import { useEffect } from 'react'

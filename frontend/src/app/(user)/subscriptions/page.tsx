@@ -1,3 +1,8 @@
+/**
+ * @page SubscriptionsPage
+ * @description Browse and purchase Fair-Ride business subscription plans.
+ * @route /subscriptions
+ */
 'use client'
 
 import { useEffect, useState } from 'react'

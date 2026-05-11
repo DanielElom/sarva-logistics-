@@ -1,3 +1,8 @@
+/**
+ * @page TrackingChatPage
+ * @description In-app chat between customer and rider for an active order.
+ * @route /tracking/[orderId]/chat
+ */
 'use client'
 
 import { useEffect, useRef, useState } from 'react'

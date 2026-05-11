@@ -1,3 +1,8 @@
+/**
+ * @page AdminAdvancedSettingsPage
+ * @description Advanced system configuration — API limits, cache TTL, debug flags.
+ * @route /admin/settings/advanced
+ */
 'use client'
 
 import { useState } from 'react'

@@ -1,3 +1,8 @@
+/**
+ * @page BusinessSettingsPage
+ * @description Business account settings — company info, billing, team members.
+ * @route /business/settings
+ */
 'use client'
 
 import { useEffect, useRef, useState } from 'react'

@@ -1,3 +1,8 @@
+/**
+ * @page SelectRolePage
+ * @description Role picker — customer (Individual/Vendor/Restaurant/Corporate) or Rider.
+ * @route /select-role
+ */
 'use client'
 
 import { useState } from 'react'

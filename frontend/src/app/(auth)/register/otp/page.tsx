@@ -1,3 +1,8 @@
+/**
+ * @page RegisterOtpPage
+ * @description Verifies OTP sent during registration to confirm phone ownership.
+ * @route /register/otp
+ */
 'use client'
 
 import { useRef, useState, useEffect, useCallback } from 'react'

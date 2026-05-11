@@ -1,3 +1,8 @@
+/**
+ * @page SoundSettingsPage
+ * @description Rider notification sound preferences for job alerts.
+ * @route /rider/settings/sounds
+ */
 'use client'
 
 import { useState, useEffect } from 'react'

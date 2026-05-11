@@ -1,3 +1,8 @@
+/**
+ * @page TrackingConfirmedPage
+ * @description Delivery confirmed success screen with rating prompt.
+ * @route /tracking/[orderId]/confirmed
+ */
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'

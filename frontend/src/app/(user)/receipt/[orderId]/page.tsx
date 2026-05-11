@@ -1,3 +1,8 @@
+/**
+ * @page ReceiptPage
+ * @description Full order receipt with fare breakdown, GPS route map, and share/download options.
+ * @route /receipt/[orderId]
+ */
 'use client'
 
 import { useEffect, useState } from 'react'

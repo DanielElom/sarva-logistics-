@@ -1,3 +1,8 @@
+/**
+ * @page RiderSettingsPage
+ * @description Rider app settings — profile, vehicle info, bank account, notifications.
+ * @route /rider/settings
+ */
 'use client'
 
 import { useState, useEffect } from 'react'

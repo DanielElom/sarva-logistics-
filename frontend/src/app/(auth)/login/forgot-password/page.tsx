@@ -1,3 +1,8 @@
+/**
+ * @page ForgotPasswordPage
+ * @description Initiates password reset by sending OTP to phone number.
+ * @route /login/forgot-password
+ */
 'use client'
 
 import { useState } from 'react'

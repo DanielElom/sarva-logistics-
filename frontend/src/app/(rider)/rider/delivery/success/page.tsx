@@ -1,3 +1,8 @@
+/**
+ * @page DeliverySuccessPage
+ * @description Success screen after delivery confirmation — shows earnings for the trip.
+ * @route /rider/delivery/success
+ */
 'use client'
 
 import { useState, useEffect } from 'react'

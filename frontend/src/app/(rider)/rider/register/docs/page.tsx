@@ -1,3 +1,8 @@
+/**
+ * @page RiderRegisterDocsPage
+ * @description Rider document upload during onboarding — ID, license, bike papers.
+ * @route /rider/register/docs
+ */
 'use client'
 
 import { useState, useRef, useEffect } from 'react'

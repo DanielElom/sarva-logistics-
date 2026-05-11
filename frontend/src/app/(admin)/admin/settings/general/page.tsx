@@ -1,3 +1,8 @@
+/**
+ * @page AdminGeneralSettingsPage
+ * @description General platform settings — company info, logo upload, timezone, language.
+ * @route /admin/settings/general
+ */
 'use client'
 
 import { useState, useRef } from 'react'

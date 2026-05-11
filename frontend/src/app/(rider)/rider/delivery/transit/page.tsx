@@ -1,3 +1,8 @@
+/**
+ * @page TransitPage
+ * @description Alternative transit tracking screen with live status updates.
+ * @route /rider/delivery/transit
+ */
 'use client'
 
 import { useState, useEffect, useRef } from 'react'

@@ -1,3 +1,8 @@
+/**
+ * @page RiderRateOrderPage
+ * @description Rider rates the customer after a completed delivery.
+ * @route /rider/rate/[orderId]
+ */
 'use client'
 
 import { useState } from 'react'

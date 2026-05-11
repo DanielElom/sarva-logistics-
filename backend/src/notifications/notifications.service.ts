@@ -1,3 +1,20 @@
+/**
+ * @module NotificationsService
+ * @description Multi-channel notification dispatch: FCM push + DB + SMS.
+ *
+ * send() writes a Notification row to DB (for in-app notification center),
+ * then sends an FCM push if the user has a registered fcmToken.
+ *
+ * sendOrderNotification() is the primary entry point — called by other services
+ * with a typed OrderEvent string. It resolves all notification targets from the
+ * order record (customer + rider depending on event type) and fans out sends.
+ *
+ * Promise.allSettled() is used for fan-out so one failed FCM send doesn't
+ * prevent the other party from receiving their notification.
+ *
+ * FCM uses the HTTP v1 API (not the legacy server-key API). FCM_SERVER_KEY
+ * must be an OAuth2 access token, not a legacy server key.
+ */
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { SmsService } from '../sms/sms.service';
@@ -15,14 +32,6 @@ type OrderEvent =
   | 'PAYMENT_CAPTURED'
   | 'NO_RIDERS';
 
-interface NotificationPayload {
-  userId: string;
-  type: NotificationType;
-  title: string;
-  body: string;
-  orderId?: string;
-  data?: Record<string, string>;
-}
 
 @Injectable()
 export class NotificationsService {

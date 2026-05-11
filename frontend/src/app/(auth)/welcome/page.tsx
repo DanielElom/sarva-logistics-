@@ -1,3 +1,8 @@
+/**
+ * @page WelcomePage
+ * @description Landing screen with app intro and CTA to register or log in.
+ * @route /welcome
+ */
 'use client'
 
 import { useEffect } from 'react'

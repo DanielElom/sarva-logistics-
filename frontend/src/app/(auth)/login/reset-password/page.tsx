@@ -1,3 +1,8 @@
+/**
+ * @page ResetPasswordPage
+ * @description Sets a new password after OTP verification.
+ * @route /login/reset-password
+ */
 'use client'
 
 import { useState, useMemo, useEffect } from 'react'

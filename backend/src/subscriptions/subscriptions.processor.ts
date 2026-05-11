@@ -1,3 +1,19 @@
+/**
+ * @module SubscriptionsProcessor
+ * @description BullMQ worker that runs the subscription expiry cron job.
+ *
+ * Cron schedule: every hour on the hour (0 * * * *)
+ * Calls SubscriptionsService.checkAndExpireSubscriptions() which finds all
+ * active subscriptions past their endDate and marks them EXPIRED.
+ *
+ * Why hourly instead of exact per-subscription expiry?
+ *   Simpler to implement. Max 1-hour delay is acceptable for subscription expiry.
+ *   Production upgrade: schedule a BullMQ delayed job per subscription at
+ *   creation time so expiry fires at the exact moment, not up to 1h later.
+ *
+ * Two separate Redis connections are required by BullMQ — one for the queue
+ * client, one for the worker — this is a BullMQ architectural constraint.
+ */
 import { Injectable, Logger, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import { Queue, Worker, Job } from 'bullmq';
 import Redis from 'ioredis';
@@ -6,10 +22,10 @@ import { SubscriptionsService } from './subscriptions.service';
 @Injectable()
 export class SubscriptionsProcessor implements OnModuleInit, OnModuleDestroy {
   private readonly logger = new Logger(SubscriptionsProcessor.name);
-  private queue: Queue;
-  private worker: Worker;
-  private queueRedis: Redis;
-  private workerRedis: Redis;
+  private queue!: Queue;
+  private worker!: Worker;
+  private queueRedis!: Redis;
+  private workerRedis!: Redis;
 
   constructor(private subscriptionsService: SubscriptionsService) {}
 

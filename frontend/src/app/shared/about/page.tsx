@@ -1,3 +1,8 @@
+/**
+ * @page AboutPage
+ * @description About Fair-Ride — mission, team, version info, and legal links.
+ * @route /shared/about
+ */
 'use client'
 
 import { useRouter } from 'next/navigation'

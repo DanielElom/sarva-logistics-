@@ -1,3 +1,8 @@
+/**
+ * @page StatusUnderReviewPage
+ * @description Waiting screen shown while rider KYC documents are being reviewed.
+ * @route /status/under-review
+ */
 'use client'
 
 import { useEffect, useRef } from 'react'

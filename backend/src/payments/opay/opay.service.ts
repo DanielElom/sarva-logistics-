@@ -1,3 +1,17 @@
+/**
+ * @module OpayService
+ * @description OPay mobile money payment gateway integration for Fair-Ride.
+ *
+ * initiatePayment() — creates an OPay cashier session (amount in Naira,
+ *   internally converted to kobo for the API call). Returns cashierUrl
+ *   for user redirect.
+ *
+ * verifyWebhookSignature() — validates HMAC-SHA512 signature on OPay callbacks.
+ *   Returns true in dev when OPAY_SECRET_KEY is not set.
+ *
+ * OPay is the preferred payment method for unbanked/cash-preferred customers
+ * in Nigerian markets where OPay wallet penetration is high.
+ */
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';

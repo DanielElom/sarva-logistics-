@@ -1,3 +1,8 @@
+/**
+ * @page StatusApprovedPage
+ * @description Confirmation screen shown after rider KYC is approved.
+ * @route /status/approved
+ */
 'use client'
 
 import { useEffect } from 'react'

@@ -1,3 +1,17 @@
+/**
+ * @module RedisService
+ * @description Thin wrapper around ioredis for key-value cache operations.
+ *
+ * Methods:
+ *   get(key)              — returns null if key does not exist
+ *   set(key, value, ttl?) — optional TTL in seconds (EX flag)
+ *   setNx(key, value)     — atomic set-if-not-exists, returns true on success
+ *                           Used by MatchingService for 30s rider request locks.
+ *   del(key)              — remove a key (e.g. after OTP verification)
+ *
+ * The shared Redis connection is separate from BullMQ connections, which
+ * require their own ioredis instances due to blocking command constraints.
+ */
 import { Injectable, OnModuleDestroy, OnModuleInit, Logger } from '@nestjs/common';
 import Redis from 'ioredis';
 

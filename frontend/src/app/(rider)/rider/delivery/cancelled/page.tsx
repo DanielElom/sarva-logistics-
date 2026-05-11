@@ -1,3 +1,8 @@
+/**
+ * @page DeliveryCancelledPage
+ * @description Screen shown when an assigned order is cancelled by the customer.
+ * @route /rider/delivery/cancelled
+ */
 'use client'
 
 import { useState, useEffect } from 'react'

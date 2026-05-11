@@ -1,3 +1,26 @@
+/**
+ * @module MatchingGateway
+ * @description Socket.io gateway on the default '/' namespace for rider matching and GPS tracking.
+ *
+ * SOCKET ROOMS
+ *   user:{userId}      — personal room, joined on connect using handshake.auth.userId
+ *   order:{orderId}    — order room for tracking; joined via 'join_order' event or
+ *                        automatically by emitOrderAssigned() when a match is confirmed
+ *
+ * EVENTS (client → server):
+ *   join_order        — join order tracking room
+ *   location_update   — rider sends GPS ping; writes GpsLog, updates RiderProfile,
+ *                       broadcasts rider_location to order room with ETA
+ *
+ * EVENTS (server → client):
+ *   job_request       — sent to rider personal room when a new order is dispatched
+ *   order_assigned    — sent to customer personal room when a rider accepts
+ *   rider_location    — broadcast to order room on every GPS ping
+ *   no_riders_available — sent to customer when all candidates are exhausted
+ *
+ * socketMap (userId → Socket) enables server-side room joins without
+ * requiring the client to emit 'join_order' immediately after connection.
+ */
 import { Logger, Inject, forwardRef } from '@nestjs/common';
 import {
   ConnectedSocket,

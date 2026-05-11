@@ -1,3 +1,8 @@
+/**
+ * @page DeliveryRequestPage
+ * @description Incoming job request card with pickup/dropoff details, fare, and accept/decline buttons.
+ * @route /rider/delivery/request
+ */
 'use client'
 
 import { useState, useEffect, useRef } from 'react'

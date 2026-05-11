@@ -1,3 +1,8 @@
+/**
+ * @page RiderHomePage
+ * @description Rider home with online/offline toggle and slide-in navigation drawer.
+ * @route /rider/home
+ */
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
