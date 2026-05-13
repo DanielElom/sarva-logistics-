@@ -109,18 +109,20 @@ export default function BookConfirmPage() {
   const [promoInput, setPromoInput] = useState(promoCode ?? '')
   const [promoOpen, setPromoOpen] = useState(false)
   const [promoStatus, setPromoStatus] = useState<'idle' | 'valid' | 'invalid'>('idle')
-  const [confirming, setConfirming] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [navigating, setNavigating] = useState(false)
 
   /* auth + flow guard — all hooks above this */
   useEffect(() => {
+    if (loading || navigating) return
     if (!isAuthenticated) { router.replace('/welcome'); return }
     if (role === 'RIDER') { router.replace('/rider/home'); return }
     if (role === 'ADMIN') { router.replace('/admin/dashboard'); return }
     if (!deliveryType) { router.replace('/book/type'); return }
     if (!pickupAddress || !dropoffAddress) { router.replace('/book/address'); return }
-  }, [isAuthenticated, role, deliveryType, pickupAddress, dropoffAddress, router])
+  }, [isAuthenticated, role, deliveryType, pickupAddress, dropoffAddress, loading, navigating, router])
 
-  if (!isAuthenticated || !deliveryType || !pickupAddress || !dropoffAddress) return null
+  if (!loading && !navigating && (!isAuthenticated || !deliveryType || !pickupAddress || !dropoffAddress)) return null
 
   /* price breakdown */
   const BASE_FARE = 300
@@ -162,7 +164,7 @@ export default function BookConfirmPage() {
       toast.error('Please select a payment method')
       return
     }
-    setConfirming(true)
+    setLoading(true)
     try {
       const payload = {
         pickupLatitude: pickupLatitude ?? 6.5244,
@@ -178,14 +180,14 @@ export default function BookConfirmPage() {
       }
       const { data } = await api.post('/orders', payload)
       setActiveOrder(data)
+      setNavigating(true)
       clearBooking()
       router.replace(`/tracking/${data.id}/confirmed`)
     } catch (err: any) {
       const msg =
         err?.response?.data?.message ?? err?.message ?? 'Something went wrong'
       toast.error(Array.isArray(msg) ? msg[0] : msg)
-    } finally {
-      setConfirming(false)
+      setLoading(false)
     }
   }
 
@@ -528,15 +530,15 @@ export default function BookConfirmPage() {
 
           <button
             onClick={handleConfirm}
-            disabled={confirming}
+            disabled={loading}
             className="w-full py-4 rounded-xl font-['Manrope'] font-bold text-lg shadow-[0_8px_30px_rgb(0,52,24,0.2)] active:opacity-80 transition-all hover:scale-[1.01] disabled:opacity-60 disabled:scale-100 text-white"
             style={{
-              background: confirming
+              background: loading
                 ? '#296b40'
                 : 'linear-gradient(135deg, #003418 0%, #296b40 100%)',
             }}
           >
-            {confirming ? (
+            {loading ? (
               <span className="flex items-center justify-center gap-2">
                 <span className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full inline-block animate-spin" />
                 Finding your rider…
@@ -547,7 +549,7 @@ export default function BookConfirmPage() {
           </button>
 
           <p className="text-center text-[10px] text-on-surface-variant px-4 leading-tight">
-            By confirming, you agree to our Terms of Service and Privacy Policy regarding courier operations.
+            By loading, you agree to our Terms of Service and Privacy Policy regarding courier operations.
           </p>
         </div>
       </div>

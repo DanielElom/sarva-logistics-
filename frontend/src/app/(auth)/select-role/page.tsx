@@ -62,13 +62,7 @@ export default function SelectRolePage() {
       return
     }
     setSelectedRole(selected)
-    if (selected === 'INDIVIDUAL') {
-      router.push('/register/profile')
-    } else if (selected === 'RIDER') {
-      router.push('/register/rider-docs')
-    } else {
-      router.push('/register/business')
-    }
+    router.push('/register/profile')
   }
 
   return (

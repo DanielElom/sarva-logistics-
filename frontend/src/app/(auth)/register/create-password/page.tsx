@@ -31,8 +31,9 @@ const STRENGTH_LABELS = ['', 'Weak', 'Fair', 'Good', 'Strong']
 const STRENGTH_COLORS = ['', '#ef4444', '#f97316', '#eab308', '#22c55e']
 
 function homeForRole(role: string): string {
-  if (role === 'RIDER') return '/rider/home'
+  if (role === 'RIDER') return '/rider/register/docs'
   if (role === 'ADMIN') return '/admin/dashboard'
+  if (role === 'VENDOR' || role === 'RESTAURANT' || role === 'CORPORATE') return '/register/business'
   return '/home'
 }
 

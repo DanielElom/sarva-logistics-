@@ -63,12 +63,12 @@ export default function RegisterProfilePage() {
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    if (selectedRole !== null && selectedRole !== 'INDIVIDUAL') {
+    if (selectedRole === null) {
       router.replace('/select-role')
     }
   }, [selectedRole, router])
 
-  if (selectedRole !== null && selectedRole !== 'INDIVIDUAL') return null
+  if (selectedRole === null) return null
 
   function handlePhotoClick() {
     fileInputRef.current?.click()
