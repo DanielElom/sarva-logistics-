@@ -18,6 +18,7 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { ChatModule } from './chat/chat.module';
 import { AdminModule } from './admin/admin.module';
 import { AdminService } from './admin/admin.service';
+import { DevModule } from './dev/dev.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { AdminService } from './admin/admin.service';
     NotificationsModule,
     ChatModule,
     AdminModule,
+    DevModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -10,6 +10,7 @@ const PUBLIC_PREFIXES = [
   '/status',
   '/shared',
   '/auth',
+  '/dev-tools',
 ]
 
 function isPublic(pathname: string): boolean {

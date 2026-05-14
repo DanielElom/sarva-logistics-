@@ -47,11 +47,14 @@ export default function HomePage() {
     if (!isAuthenticated) { router.replace('/welcome'); return }
     if (role === 'RIDER') { router.replace('/rider/home'); return }
     if (role === 'ADMIN') { router.replace('/admin/dashboard'); return }
+    if (['VENDOR', 'RESTAURANT', 'CORPORATE'].includes(role ?? '')) {
+      router.replace('/business/dashboard'); return
+    }
   }, [isAuthenticated, role, router])
 
   // Fetch data
   useEffect(() => {
-    if (!isAuthenticated || role === 'RIDER' || role === 'ADMIN') return
+    if (!isAuthenticated || role === 'RIDER' || role === 'ADMIN' || ['VENDOR','RESTAURANT','CORPORATE'].includes(role ?? '')) return
     Promise.all([
       api.get('/orders?page=1&limit=3'),
       api.get('/notifications/unread-count'),
@@ -64,7 +67,7 @@ export default function HomePage() {
       .finally(() => setLoadingOrders(false))
   }, [isAuthenticated, role])
 
-  if (!isAuthenticated || role === 'RIDER' || role === 'ADMIN') return null
+  if (!isAuthenticated || role === 'RIDER' || role === 'ADMIN' || ['VENDOR','RESTAURANT','CORPORATE'].includes(role ?? '')) return null
 
   return (
     <ScreenWrapper>
