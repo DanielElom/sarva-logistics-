@@ -31,25 +31,15 @@ const ROLES: RoleOption[] = [
     icon: 'moped',
     description: 'Earn by delivering items. Join our fleet of couriers and define your own schedule.',
   },
-  {
-    id: 'VENDOR',
-    label: 'Vendor',
-    icon: 'storefront',
-    description: 'Retail shop logistics. Manage inventory movement and last-mile fulfillment.',
-  },
-  {
-    id: 'RESTAURANT',
-    label: 'Restaurant',
-    icon: 'restaurant',
-    description: 'Kitchen & food delivery. Streamline takeout orders with professional logistics.',
-  },
-  {
-    id: 'CORPORATE',
-    label: 'Corporate',
-    icon: 'apartment',
-    description: 'Enterprise fleet solutions. Custom dashboards and bulk delivery optimization.',
-  },
 ]
+
+/* V2_FEATURE: BUSINESS_ROLES
+const BUSINESS_ROLES: RoleOption[] = [
+  { id: 'VENDOR',     label: 'Vendor',     icon: 'storefront', description: 'Retail shop logistics. Manage inventory movement and last-mile fulfillment.' },
+  { id: 'RESTAURANT', label: 'Restaurant', icon: 'restaurant', description: 'Kitchen & food delivery. Streamline takeout orders with professional logistics.' },
+  { id: 'CORPORATE',  label: 'Corporate',  icon: 'apartment',  description: 'Enterprise fleet solutions. Custom dashboards and bulk delivery optimization.' },
+]
+*/
 
 export default function SelectRolePage() {
   const router = useRouter()
@@ -107,7 +97,6 @@ export default function SelectRolePage() {
                 onClick={() => setSelected(role.id)}
                 className={[
                   'group relative flex items-start gap-4 p-4 rounded-xl text-left transition-all duration-200 active:scale-[0.98]',
-                  role.id === 'CORPORATE' ? 'md:col-span-2' : '',
                   isSelected
                     ? 'bg-surface-container-lowest border-2 border-primary shadow-sm'
                     : 'bg-surface-container-lowest editorial-shadow border-2 border-transparent hover:border-outline-variant/30 hover:bg-surface-container-high',

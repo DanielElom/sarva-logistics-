@@ -34,16 +34,12 @@ interface Order {
   rider?: { user: { name: string } } | null
 }
 
+/* V2_FEATURE: SUBSCRIPTIONS — Subscription interface preserved here
 interface Subscription {
-  id: string
-  plan: string
-  tier?: number | null
-  status: string
-  startDate: string
-  endDate: string
-  deliveryLimit: number | null
-  deliveriesUsed?: number
+  id: string; plan: string; tier?: number | null; status: string
+  startDate: string; endDate: string; deliveryLimit: number | null; deliveriesUsed?: number
 }
+*/
 
 const ACTIVE_STATUSES = new Set(['PENDING', 'ASSIGNED', 'EN_ROUTE_TO_PICKUP', 'ARRIVED_AT_PICKUP', 'PICKED_UP', 'IN_TRANSIT', 'ARRIVED_AT_DELIVERY', 'DELIVERED_REQUESTED'])
 const COMPLETED_STATUS = 'DELIVERED_CONFIRMED'
@@ -78,20 +74,10 @@ function QuickAction({ icon, label, onClick }: { icon: string; label: string; on
   )
 }
 
-function daysUntil(dateStr: string) {
-  return Math.ceil((new Date(dateStr).getTime() - Date.now()) / 86400000)
-}
-
-function planDisplayName(plan: string, tier?: number | null) {
-  if (plan === 'BUSINESS_VOLUME') {
-    const names = ['Starter', 'Growth', 'Enterprise']
-    return `Business ${names[(tier ?? 1) - 1] ?? 'Volume'}`
-  }
-  if (plan === 'BUSINESS_FLAT') return 'Business Flat Rate'
-  if (plan === 'RIDER_WEEKLY') return 'Rider Weekly'
-  if (plan === 'RIDER_MONTHLY') return 'Rider Monthly'
-  return plan
-}
+/* V2_FEATURE: SUBSCRIPTIONS — daysUntil/planDisplayName helpers preserved here
+function daysUntil(dateStr: string) { return Math.ceil((new Date(dateStr).getTime() - Date.now()) / 86400000) }
+function planDisplayName(plan: string, tier?: number | null) { ... }
+*/
 
 export default function BusinessDashboardPage() {
   const router = useRouter()
@@ -101,7 +87,6 @@ export default function BusinessDashboardPage() {
 
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [orders, setOrders] = useState<Order[]>([])
-  const [subscription, setSubscription] = useState<Subscription | null>(null)
   const [loading, setLoading] = useState(true)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
@@ -114,8 +99,7 @@ export default function BusinessDashboardPage() {
     Promise.all([
       api.get('/users/me'),
       api.get('/orders?page=1&limit=100'),
-      api.get('/subscriptions/me').catch(() => null),
-    ]).then(([profileRes, ordersRes, subRes]) => {
+    ]).then(([profileRes, ordersRes]) => {
       const p: UserProfile = profileRes.data
       setProfile(p)
       if (!p.businessAccount) {
@@ -126,7 +110,6 @@ export default function BusinessDashboardPage() {
       }
       const list: Order[] = ordersRes.data.data ?? ordersRes.data.orders ?? []
       setOrders(list)
-      if (subRes?.data) setSubscription(subRes.data)
     }).catch(() => {
       toast.error('Could not load dashboard')
     }).finally(() => setLoading(false))
@@ -149,10 +132,6 @@ export default function BusinessDashboardPage() {
     : 0
   const recentOrders = [...orders].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 5)
   const hasActiveOrder = activeOrder && ACTIVE_STATUSES.has(activeOrder.status)
-
-  const subDaysLeft = subscription?.endDate ? daysUntil(subscription.endDate) : null
-  const subExpiringSoon = subDaysLeft !== null && subDaysLeft <= 7 && subDaysLeft > 0
-  const subExpired = subDaysLeft !== null && subDaysLeft <= 0
 
   const companyName = profile?.companyName ?? 'Business Dashboard'
   const greeting = (() => {
@@ -222,55 +201,7 @@ export default function BusinessDashboardPage() {
               </div>
             )}
 
-            {/* subscription banner */}
-            {!subscription ? (
-              <div className="flex items-center justify-between p-4 bg-amber-50 border border-amber-200 rounded-2xl">
-                <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-amber-600" style={{ fontVariationSettings: "'FILL' 1", fontSize: '22px' }}>workspace_premium</span>
-                  <div>
-                    <p className="text-sm font-bold text-amber-800">No active subscription</p>
-                    <p className="text-xs text-amber-600">Upgrade to unlock business features</p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => router.push('/subscriptions')}
-                  className="px-3 py-2 bg-amber-600 text-white text-xs font-bold rounded-xl active:scale-95"
-                >
-                  Upgrade
-                </button>
-              </div>
-            ) : subExpired ? (
-              <div className="flex items-center justify-between p-4 bg-error-container/30 border border-error/20 rounded-2xl">
-                <div>
-                  <p className="text-sm font-bold text-error">Subscription expired</p>
-                  <p className="text-xs text-on-surface-variant">{planDisplayName(subscription.plan, subscription.tier)}</p>
-                </div>
-                <button onClick={() => router.push('/subscriptions')} className="px-3 py-2 bg-error text-white text-xs font-bold rounded-xl active:scale-95">
-                  Renew
-                </button>
-              </div>
-            ) : subExpiringSoon ? (
-              <div className="flex items-center justify-between p-4 bg-amber-50 border border-amber-200 rounded-2xl">
-                <div>
-                  <p className="text-sm font-bold text-amber-800">{planDisplayName(subscription.plan, subscription.tier)}</p>
-                  <p className="text-xs text-amber-600">Expires in {subDaysLeft} days</p>
-                </div>
-                <button onClick={() => router.push('/subscriptions')} className="px-3 py-2 bg-amber-600 text-white text-xs font-bold rounded-xl active:scale-95">
-                  Renew
-                </button>
-              </div>
-            ) : (
-              <div className="flex items-center justify-between p-4 bg-primary/5 border border-primary/15 rounded-2xl">
-                <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1", fontSize: '22px' }}>workspace_premium</span>
-                  <div>
-                    <p className="text-sm font-bold text-primary">{planDisplayName(subscription.plan, subscription.tier)}</p>
-                    <p className="text-xs text-on-surface-variant">Renews in {subDaysLeft} days</p>
-                  </div>
-                </div>
-                <span className="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded-full uppercase tracking-wide">Active</span>
-              </div>
-            )}
+            {/* V2_FEATURE: SUBSCRIPTIONS — subscription banner removed for V1 */}
 
             {/* stats grid */}
             <div className="grid grid-cols-2 gap-3">
@@ -293,9 +224,9 @@ export default function BusinessDashboardPage() {
             {/* quick actions */}
             <section>
               <h3 className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">Quick Actions</h3>
-              <div className="grid grid-cols-5 gap-2">
+              <div className="grid grid-cols-4 gap-2">
                 <QuickAction icon="add_circle" label="Book Delivery" onClick={() => router.push('/book/type')} />
-                <QuickAction icon="workspace_premium" label="Subscription" onClick={() => router.push('/subscriptions')} />
+                {/* V2_FEATURE: SUBSCRIPTIONS — Subscription quick action removed for V1 */}
                 <QuickAction icon="history" label="History" onClick={() => router.push('/history')} />
                 <QuickAction icon="business" label="Settings" onClick={() => router.push('/business/settings')} />
                 <QuickAction icon="support_agent" label="Support" onClick={() => router.push('/shared/support')} />

@@ -78,14 +78,14 @@ export class OrdersService {
       dto.dropoffLongitude,
     );
 
-    const [baseFareRaw, perKmRateRaw, surgeRaw] = await Promise.all([
+    const [baseFareRaw, perKmRateRaw] = await Promise.all([
       this.redis.get('config:baseFare'),
       this.redis.get('config:perKmRate'),
-      this.redis.get('config:surgeMultiplier'),
+      // V2_FEATURE: SURGE_PRICING — this.redis.get('config:surgeMultiplier')
     ]);
     const baseFare = parseFloat(baseFareRaw ?? '300');
     const perKmRate = parseFloat(perKmRateRaw ?? '120');
-    const surgeMultiplier = parseFloat(surgeRaw ?? '1.0');
+    const surgeMultiplier = 1.0; // V2_FEATURE: SURGE_PRICING — read from Redis and apply dynamic surge
 
     const finalPrice = Math.round((baseFare + distanceKm * perKmRate) * surgeMultiplier);
 
@@ -110,8 +110,8 @@ export class OrdersService {
         perKmRate,
         surgeMultiplier,
         finalPrice,
-        deliveryType: dto.deliveryType,
-        scheduledAt: dto.scheduledFor ? new Date(dto.scheduledFor) : null,
+        deliveryType: 'ON_DEMAND', // V2_FEATURE: DELIVERY_TYPES — use dto.deliveryType when enabled
+        scheduledAt: null, // V2_FEATURE: SCHEDULED_DELIVERY — use dto.scheduledFor when enabled
         paymentMethod: dto.paymentMethod,
         isPremium,
         status: OrderStatus.PENDING,
@@ -232,14 +232,14 @@ export class OrdersService {
   ) {
     const distanceKm = this.haversineKm(pickupLat, pickupLng, dropoffLat, dropoffLng);
 
-    const [bfr, pkr, smr] = await Promise.all([
+    const [bfr, pkr] = await Promise.all([
       this.redis.get('config:baseFare'),
       this.redis.get('config:perKmRate'),
-      this.redis.get('config:surgeMultiplier'),
+      // V2_FEATURE: SURGE_PRICING — this.redis.get('config:surgeMultiplier')
     ]);
     const baseFare = parseFloat(bfr ?? '300');
     const perKmRate = parseFloat(pkr ?? '120');
-    const surge = parseFloat(smr ?? '1.0');
+    const surge = 1.0; // V2_FEATURE: SURGE_PRICING — read from Redis when enabled
 
     const estimatedPrice = Math.round((baseFare + distanceKm * perKmRate) * surge);
     const estimatedEta = Math.round(distanceKm * 4 + 8); // ~4 min/km + 8 min base

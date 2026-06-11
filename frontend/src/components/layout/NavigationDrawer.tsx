@@ -154,13 +154,12 @@ export default function NavigationDrawer({ isOpen, onClose }: Props) {
       items: [
         { icon: 'support_agent', label: 'Help & Support', action: () => navigate('/shared/support') },
         { icon: 'info', label: 'About Fair-Ride', action: () => navigate('/shared/about') },
-        { icon: 'star', label: 'Rate the App', action: () => { onClose(); toast('Coming soon', { icon: '⭐' }) } },
       ],
     },
     {
       title: 'Account Actions',
       items: [
-        { icon: 'group_add', label: 'Refer a Friend', action: () => { onClose(); toast('Coming soon', { icon: '🎉' }) } },
+        /* V2_FEATURE: REFERRALS — { icon: 'group_add', label: 'Refer a Friend', ... } */
         {
           icon: 'logout',
           label: 'Log Out',
@@ -172,12 +171,13 @@ export default function NavigationDrawer({ isOpen, onClose }: Props) {
   ]
 
   const businessSections: MenuSection[] = [
+    /* V2_FEATURE: BUSINESS_ROLES — entire businessSections only used when BUSINESS_ROLES enabled */
     {
       title: 'Account',
       items: [
         { icon: 'business', label: 'Business Profile', action: () => navigate('/business/settings') },
         { icon: 'history', label: 'Delivery History', action: () => navigate('/history') },
-        { icon: 'workspace_premium', label: 'Subscription Plan', action: () => navigate('/subscriptions') },
+        /* V2_FEATURE: SUBSCRIPTIONS — { icon: 'workspace_premium', label: 'Subscription Plan', ... } */
         { icon: 'notifications', label: 'Notifications', action: () => navigate('/notifications') },
       ],
     },
@@ -201,8 +201,8 @@ export default function NavigationDrawer({ isOpen, onClose }: Props) {
       title: 'Business',
       items: [
         { icon: 'dashboard', label: 'Dashboard', action: () => navigate('/business/dashboard') },
-        { icon: 'bar_chart', label: 'Usage & Analytics', action: () => navigate('/business/dashboard') },
-        { icon: 'payments', label: 'Billing & Payments', action: () => { onClose(); toast('Coming soon', { icon: '💳' }) } },
+        /* V2_FEATURE: BUSINESS_ANALYTICS — { icon: 'bar_chart', label: 'Usage & Analytics', ... } */
+        /* V2_FEATURE: BILLING — { icon: 'payments', label: 'Billing & Payments', ... } */
       ],
     },
     {

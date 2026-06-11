@@ -181,14 +181,7 @@ export default function RiderEarningsPage() {
           </div>
         )}
 
-        {/* Premium banner */}
-        <div className="bg-gradient-to-br from-primary to-primary-container rounded-xl p-5 flex items-start gap-3 shadow-lg shadow-primary/10">
-          <span className="material-symbols-outlined text-primary-fixed text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>stars</span>
-          <div>
-            <h3 className="font-headline font-bold text-on-primary leading-tight mb-1">Premium Order Bonus Applied</h3>
-            <p className="font-body text-xs text-on-primary/80">A +₦200 completion incentive has been credited to your wallet.</p>
-          </div>
-        </div>
+        {/* V2_FEATURE: SUBSCRIPTIONS — premium bonus banner removed for V1 */}
 
         {/* Recent earnings */}
         {data && data.recentEarnings.length > 0 && (
@@ -202,7 +195,7 @@ export default function RiderEarningsPage() {
                   </p>
                   <div className="flex gap-3 mt-1 text-xs text-on-surface-variant">
                     <span>Fare: ₦{e.fare.toLocaleString()}</span>
-                    <span>Commission: ₦{e.commission.toLocaleString()}</span>
+                    {/* V2_FEATURE: COMMISSION — commission deduction display removed for V1 */}
                   </div>
                 </div>
                 <p className="font-headline font-extrabold text-lg text-primary">₦{e.net.toLocaleString()}</p>

@@ -16,7 +16,7 @@ const MENU_ITEMS = [
   { icon: 'payments', label: 'Wallet & Payments', href: '/home', section: 'Services' },
   { icon: 'notifications', label: 'Notifications', href: '/notifications', section: 'Account' },
   { icon: 'settings', label: 'Account Settings', href: '/settings', section: 'Account' },
-  { icon: 'subscriptions', label: 'Subscriptions', href: '/subscriptions', section: 'Account' },
+  /* V2_FEATURE: SUBSCRIPTIONS — { icon: 'subscriptions', label: 'Subscriptions', ... } */
   { icon: 'support_agent', label: 'Support Center', href: '/shared/support', section: 'Help' },
   { icon: 'info', label: 'About Fair-Ride', href: '/shared/about', section: 'Help' },
 ]

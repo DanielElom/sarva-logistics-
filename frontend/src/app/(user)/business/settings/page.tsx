@@ -333,22 +333,11 @@ export default function BusinessSettingsPage() {
               </div>
             </SectionCard>
 
-            {/* subscription */}
-            <SectionCard>
-              <SectionTitle number="02" title="Subscription" />
-              <div className="px-6 py-5">
-                <RowLink
-                  icon="workspace_premium"
-                  label="Manage Plan"
-                  sublabel="View or upgrade your subscription"
-                  onClick={() => router.push('/subscriptions')}
-                />
-              </div>
-            </SectionCard>
+            {/* V2_FEATURE: SUBSCRIPTIONS — subscription section removed for V1 */}
 
             {/* documents */}
             <SectionCard>
-              <SectionTitle number="03" title="Compliance Documents" />
+              <SectionTitle number="02" title="Compliance Documents" />
               <div className="px-6 py-5 space-y-3">
                 <div className="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
                   <div className="flex items-center gap-3">

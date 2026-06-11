@@ -17,8 +17,6 @@ interface RiderProfile {
   phone: string
   isOnline: boolean
   rating: number
-  subscriptionPlan?: string
-  commissionModel?: string
   vehicleType?: string
   bankName?: string
   accountNumber?: string
@@ -93,7 +91,7 @@ export default function RiderSettingsPage() {
               <div className="z-10 relative">
                 <p className="text-on-primary-container font-label text-sm uppercase tracking-widest mb-2">Primary Courier</p>
                 <h2 className="font-headline font-extrabold text-3xl text-white">{profile?.name ?? user?.name ?? 'Rider'}</h2>
-                <p className="text-on-primary-container mt-1 text-sm">{profile?.commissionModel ?? 'Standard Commission'}</p>
+                <p className="text-on-primary-container mt-1 text-sm">Per-delivery</p>
               </div>
               <div className="mt-8 z-10 relative">
                 <span className="bg-white/10 text-white px-4 py-1.5 rounded-full text-sm font-medium backdrop-blur-sm">
@@ -138,18 +136,7 @@ export default function RiderSettingsPage() {
             </div>
           </section>
 
-          {/* Subscription */}
-          <section>
-            <h3 className="font-headline font-bold text-xl text-on-surface mb-3 px-1">Subscription</h3>
-            <div className="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
-              <SettingsRow
-                icon="workspace_premium"
-                label="Subscription Plan"
-                sub={profile?.subscriptionPlan ?? 'Standard'}
-                onClick={() => router.push('/subscriptions')}
-              />
-            </div>
-          </section>
+          {/* V2_FEATURE: SUBSCRIPTIONS — Subscription section removed for V1 */}
 
           {/* Navigation */}
           <section>

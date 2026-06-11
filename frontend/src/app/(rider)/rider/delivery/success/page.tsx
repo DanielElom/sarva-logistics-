@@ -53,9 +53,6 @@ export default function DeliverySuccessPage() {
     return () => clearInterval(timer)
   }, [router])
 
-  const baseFare = order ? Math.round(order.estimatedPayout * 0.85) : 0
-  const commission = order ? order.estimatedPayout - baseFare : 0
-
   return (
     <ScreenWrapper>
       <main className="min-h-screen flex flex-col">
@@ -106,32 +103,16 @@ export default function DeliverySuccessPage() {
             </div>
             <div className="relative z-10">
               <p className="text-[10px] uppercase tracking-widest text-on-primary/70 font-bold mb-1">
-                Earning Summary
+                You Earned
               </p>
-              <h2 className="font-headline font-extrabold text-4xl text-on-primary mb-4">
+              <h2 className="font-headline font-extrabold text-4xl text-on-primary">
                 ₦{(order?.estimatedPayout ?? 0).toLocaleString()}
               </h2>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="p-3 bg-on-primary/10 rounded-lg">
-                  <p className="text-[10px] uppercase text-on-primary/60 font-bold">Your Share</p>
-                  <p className="font-bold text-on-primary text-lg">₦{baseFare.toLocaleString()}</p>
-                </div>
-                <div className="p-3 bg-on-primary/10 rounded-lg">
-                  <p className="text-[10px] uppercase text-on-primary/60 font-bold">Commission</p>
-                  <p className="font-bold text-on-primary text-lg">₦{commission.toLocaleString()}</p>
-                </div>
-              </div>
+              {/* V2_FEATURE: COMMISSION — baseFare/commission breakdown grid removed for V1 */}
             </div>
           </div>
 
-          {/* Premium bonus */}
-          <div className="bg-gradient-to-br from-primary to-primary-container rounded-xl p-5 flex items-start gap-3 shadow-lg shadow-primary/10">
-            <span className="material-symbols-outlined text-primary-fixed text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>stars</span>
-            <div>
-              <h3 className="font-headline font-bold text-on-primary leading-tight mb-0.5">Top Tier Rider</h3>
-              <p className="font-body text-xs text-on-primary/80">Keep up the excellent completion rate to maintain your status!</p>
-            </div>
-          </div>
+          {/* V2_FEATURE: SUBSCRIPTIONS — premium/top-tier banner removed for V1 */}
 
           {/* Actions */}
           <div className="flex flex-col gap-3 pt-2">

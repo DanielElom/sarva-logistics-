@@ -108,6 +108,11 @@ export class AuthService {
 
     if (!user) {
       if (!role) throw new BadRequestException('role is required for new users');
+      // V1: block business roles — only INDIVIDUAL and RIDER allowed at launch
+      const V2_BUSINESS_ROLES: UserRole[] = ['VENDOR' as UserRole, 'RESTAURANT' as UserRole, 'CORPORATE' as UserRole];
+      if (V2_BUSINESS_ROLES.includes(role)) {
+        throw new BadRequestException('Business accounts are not available yet. Please register as Individual or Rider.');
+      }
       user = await db.user.create({
         data: { phone, role, status: UserStatus.PENDING_VERIFICATION },
       });

@@ -5,7 +5,7 @@
  */
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import ScreenWrapper from '@/components/layout/ScreenWrapper'
@@ -67,12 +67,12 @@ function MapRouteUnderlay() {
   )
 }
 
-/* ── payment option data ──────────────────────────────────────────── */
+/* V2_FEATURE: CARD_PAYMENT - Paystack card integration */
+/* V2_FEATURE: OPAY_PAYMENT - Opay wallet integration */
+/* ── payment option data (V1: Cash + Bank Transfer only) ─────────── */
 const PAYMENT_OPTIONS: { method: PaymentMethod; label: string; sub: string; icon: string }[] = [
-  { method: 'CARD', label: 'Card (Paystack)', sub: 'Visa / Mastercard', icon: 'credit_card' },
-  { method: 'OPAY', label: 'Opay Wallet', sub: 'Instant debit', icon: 'account_balance_wallet' },
-  { method: 'BANK_TRANSFER', label: 'Bank Transfer', sub: 'Pay via bank', icon: 'account_balance' },
   { method: 'CASH', label: 'Cash on Delivery', sub: 'Pay the rider', icon: 'payments' },
+  { method: 'BANK_TRANSFER', label: 'Bank Transfer', sub: 'Pay via bank (NIP)', icon: 'account_balance' },
 ]
 
 /* ── page ─────────────────────────────────────────────────────────── */
@@ -95,9 +95,7 @@ export default function BookConfirmPage() {
     estimatedDistance,
     estimatedEta,
     packageDescription,
-    promoCode,
     setPaymentMethod,
-    setPromoCode,
     clearBooking,
   } = useBookingStore()
 
@@ -106,9 +104,6 @@ export default function BookConfirmPage() {
   const [selectedPayment, setSelectedPayment] = useState<PaymentMethod>(
     paymentMethod ?? 'CASH',
   )
-  const [promoInput, setPromoInput] = useState(promoCode ?? '')
-  const [promoOpen, setPromoOpen] = useState(false)
-  const [promoStatus, setPromoStatus] = useState<'idle' | 'valid' | 'invalid'>('idle')
   const [loading, setLoading] = useState(false)
   const [navigating, setNavigating] = useState(false)
 
@@ -145,18 +140,6 @@ export default function BookConfirmPage() {
   function handleSelectPayment(m: PaymentMethod) {
     setSelectedPayment(m)
     setPaymentMethod(m)
-  }
-
-  function handleApplyPromo() {
-    const code = promoInput.trim().toUpperCase()
-    if (!code) return
-    setPromoCode(code)
-    // MVP: hardcoded valid codes
-    if (code === 'LAUNCH50' || code === 'FAIRRIDE') {
-      setPromoStatus('valid')
-    } else {
-      setPromoStatus('invalid')
-    }
   }
 
   async function handleConfirm() {
@@ -363,16 +346,11 @@ export default function BookConfirmPage() {
               </span>
               <span className="text-sm font-medium text-on-surface">{fmt(distCharge)}</span>
             </div>
-            {promoStatus === 'valid' && (
-              <div className="flex justify-between items-center text-green-700">
-                <span className="text-sm font-medium">Promo ({promoCode})</span>
-                <span className="text-sm font-bold">-50%</span>
-              </div>
-            )}
+            {/* V2_FEATURE: PROMO_CODES - Discount code input */}
             <div className="pt-3 mt-1 border-t border-outline-variant/20 flex justify-between items-center">
               <span className="font-['Manrope'] font-extrabold text-on-surface">Total</span>
               <span className="font-['Manrope'] font-extrabold text-xl text-primary">
-                {promoStatus === 'valid' ? fmt(Math.round(total * 0.5)) : fmt(total)}
+                {fmt(total)}
               </span>
             </div>
           </div>
@@ -430,71 +408,9 @@ export default function BookConfirmPage() {
           </div>
         </section>
 
-        {/* Promo Code */}
-        <section>
-          <button
-            onClick={() => setPromoOpen(!promoOpen)}
-            className="w-full flex items-center justify-between py-3 text-sm font-bold text-primary active:opacity-70 transition-opacity"
-          >
-            <div className="flex items-center gap-2">
-              <span
-                className="material-symbols-outlined text-base"
-                style={{ fontVariationSettings: "'FILL' 1", fontSize: '18px' }}
-              >
-                local_offer
-              </span>
-              Have a promo code?
-            </div>
-            <span
-              className="material-symbols-outlined text-outline text-base transition-transform duration-200"
-              style={{
-                fontVariationSettings: "'FILL' 0",
-                fontSize: '18px',
-                transform: promoOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-              }}
-            >
-              expand_more
-            </span>
-          </button>
-
-          {promoOpen && (
-            <div className="mt-1 flex gap-2">
-              <input
-                type="text"
-                value={promoInput}
-                onChange={(e) => {
-                  setPromoInput(e.target.value.toUpperCase())
-                  setPromoStatus('idle')
-                }}
-                placeholder="Enter code"
-                className="flex-1 px-4 py-3 rounded-xl border border-outline-variant/40 bg-surface-container-lowest text-sm font-medium uppercase tracking-wider focus:outline-none focus:border-primary transition-colors"
-              />
-              <button
-                onClick={handleApplyPromo}
-                className="px-5 py-3 bg-primary text-white rounded-xl text-sm font-bold active:opacity-80 transition-opacity"
-              >
-                Apply
-              </button>
-            </div>
-          )}
-
-          {promoStatus === 'valid' && (
-            <p className="mt-2 text-xs font-bold text-green-700 flex items-center gap-1">
-              <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1", fontSize: '16px' }}>
-                check_circle
-              </span>
-              {promoCode} applied — 50% off!
-            </p>
-          )}
-          {promoStatus === 'invalid' && (
-            <p className="mt-2 text-xs font-bold text-red-600 flex items-center gap-1">
-              <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1", fontSize: '16px' }}>
-                cancel
-              </span>
-              Invalid or expired code
-            </p>
-          )}
-        </section>
+        {/* V2_FEATURE: PROMO_CODES
+        <section> promo code input + apply button + status feedback </section>
+        */}
       </main>
 
       {/* Fixed Footer */}

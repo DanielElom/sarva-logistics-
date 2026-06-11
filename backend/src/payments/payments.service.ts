@@ -40,8 +40,11 @@ import {
   PaymentStatus,
 } from '../../generated/prisma/enums';
 
+const PLATFORM_RATE = 0.0; // V1: 0% commission — rider keeps 100%
+/* V2_FEATURE: COMMISSION
 const PLATFORM_RATE = 0.15;
 const SUBSCRIPTION_PLATFORM_RATE = 0.05;
+*/
 
 @Injectable()
 export class PaymentsService {
@@ -73,13 +76,15 @@ export class PaymentsService {
     }
 
     switch (order.paymentMethod as PaymentMethod) {
-      case PaymentMethod.CARD:
+      // V2_FEATURE: CARD_PAYMENT — case PaymentMethod.CARD:
       case PaymentMethod.BANK_TRANSFER:
         return this.initiatePaystack(order);
-      case PaymentMethod.OPAY:
-        return this.initiateOpay(order);
+      // V2_FEATURE: OPAY_PAYMENT — case PaymentMethod.OPAY: return this.initiateOpay(order);
       case PaymentMethod.CASH:
         return { message: 'Cash payment — pay rider on delivery', orderId };
+      case PaymentMethod.CARD:
+      case PaymentMethod.OPAY:
+        throw new BadRequestException('This payment method is not available yet. Please use Cash or Bank Transfer.');
       default:
         throw new BadRequestException('Unsupported payment method');
     }
@@ -166,9 +171,9 @@ export class PaymentsService {
     grossAmount: number,
     riderUserId: string,
   ) {
-    const isSubscribed = await this.subscriptions.hasActiveSubscription(riderUserId);
-    const platformRate = isSubscribed ? SUBSCRIPTION_PLATFORM_RATE : PLATFORM_RATE;
-    const platformCommission = Math.round(grossAmount * platformRate * 100) / 100;
+    // V1: 0% commission — rider keeps 100% of the fare
+    // V2_FEATURE: COMMISSION — restore isSubscribed check and SUBSCRIPTION_PLATFORM_RATE
+    const platformCommission = Math.round(grossAmount * PLATFORM_RATE * 100) / 100;
     const riderShare = Math.round((grossAmount - platformCommission) * 100) / 100;
 
     const order = await this.db.order.findUnique({
