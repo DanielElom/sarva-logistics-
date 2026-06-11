@@ -167,9 +167,9 @@ export default function BusinessRegisterPage() {
     }
     // Check existing business account status
     api.get('/users/me').then(({ data }) => {
-      if (data.verificationStatus === 'APPROVED') {
+      if (data.businessAccount?.verificationStatus === 'VERIFIED') {
         router.replace('/business/dashboard')
-      } else if (data.verificationStatus === 'PENDING' && data.businessAccount) {
+      } else if (data.businessAccount) {
         router.replace('/status/under-review')
       }
     }).catch(() => null)

@@ -43,7 +43,7 @@ export default function UnderReviewPage() {
 
     pollRef.current = setInterval(() => {
       api.get('/users/me').then(({ data }) => {
-        if (data?.status === 'ACTIVE' || data?.verificationStatus === 'APPROVED') {
+        if (data?.status === 'ACTIVE' || data?.verificationStatus === 'VERIFIED') {
           clearInterval(pollRef.current!)
           const dest = data.role === 'RIDER' ? '/rider/home'
             : data.role === 'INDIVIDUAL' ? '/home'

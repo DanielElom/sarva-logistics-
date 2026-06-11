@@ -15,6 +15,7 @@ import api from '@/lib/api'
 function homeForRole(role: string): string {
   if (role === 'RIDER') return '/rider/home'
   if (role === 'ADMIN') return '/admin/dashboard'
+  if (['VENDOR', 'RESTAURANT', 'CORPORATE'].includes(role)) return '/business/dashboard'
   return '/home'
 }
 

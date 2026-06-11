@@ -124,7 +124,7 @@ export default function BusinessSettingsPage() {
     }
     api.get<UserMe>('/users/me').then(({ data }) => {
       setUser(data)
-      if (data.verificationStatus !== 'APPROVED') {
+      if (data.businessAccount?.verificationStatus !== 'VERIFIED') {
         router.replace('/status/under-review'); return
       }
       const biz = data.businessAccount

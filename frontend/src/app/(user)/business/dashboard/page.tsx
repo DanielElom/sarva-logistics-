@@ -20,7 +20,7 @@ interface UserProfile {
   name: string | null
   companyName: string | null
   verificationStatus: string | null
-  businessAccount?: { id: string } | null
+  businessAccount?: { id: string; verificationStatus: string } | null
 }
 
 interface Order {
@@ -121,7 +121,7 @@ export default function BusinessDashboardPage() {
       if (!p.businessAccount) {
         router.replace('/register/business'); return
       }
-      if (p.verificationStatus !== 'APPROVED') {
+      if (p.businessAccount?.verificationStatus !== 'VERIFIED') {
         router.replace('/status/under-review'); return
       }
       const list: Order[] = ordersRes.data.data ?? ordersRes.data.orders ?? []

@@ -59,7 +59,7 @@ export default function RiderHomePage() {
           isOnline: data.isOnline ?? false,
         })
 
-        if (data.verificationStatus !== 'APPROVED') {
+        if (data.verificationStatus !== 'VERIFIED') {
           router.replace('/status/under-review')
         }
       })

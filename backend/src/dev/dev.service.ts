@@ -102,6 +102,10 @@ export class DevService {
   }
 
   async approveBusiness(userId: string) {
+    await (this.db as any).businessAccount.updateMany({
+      where: { userId },
+      data: { verificationStatus: 'VERIFIED' },
+    });
     return this.db.user.update({
       where: { id: userId },
       data: { verificationStatus: 'VERIFIED', status: 'ACTIVE' },
