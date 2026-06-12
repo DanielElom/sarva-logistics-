@@ -5,7 +5,7 @@
  */
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import ScreenWrapper from '@/components/layout/ScreenWrapper'
@@ -42,6 +42,19 @@ export default function CreatePasswordPage() {
   const pendingProfile = useAuthStore((s) => s.pendingProfile)
   const clearPendingProfile = useAuthStore((s) => s.clearPendingProfile)
   const role = useAuthStore((s) => s.role)
+  const selectedRole = useAuthStore((s) => s.selectedRole)
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+
+  // selectedRole is the user's intent (set on select-role page before OTP)
+  // role is what the backend returned — could be wrong if phone was previously registered
+  // selectedRole takes priority for routing; role is fallback for returning users
+  const routingRole = selectedRole ?? role ?? 'INDIVIDUAL'
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.replace('/welcome')
+    }
+  }, [isAuthenticated, router])
 
   const [password, setPassword] = useState('')
   const [confirm, setConfirm] = useState('')
@@ -83,7 +96,7 @@ export default function CreatePasswordPage() {
       }
 
       toast.success('Account created!')
-      router.replace(homeForRole(role ?? 'INDIVIDUAL'))
+      router.replace(homeForRole(routingRole))
     } catch (err: unknown) {
       const msg =
         (err as { response?: { data?: { message?: string } } })?.response?.data?.message ??

@@ -71,11 +71,20 @@ export class AuthService {
     await this.redis.set(`${OTP_PREFIX}${phone}`, otp, OTP_TTL);
     await this.sms.sendOtp(phone, otp);
 
+    console.log(`
+╔════════════════════════════╗
+║       FAIR-RIDE OTP        ║
+╠════════════════════════════╣
+║ Phone: ${phone.padEnd(19)}║
+║ OTP:   ${otp.padEnd(19)}║
+╚════════════════════════════╝
+`);
+
     const db = this.prisma as any;
     const user: User | null = await db.user.findUnique({ where: { phone } });
     const emailTarget = user?.email ?? emailOverride;
     if (emailTarget) {
-      await this.email.sendOtpEmail(emailTarget, otp, user?.name);
+      await this.email.sendOtpEmail(emailTarget, otp, user?.name).catch(() => null);
     }
 
     return { message: 'OTP sent' };
@@ -116,6 +125,12 @@ export class AuthService {
       user = await db.user.create({
         data: { phone, role, status: UserStatus.PENDING_VERIFICATION },
       });
+    } else if (role && user.role !== role) {
+      // Phone is already registered with a different role — prevent silent mismatch
+      throw new BadRequestException(
+        `This phone number is already registered as ${user.role.charAt(0) + user.role.slice(1).toLowerCase()}. ` +
+        `Please log in instead, or use a different number to register as ${role.charAt(0) + role.slice(1).toLowerCase()}.`,
+      );
     }
 
     const tokens = await this.generateTokens(user);
@@ -228,10 +243,19 @@ export class AuthService {
     await this.redis.set(`${FORGOT_PREFIX}${phone}`, otp, OTP_TTL);
     await this.sms.sendOtp(phone, otp);
 
+    console.log(`
+╔════════════════════════════╗
+║    FAIR-RIDE RESET OTP     ║
+╠════════════════════════════╣
+║ Phone: ${phone.padEnd(19)}║
+║ OTP:   ${otp.padEnd(19)}║
+╚════════════════════════════╝
+`);
+
     const db = this.prisma as any;
     const user: User | null = await db.user.findUnique({ where: { phone } });
     if (user?.email) {
-      await this.email.sendOtpEmail(user.email, otp, user.name);
+      await this.email.sendOtpEmail(user.email, otp, user.name).catch(() => null);
     }
 
     return { message: 'OTP sent' };
