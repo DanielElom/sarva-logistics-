@@ -5,7 +5,7 @@
  */
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import ScreenWrapper from '@/components/layout/ScreenWrapper'
@@ -56,11 +56,8 @@ export default function RegisterProfilePage() {
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
-  const [photoPreview, setPhotoPreview] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<FieldErrors>({})
-
-  const fileInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (selectedRole === null) {
@@ -69,16 +66,6 @@ export default function RegisterProfilePage() {
   }, [selectedRole, router])
 
   if (selectedRole === null) return null
-
-  function handlePhotoClick() {
-    fileInputRef.current?.click()
-  }
-
-  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0]
-    if (!file) return
-    setPhotoPreview(URL.createObjectURL(file))
-  }
 
   function handlePhoneChange(e: React.ChangeEvent<HTMLInputElement>) {
     setPhone(formatPhone(e.target.value))
@@ -161,47 +148,6 @@ export default function RegisterProfilePage() {
         </section>
 
         <div className="space-y-6">
-
-          {/* Photo upload */}
-          <div className="flex items-center gap-5 p-5 bg-surface-container-lowest rounded-xl editorial-shadow border border-outline-variant/10">
-            <div className="relative shrink-0">
-              <button
-                type="button"
-                onClick={handlePhotoClick}
-                className="w-18 h-18 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border-2 border-primary/5 active:scale-95 transition-transform"
-                aria-label="Choose profile photo"
-              >
-                {photoPreview ? (
-                  <img src={photoPreview} alt="Profile preview" className="w-full h-full object-cover" />
-                ) : (
-                  <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: '36px' }}>
-                    person
-                  </span>
-                )}
-              </button>
-              <button
-                type="button"
-                onClick={handlePhotoClick}
-                className="absolute -bottom-0.5 -right-0.5 bg-primary text-on-primary p-1.5 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-transform"
-                aria-label="Upload photo"
-              >
-                <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>photo_camera</span>
-              </button>
-            </div>
-            <div>
-              <h3 className="font-headline font-bold text-base text-on-surface mb-0.5">Profile Photo</h3>
-              <p className="text-xs text-on-surface-variant mb-3">Optional — add a photo so others recognise you.</p>
-              <button
-                type="button"
-                onClick={handlePhotoClick}
-                className="text-xs font-semibold text-primary px-3 py-1.5 bg-surface-container-high rounded-full hover:bg-surface-container-highest active:scale-95 transition-all"
-              >
-                {photoPreview ? 'Change Photo' : 'Upload Image'}
-              </button>
-            </div>
-          </div>
-
-          <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
 
           {/* Form fields */}
           <div className="space-y-4">

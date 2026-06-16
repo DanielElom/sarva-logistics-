@@ -1,15 +1,32 @@
-import { IsString, IsUrl } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class KycDto {
-  @IsUrl()
-  idDocument: string;
-
-  @IsUrl()
-  licenseDocument: string;
-
-  @IsUrl()
-  bikePapers: string;
+  @IsString()
+  idDocument!: string;
 
   @IsString()
-  bvnNin: string;
+  licenseDocument!: string;
+
+  @IsString()
+  bikePapers!: string;
+
+  @IsString()
+  bvnNin!: string;
+
+  @IsString()
+  bikePhotoFront!: string;
+
+  @IsString()
+  bikePhotoSide!: string;
+
+  @IsString()
+  bikePhotoPlate!: string;
+
+  // V2_FEATURE: BANK_DETAILS
+  // bankAccountName?: string
+  // bankAccountNumber?: string
+  // bankName?: string
+
+  // V2_FEATURE: COMMISSION_MODEL
+  // commissionModel?: CommissionModel
 }

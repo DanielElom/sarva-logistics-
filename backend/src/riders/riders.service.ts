@@ -70,6 +70,9 @@ export class RidersService {
         licenseDocument: dto.licenseDocument,
         bikePapers: dto.bikePapers,
         bvn: dto.bvnNin,
+        bikePhotoFront: dto.bikePhotoFront,
+        bikePhotoSide: dto.bikePhotoSide,
+        bikePhotoPlate: dto.bikePhotoPlate,
         verificationStatus: VerificationStatus.PENDING,
       },
     });

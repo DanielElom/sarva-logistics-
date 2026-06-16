@@ -1,6 +1,6 @@
 /**
  * @page RiderRegisterDocsPage
- * @description Rider document upload during onboarding — ID, license, bike papers.
+ * @description Rider document upload during onboarding — ID, license, bike papers, and bike photos.
  * @route /rider/register/docs
  */
 'use client'
@@ -11,70 +11,106 @@ import { useAuthStore } from '@/stores/auth.store'
 import ScreenWrapper from '@/components/layout/ScreenWrapper'
 import api from '@/lib/api'
 
+async function compressImage(file: File, maxDimension = 1024, quality = 0.7): Promise<string> {
+  return new Promise((resolve) => {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      const img = new Image()
+      img.onload = () => {
+        const canvas = document.createElement('canvas')
+        let { width, height } = img
+        if (width > maxDimension || height > maxDimension) {
+          if (width > height) {
+            height = Math.round((height / width) * maxDimension)
+            width = maxDimension
+          } else {
+            width = Math.round((width / height) * maxDimension)
+            height = maxDimension
+          }
+        }
+        canvas.width = width
+        canvas.height = height
+        const ctx = canvas.getContext('2d')!
+        ctx.drawImage(img, 0, 0, width, height)
+        resolve(canvas.toDataURL('image/jpeg', quality))
+      }
+      img.src = e.target?.result as string
+    }
+    reader.readAsDataURL(file)
+  })
+}
+
+type DocField = 'idDocument' | 'licenseDocument' | 'bikePapers' | 'bikePhotoFront' | 'bikePhotoSide' | 'bikePhotoPlate'
+
 export default function RiderRegisterDocsPage() {
   const router = useRouter()
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
   const role = useAuthStore((s) => s.role)
   const user = useAuthStore((s) => s.user)
 
-  const [photo, setPhoto] = useState<string | null>(null)
-  const [licenseDoc, setLicenseDoc] = useState<string | null>(null)
-  const [bikeDoc, setBikeDoc] = useState<string | null>(null)
+  const [idDocument, setIdDocument] = useState<string | null>(null)
+  const [licenseDocument, setLicenseDocument] = useState<string | null>(null)
+  const [bikePapers, setBikePapers] = useState<string | null>(null)
   const [bvn, setBvn] = useState('')
-  const [bankName, setBankName] = useState('')
-  const [accountNumber, setAccountNumber] = useState('')
-  const [commissionModel, setCommissionModel] = useState<'PERCENTAGE' | 'PER_TRIP'>('PERCENTAGE')
+  const [bikePhotoFront, setBikePhotoFront] = useState<string | null>(null)
+  const [bikePhotoSide, setBikePhotoSide] = useState<string | null>(null)
+  const [bikePhotoPlate, setBikePhotoPlate] = useState<string | null>(null)
+  const [uploading, setUploading] = useState<Record<string, boolean>>({})
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const photoRef = useRef<HTMLInputElement>(null)
+  const idRef = useRef<HTMLInputElement>(null)
   const licenseRef = useRef<HTMLInputElement>(null)
-  const bikeRef = useRef<HTMLInputElement>(null)
+  const bikePapersRef = useRef<HTMLInputElement>(null)
+  const frontPhotoRef = useRef<HTMLInputElement>(null)
+  const sidePhotoRef = useRef<HTMLInputElement>(null)
+  const platePhotoRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (!isAuthenticated) { router.replace('/welcome'); return }
     if (role !== 'RIDER') { router.replace('/home'); return }
   }, [isAuthenticated, role, router])
 
-  function toBase64(file: File): Promise<string> {
-    return new Promise((res, rej) => {
-      const reader = new FileReader()
-      reader.onload = () => res(reader.result as string)
-      reader.onerror = rej
-      reader.readAsDataURL(file)
-    })
-  }
-
-  async function handleFileChange(
+  async function handleFileSelect(
     e: React.ChangeEvent<HTMLInputElement>,
+    field: DocField,
     setter: (v: string) => void,
   ) {
     const file = e.target.files?.[0]
     if (!file) return
-    const b64 = await toBase64(file)
-    setter(b64)
+    setUploading((prev) => ({ ...prev, [field]: true }))
+    try {
+      const compressed = await compressImage(file)
+      setter(compressed)
+    } finally {
+      setUploading((prev) => ({ ...prev, [field]: false }))
+    }
   }
 
   async function handleSubmit() {
-    if (!photo || !licenseDoc || !bikeDoc) {
-      setError('Please upload your photo, license, and bike documents.')
+    if (!idDocument || !licenseDocument || !bikePapers) {
+      setError('Please upload your ID, driver\'s license, and bike papers.')
       return
     }
-    if (!bvn || !bankName || !accountNumber) {
-      setError('Please complete all bank and identity fields.')
+    if (!bvn.trim()) {
+      setError('Please enter your BVN or NIN.')
+      return
+    }
+    if (!bikePhotoFront || !bikePhotoSide || !bikePhotoPlate) {
+      setError('Please upload all three bike photos (front, side, and number plate).')
       return
     }
     setError('')
     setLoading(true)
     try {
       await api.post('/riders/me/kyc', {
-        photo,
-        licenseDocument: licenseDoc,
-        bikeDocument: bikeDoc,
-        bvn,
-        bankName,
-        accountNumber,
-        commissionModel,
+        idDocument,
+        licenseDocument,
+        bikePapers,
+        bvnNin: bvn,
+        bikePhotoFront,
+        bikePhotoSide,
+        bikePhotoPlate,
       })
       router.replace('/status/under-review')
     } catch (err: unknown) {
@@ -83,6 +119,107 @@ export default function RiderRegisterDocsPage() {
     } finally {
       setLoading(false)
     }
+  }
+
+  function UploadCard({
+    label,
+    value,
+    isUploading,
+    icon,
+    onTap,
+    accept = 'image/*,application/pdf',
+  }: {
+    label: string
+    value: string | null
+    isUploading: boolean
+    icon: string
+    onTap: () => void
+    accept?: string
+  }) {
+    return (
+      <button
+        type="button"
+        onClick={onTap}
+        className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-all text-left ${
+          value
+            ? 'border-primary bg-primary/5'
+            : 'border-outline-variant bg-surface-container-lowest'
+        }`}
+      >
+        {value ? (
+          <div className="w-12 h-12 rounded-lg overflow-hidden shrink-0 border border-outline-variant/20">
+            <img src={value} alt={label} className="w-full h-full object-cover" />
+          </div>
+        ) : (
+          <div className={`w-12 h-12 rounded-lg flex items-center justify-center shrink-0 ${
+            isUploading ? 'bg-primary/10' : 'bg-surface-container-high'
+          }`}>
+            {isUploading ? (
+              <span className="material-symbols-outlined text-primary animate-spin">progress_activity</span>
+            ) : (
+              <span className={`material-symbols-outlined ${value ? 'text-primary' : 'text-on-surface-variant'}`}>
+                {icon}
+              </span>
+            )}
+          </div>
+        )}
+        <div className="flex-1 min-w-0">
+          <p className={`font-headline font-bold text-sm ${value ? 'text-primary' : 'text-on-surface'}`}>
+            {isUploading ? 'Compressing…' : value ? `${label} — Added` : label}
+          </p>
+          <p className="text-xs text-on-surface-variant mt-0.5">
+            {value ? 'Tap to replace' : 'Tap to upload'}
+          </p>
+        </div>
+        {value && (
+          <span className="material-symbols-outlined text-primary shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
+            check_circle
+          </span>
+        )}
+      </button>
+    )
+  }
+
+  function BikePhotoSlot({
+    label,
+    value,
+    isUploading,
+    onTap,
+  }: {
+    label: string
+    value: string | null
+    isUploading: boolean
+    onTap: () => void
+  }) {
+    return (
+      <button
+        type="button"
+        onClick={onTap}
+        className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all ${
+          value ? 'border-primary bg-primary/5' : 'border-outline-variant bg-surface-container-lowest'
+        }`}
+      >
+        {value ? (
+          <div className="w-full aspect-[4/3] rounded-lg overflow-hidden relative">
+            <img src={value} alt={label} className="w-full h-full object-cover" />
+            <div className="absolute top-1 right-1 bg-primary rounded-full p-0.5">
+              <span className="material-symbols-outlined text-on-primary text-xs" style={{ fontVariationSettings: "'FILL' 1", fontSize: '14px' }}>check</span>
+            </div>
+          </div>
+        ) : (
+          <div className="w-full aspect-[4/3] rounded-lg bg-surface-container-high flex items-center justify-center">
+            {isUploading ? (
+              <span className="material-symbols-outlined text-primary animate-spin text-3xl">progress_activity</span>
+            ) : (
+              <span className="material-symbols-outlined text-on-surface-variant text-3xl">photo_camera</span>
+            )}
+          </div>
+        )}
+        <p className={`text-xs font-bold text-center ${value ? 'text-primary' : 'text-on-surface-variant'}`}>
+          {isUploading ? 'Compressing…' : label}
+        </p>
+      </button>
+    )
   }
 
   return (
@@ -99,195 +236,129 @@ export default function RiderRegisterDocsPage() {
       </header>
 
       <main className="pt-24 pb-12 px-6 max-w-lg mx-auto space-y-8">
-        {/* Profile photo */}
-        <section className="flex flex-col items-center gap-4">
-          <button
-            onClick={() => photoRef.current?.click()}
-            className="w-28 h-28 rounded-full bg-surface-container-low border-2 border-dashed border-outline-variant flex flex-col items-center justify-center overflow-hidden relative"
-          >
-            {photo ? (
-              <img src={photo} alt="Profile" className="w-full h-full object-cover" />
-            ) : (
-              <>
-                <span className="material-symbols-outlined text-3xl text-on-surface-variant">
-                  add_a_photo
-                </span>
-                <span className="text-[10px] text-on-surface-variant mt-1">Add Photo</span>
-              </>
-            )}
-          </button>
-          <input
-            ref={photoRef}
-            type="file"
-            accept="image/*"
-            className="sr-only"
-            onChange={(e) => handleFileChange(e, setPhoto)}
+
+        {/* Section 1 — Personal Info (read-only) */}
+        <section className="bg-surface-container-lowest rounded-xl p-5 shadow-sm space-y-3">
+          <h2 className="font-headline font-bold text-on-surface">Personal Details</h2>
+          <div className="flex items-center gap-3">
+            <span className="material-symbols-outlined text-primary text-sm">person</span>
+            <div>
+              <p className="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Full Name</p>
+              <p className="font-body text-on-surface font-medium">{user?.name ?? '—'}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="material-symbols-outlined text-primary text-sm">phone</span>
+            <div>
+              <p className="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Phone</p>
+              <p className="font-body text-on-surface font-medium">{user?.phone ?? '—'}</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 2 — Identity Documents */}
+        <section className="space-y-3">
+          <h2 className="font-headline font-bold text-on-surface px-1">Identity Documents</h2>
+
+          <UploadCard
+            label="National ID / Passport"
+            value={idDocument}
+            isUploading={uploading.idDocument ?? false}
+            icon="id_card"
+            onTap={() => idRef.current?.click()}
           />
-          <p className="text-sm text-on-surface-variant font-body text-center">
-            Upload a clear profile photo
-          </p>
-        </section>
+          <input
+            ref={idRef}
+            type="file"
+            accept="image/*,application/pdf"
+            className="sr-only"
+            onChange={(e) => handleFileSelect(e, 'idDocument', setIdDocument)}
+          />
 
-        {/* Identity info (read-only from store) */}
-        <section className="bg-surface-container-lowest rounded-xl p-6 shadow-sm space-y-4">
-          <h2 className="font-headline font-bold text-on-surface mb-2">Personal Details</h2>
-          <div>
-            <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">
-              Full Name
-            </label>
-            <p className="mt-1 font-body text-on-surface font-medium">{user?.name ?? '—'}</p>
-          </div>
-          <div>
-            <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">
-              Phone
-            </label>
-            <p className="mt-1 font-body text-on-surface font-medium">{user?.phone ?? '—'}</p>
-          </div>
-        </section>
+          <UploadCard
+            label="Driver's License"
+            value={licenseDocument}
+            isUploading={uploading.licenseDocument ?? false}
+            icon="card_membership"
+            onTap={() => licenseRef.current?.click()}
+          />
+          <input
+            ref={licenseRef}
+            type="file"
+            accept="image/*,application/pdf"
+            className="sr-only"
+            onChange={(e) => handleFileSelect(e, 'licenseDocument', setLicenseDocument)}
+          />
 
-        {/* Document uploads */}
-        <section className="space-y-4">
-          <h2 className="font-headline font-bold text-on-surface px-1">Documents</h2>
-          <div className="grid grid-cols-2 gap-4">
-            {/* License */}
-            <button
-              onClick={() => licenseRef.current?.click()}
-              className={`p-5 rounded-xl border-2 border-dashed flex flex-col items-center gap-2 transition-colors ${
-                licenseDoc
-                  ? 'border-primary bg-primary/5'
-                  : 'border-outline-variant bg-surface-container-lowest'
-              }`}
-            >
-              <span
-                className={`material-symbols-outlined text-3xl ${licenseDoc ? 'text-primary' : 'text-on-surface-variant'}`}
-                style={{ fontVariationSettings: licenseDoc ? "'FILL' 1" : "'FILL' 0" }}
-              >
-                {licenseDoc ? 'check_circle' : 'id_card'}
-              </span>
-              <span className="text-xs font-bold text-center text-on-surface">
-                {licenseDoc ? 'License Added' : "Driver's License"}
-              </span>
-            </button>
-            <input
-              ref={licenseRef}
-              type="file"
-              accept="image/*,application/pdf"
-              className="sr-only"
-              onChange={(e) => handleFileChange(e, setLicenseDoc)}
-            />
-
-            {/* Bike doc */}
-            <button
-              onClick={() => bikeRef.current?.click()}
-              className={`p-5 rounded-xl border-2 border-dashed flex flex-col items-center gap-2 transition-colors ${
-                bikeDoc
-                  ? 'border-primary bg-primary/5'
-                  : 'border-outline-variant bg-surface-container-lowest'
-              }`}
-            >
-              <span
-                className={`material-symbols-outlined text-3xl ${bikeDoc ? 'text-primary' : 'text-on-surface-variant'}`}
-                style={{ fontVariationSettings: bikeDoc ? "'FILL' 1" : "'FILL' 0" }}
-              >
-                {bikeDoc ? 'check_circle' : 'pedal_bike'}
-              </span>
-              <span className="text-xs font-bold text-center text-on-surface">
-                {bikeDoc ? 'Bike Doc Added' : 'Bike Document'}
-              </span>
-            </button>
-            <input
-              ref={bikeRef}
-              type="file"
-              accept="image/*,application/pdf"
-              className="sr-only"
-              onChange={(e) => handleFileChange(e, setBikeDoc)}
-            />
-          </div>
-        </section>
-
-        {/* Identity number */}
-        <section className="bg-surface-container-lowest rounded-xl p-6 shadow-sm space-y-4">
-          <h2 className="font-headline font-bold text-on-surface mb-2">Identity Verification</h2>
-          <div>
-            <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant block mb-1">
+          <div className="space-y-1">
+            <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant block px-1">
               BVN / NIN
             </label>
             <input
               type="text"
+              inputMode="numeric"
               value={bvn}
               onChange={(e) => setBvn(e.target.value)}
               placeholder="Enter your BVN or NIN"
-              className="w-full bg-surface-container-low rounded-lg px-4 py-3 text-on-surface font-body placeholder:text-on-surface-variant/40 border-none focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full bg-surface-container-low rounded-xl px-4 py-3 text-on-surface font-body placeholder:text-on-surface-variant/40 border-none focus:outline-none focus:ring-2 focus:ring-primary/30"
             />
           </div>
         </section>
 
-        {/* Bank details */}
-        <section className="bg-surface-container-lowest rounded-xl p-6 shadow-sm space-y-4">
-          <h2 className="font-headline font-bold text-on-surface mb-2">Payout Details</h2>
-          <div>
-            <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant block mb-1">
-              Bank Name
-            </label>
-            <input
-              type="text"
-              value={bankName}
-              onChange={(e) => setBankName(e.target.value)}
-              placeholder="e.g. Access Bank"
-              className="w-full bg-surface-container-low rounded-lg px-4 py-3 text-on-surface font-body placeholder:text-on-surface-variant/40 border-none focus:outline-none focus:ring-2 focus:ring-primary/30"
-            />
-          </div>
-          <div>
-            <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant block mb-1">
-              Account Number
-            </label>
-            <input
-              type="text"
-              inputMode="numeric"
-              value={accountNumber}
-              onChange={(e) => setAccountNumber(e.target.value)}
-              placeholder="10-digit account number"
-              maxLength={10}
-              className="w-full bg-surface-container-low rounded-lg px-4 py-3 text-on-surface font-body placeholder:text-on-surface-variant/40 border-none focus:outline-none focus:ring-2 focus:ring-primary/30"
-            />
-          </div>
+        {/* Section 3 — Vehicle Documents */}
+        <section className="space-y-3">
+          <h2 className="font-headline font-bold text-on-surface px-1">Vehicle Documents</h2>
+
+          <UploadCard
+            label="Bike Papers / Registration"
+            value={bikePapers}
+            isUploading={uploading.bikePapers ?? false}
+            icon="pedal_bike"
+            onTap={() => bikePapersRef.current?.click()}
+          />
+          <input
+            ref={bikePapersRef}
+            type="file"
+            accept="image/*,application/pdf"
+            className="sr-only"
+            onChange={(e) => handleFileSelect(e, 'bikePapers', setBikePapers)}
+          />
         </section>
 
-        {/* Commission model */}
-        <section className="bg-surface-container-lowest rounded-xl p-6 shadow-sm">
-          <h2 className="font-headline font-bold text-on-surface mb-4">Commission Model</h2>
-          <div className="space-y-3">
-            {[
-              { value: 'PERCENTAGE', label: 'Percentage', sub: 'Earn a % of each order fare' },
-              { value: 'PER_TRIP', label: 'Per Trip', sub: 'Flat fee per completed delivery' },
-            ].map((opt) => (
-              <button
-                key={opt.value}
-                onClick={() => setCommissionModel(opt.value as 'PERCENTAGE' | 'PER_TRIP')}
-                className={`w-full flex items-center justify-between p-4 rounded-xl border-2 transition-all ${
-                  commissionModel === opt.value
-                    ? 'border-primary bg-primary/5'
-                    : 'border-outline-variant bg-surface-container-low'
-                }`}
-              >
-                <div className="text-left">
-                  <p className="font-headline font-bold text-on-surface">{opt.label}</p>
-                  <p className="text-xs text-on-surface-variant">{opt.sub}</p>
-                </div>
-                <div
-                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                    commissionModel === opt.value
-                      ? 'border-primary bg-primary'
-                      : 'border-outline-variant'
-                  }`}
-                >
-                  {commissionModel === opt.value && (
-                    <div className="w-2 h-2 bg-white rounded-full" />
-                  )}
-                </div>
-              </button>
-            ))}
+        {/* Section 4 — Bike Photos */}
+        <section className="space-y-3">
+          <div className="px-1">
+            <h2 className="font-headline font-bold text-on-surface">Bike Photos</h2>
+            <p className="text-xs text-on-surface-variant mt-0.5">Upload clear photos of your motorcycle</p>
           </div>
+
+          <div className="grid grid-cols-3 gap-3">
+            <BikePhotoSlot
+              label="Front View"
+              value={bikePhotoFront}
+              isUploading={uploading.bikePhotoFront ?? false}
+              onTap={() => frontPhotoRef.current?.click()}
+            />
+            <BikePhotoSlot
+              label="Side View"
+              value={bikePhotoSide}
+              isUploading={uploading.bikePhotoSide ?? false}
+              onTap={() => sidePhotoRef.current?.click()}
+            />
+            <BikePhotoSlot
+              label="Number Plate"
+              value={bikePhotoPlate}
+              isUploading={uploading.bikePhotoPlate ?? false}
+              onTap={() => platePhotoRef.current?.click()}
+            />
+          </div>
+
+          <input ref={frontPhotoRef} type="file" accept="image/*" className="sr-only"
+            onChange={(e) => handleFileSelect(e, 'bikePhotoFront', setBikePhotoFront)} />
+          <input ref={sidePhotoRef} type="file" accept="image/*" className="sr-only"
+            onChange={(e) => handleFileSelect(e, 'bikePhotoSide', setBikePhotoSide)} />
+          <input ref={platePhotoRef} type="file" accept="image/*" className="sr-only"
+            onChange={(e) => handleFileSelect(e, 'bikePhotoPlate', setBikePhotoPlate)} />
         </section>
 
         {error && (

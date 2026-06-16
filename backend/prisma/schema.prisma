@@ -201,6 +201,10 @@ model RiderProfile {
   bankAccountNumber String?
   bankAccountName   String?
 
+  bikePhotoFront  String?
+  bikePhotoSide   String?
+  bikePhotoPlate  String?
+
   latitude        Float?
   longitude       Float?
   acceptanceRate  Float    @default(0)

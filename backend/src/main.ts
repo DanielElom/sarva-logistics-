@@ -1,11 +1,24 @@
 import 'reflect-metadata';
+import * as express from 'express';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { rawBody: true });
+  // bodyParser: false so we control the limit ourselves below
+  const app = await NestFactory.create(AppModule, { bodyParser: false });
+
+  // 50 MB limit for base64 document uploads; rawBody captured for payment webhook signatures
+  app.use(
+    express.json({
+      limit: '50mb',
+      verify: (req: any, _res, buf) => {
+        req.rawBody = buf;
+      },
+    }),
+  );
+  app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
   app.enableCors({
     origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
