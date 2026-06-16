@@ -13,11 +13,9 @@ import api from '@/lib/api'
 
 export default function RiderRegisterDocsPage() {
   const router = useRouter()
-  const { isAuthenticated, role, user } = useAuthStore((s) => ({
-    isAuthenticated: s.isAuthenticated,
-    role: s.role,
-    user: s.user,
-  }))
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const role = useAuthStore((s) => s.role)
+  const user = useAuthStore((s) => s.user)
 
   const [photo, setPhoto] = useState<string | null>(null)
   const [licenseDoc, setLicenseDoc] = useState<string | null>(null)

@@ -25,7 +25,8 @@ const SECTIONS = ['Services', 'Account', 'Help']
 
 export default function MenuPage() {
   const router = useRouter()
-  const { user, clearAuth } = useAuthStore((s) => ({ user: s.user, clearAuth: s.clearAuth }))
+  const user = useAuthStore((s) => s.user)
+  const clearAuth = useAuthStore((s) => s.clearAuth)
 
   const initials = user?.name
     ? user.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()

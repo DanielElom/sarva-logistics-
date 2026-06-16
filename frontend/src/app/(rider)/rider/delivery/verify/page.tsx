@@ -28,10 +28,8 @@ const CHECKLIST = [
 
 export default function VerifyPickupPage() {
   const router = useRouter()
-  const { isAuthenticated, role } = useAuthStore((s) => ({
-    isAuthenticated: s.isAuthenticated,
-    role: s.role,
-  }))
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const role = useAuthStore((s) => s.role)
 
   const [order, setOrder] = useState<ActiveOrder | null>(null)
   const [checked, setChecked] = useState<boolean[]>(new Array(CHECKLIST.length).fill(false))

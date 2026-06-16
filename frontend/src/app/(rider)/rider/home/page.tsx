@@ -30,11 +30,9 @@ interface RiderStats {
 
 export default function RiderHomePage() {
   const router = useRouter()
-  const { isAuthenticated, role, token } = useAuthStore((s) => ({
-    isAuthenticated: s.isAuthenticated,
-    role: s.role,
-    token: s.token,
-  }))
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const role = useAuthStore((s) => s.role)
+  const token = useAuthStore((s) => s.token)
 
   const [isOnline, setIsOnline] = useState(false)
   const [stats, setStats] = useState<RiderStats>({ todayEarnings: 0, todayTrips: 0, isOnline: false })

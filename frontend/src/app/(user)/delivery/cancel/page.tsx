@@ -26,7 +26,8 @@ function maskPayment(method: string) {
 
 export default function DeliveryCancelPage() {
   const router = useRouter()
-  const { isAuthenticated, role } = useAuthStore((s) => ({ isAuthenticated: s.isAuthenticated, role: s.role }))
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const role = useAuthStore((s) => s.role)
   const [data, setData] = useState<CancelData | null>(null)
 
   useEffect(() => {

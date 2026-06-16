@@ -26,10 +26,8 @@ const SOUND_TOGGLES = [
 
 export default function SoundsSettingsPage() {
   const router = useRouter()
-  const { isAuthenticated, role } = useAuthStore((s) => ({
-    isAuthenticated: s.isAuthenticated,
-    role: s.role,
-  }))
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const role = useAuthStore((s) => s.role)
 
   const [selectedProfile, setSelectedProfile] = useState('emerald')
   const [volume, setVolume] = useState(85)

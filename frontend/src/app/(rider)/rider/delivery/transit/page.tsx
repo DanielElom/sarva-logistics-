@@ -23,11 +23,9 @@ interface ActiveOrder {
 
 export default function InTransitPage() {
   const router = useRouter()
-  const { isAuthenticated, role, token } = useAuthStore((s) => ({
-    isAuthenticated: s.isAuthenticated,
-    role: s.role,
-    token: s.token,
-  }))
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const role = useAuthStore((s) => s.role)
+  const token = useAuthStore((s) => s.token)
 
   const [order, setOrder] = useState<ActiveOrder | null>(null)
   const socketRef = useRef<Socket | null>(null)

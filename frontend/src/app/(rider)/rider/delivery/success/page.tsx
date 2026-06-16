@@ -19,10 +19,8 @@ interface LastOrder {
 
 export default function DeliverySuccessPage() {
   const router = useRouter()
-  const { isAuthenticated, role } = useAuthStore((s) => ({
-    isAuthenticated: s.isAuthenticated,
-    role: s.role,
-  }))
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const role = useAuthStore((s) => s.role)
 
   const [order, setOrder] = useState<LastOrder | null>(null)
   const [countdown, setCountdown] = useState(5)

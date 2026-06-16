@@ -46,12 +46,10 @@ function SettingsRow({
 
 export default function RiderSettingsPage() {
   const router = useRouter()
-  const { isAuthenticated, role, user, clearAuth } = useAuthStore((s) => ({
-    isAuthenticated: s.isAuthenticated,
-    role: s.role,
-    user: s.user,
-    clearAuth: s.clearAuth,
-  }))
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const role = useAuthStore((s) => s.role)
+  const user = useAuthStore((s) => s.user)
+  const clearAuth = useAuthStore((s) => s.clearAuth)
 
   const [profile, setProfile] = useState<RiderProfile | null>(null)
 

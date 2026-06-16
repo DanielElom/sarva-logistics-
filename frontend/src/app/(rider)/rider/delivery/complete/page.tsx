@@ -20,10 +20,8 @@ interface ActiveOrder {
 
 export default function CompleteDeliveryPage() {
   const router = useRouter()
-  const { isAuthenticated, role } = useAuthStore((s) => ({
-    isAuthenticated: s.isAuthenticated,
-    role: s.role,
-  }))
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const role = useAuthStore((s) => s.role)
 
   const [order, setOrder] = useState<ActiveOrder | null>(null)
   const [code, setCode] = useState(['', '', '', ''])

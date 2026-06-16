@@ -19,10 +19,8 @@ export default function RateCustomerPage() {
   const params = useParams()
   const orderId = params?.orderId as string | undefined
 
-  const { isAuthenticated, role } = useAuthStore((s) => ({
-    isAuthenticated: s.isAuthenticated,
-    role: s.role,
-  }))
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const role = useAuthStore((s) => s.role)
 
   const [rating, setRating] = useState(5)
   const [hovered, setHovered] = useState(0)

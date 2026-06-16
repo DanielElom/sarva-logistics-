@@ -24,10 +24,8 @@ const COUNTDOWN_SECONDS = 30
 
 export default function DeliveryRequestPage() {
   const router = useRouter()
-  const { isAuthenticated, role } = useAuthStore((s) => ({
-    isAuthenticated: s.isAuthenticated,
-    role: s.role,
-  }))
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const role = useAuthStore((s) => s.role)
 
   const [job, setJob] = useState<JobRequest | null>(null)
   const [timeLeft, setTimeLeft] = useState(COUNTDOWN_SECONDS)

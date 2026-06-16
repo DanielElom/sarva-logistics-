@@ -39,10 +39,8 @@ const BORDER_COLORS: Record<string, string> = {
 
 export default function RiderHistoryPage() {
   const router = useRouter()
-  const { isAuthenticated, role } = useAuthStore((s) => ({
-    isAuthenticated: s.isAuthenticated,
-    role: s.role,
-  }))
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const role = useAuthStore((s) => s.role)
 
   const [tab, setTab] = useState<FilterTab>('All')
   const [trips, setTrips] = useState<TripRecord[]>([])

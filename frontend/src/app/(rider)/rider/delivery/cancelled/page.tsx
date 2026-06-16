@@ -17,10 +17,8 @@ interface CancelledInfo {
 
 export default function OrderCancelledPage() {
   const router = useRouter()
-  const { isAuthenticated, role } = useAuthStore((s) => ({
-    isAuthenticated: s.isAuthenticated,
-    role: s.role,
-  }))
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const role = useAuthStore((s) => s.role)
 
   const [info, setInfo] = useState<CancelledInfo>({})
 
