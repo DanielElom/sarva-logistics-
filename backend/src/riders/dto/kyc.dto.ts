@@ -22,6 +22,9 @@ export class KycDto {
   @IsString()
   bikePhotoPlate!: string;
 
+  @IsString()
+  profilePhoto!: string;
+
   // V2_FEATURE: BANK_DETAILS
   // bankAccountName?: string
   // bankAccountNumber?: string

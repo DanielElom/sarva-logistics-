@@ -21,4 +21,8 @@ export class UpdateRiderDto {
   @IsOptional()
   @IsString()
   bankName?: string;
+
+  @IsOptional()
+  @IsString()
+  bikeMakeModel?: string;
 }

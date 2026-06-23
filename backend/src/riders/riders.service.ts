@@ -73,6 +73,7 @@ export class RidersService {
         bikePhotoFront: dto.bikePhotoFront,
         bikePhotoSide: dto.bikePhotoSide,
         bikePhotoPlate: dto.bikePhotoPlate,
+        profilePhoto: dto.profilePhoto,
         verificationStatus: VerificationStatus.PENDING,
       },
     });

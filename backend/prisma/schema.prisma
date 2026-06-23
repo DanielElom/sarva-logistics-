@@ -204,6 +204,8 @@ model RiderProfile {
   bikePhotoFront  String?
   bikePhotoSide   String?
   bikePhotoPlate  String?
+  profilePhoto    String?
+  bikeMakeModel   String?
 
   latitude        Float?
   longitude       Float?

@@ -48,7 +48,7 @@ export default function RiderHomePage() {
   useEffect(() => {
     if (!isAuthenticated || role !== 'RIDER') return
 
-    api.get('/riders/me/profile')
+    api.get('/riders/me')
       .then(({ data }) => {
         setIsOnline(data.isOnline ?? false)
         setStats({

@@ -1,22 +1,36 @@
 /**
  * @page RiderRegisterDocsPage
- * @description Rider document upload during onboarding — ID, license, bike papers, and bike photos.
+ * @description Rider document upload during onboarding — profile photo, ID, license, bike papers, and bike photos.
  * @route /rider/register/docs
  */
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 import { useAuthStore } from '@/stores/auth.store'
 import ScreenWrapper from '@/components/layout/ScreenWrapper'
 import api from '@/lib/api'
 
 async function compressImage(file: File, maxDimension = 1024, quality = 0.7): Promise<string> {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
+    const timeout = setTimeout(() => {
+      reject(new Error('Image processing timed out'))
+    }, 15000)
+
     const reader = new FileReader()
+    reader.onerror = () => {
+      clearTimeout(timeout)
+      reject(new Error('Could not read file'))
+    }
     reader.onload = (e) => {
       const img = new Image()
+      img.onerror = () => {
+        clearTimeout(timeout)
+        reject(new Error('Could not load image — unsupported format'))
+      }
       img.onload = () => {
+        clearTimeout(timeout)
         const canvas = document.createElement('canvas')
         let { width, height } = img
         if (width > maxDimension || height > maxDimension) {
@@ -40,7 +54,7 @@ async function compressImage(file: File, maxDimension = 1024, quality = 0.7): Pr
   })
 }
 
-type DocField = 'idDocument' | 'licenseDocument' | 'bikePapers' | 'bikePhotoFront' | 'bikePhotoSide' | 'bikePhotoPlate'
+type DocField = 'profilePhoto' | 'idDocument' | 'licenseDocument' | 'bikePapers' | 'bikePhotoFront' | 'bikePhotoSide' | 'bikePhotoPlate'
 
 export default function RiderRegisterDocsPage() {
   const router = useRouter()
@@ -48,6 +62,7 @@ export default function RiderRegisterDocsPage() {
   const role = useAuthStore((s) => s.role)
   const user = useAuthStore((s) => s.user)
 
+  const [profilePhoto, setProfilePhoto] = useState<string | null>(null)
   const [idDocument, setIdDocument] = useState<string | null>(null)
   const [licenseDocument, setLicenseDocument] = useState<string | null>(null)
   const [bikePapers, setBikePapers] = useState<string | null>(null)
@@ -59,6 +74,7 @@ export default function RiderRegisterDocsPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
+  const profilePhotoRef = useRef<HTMLInputElement>(null)
   const idRef = useRef<HTMLInputElement>(null)
   const licenseRef = useRef<HTMLInputElement>(null)
   const bikePapersRef = useRef<HTMLInputElement>(null)
@@ -82,12 +98,21 @@ export default function RiderRegisterDocsPage() {
     try {
       const compressed = await compressImage(file)
       setter(compressed)
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Could not process this image'
+      toast.error(`${msg} — try a different photo`)
     } finally {
       setUploading((prev) => ({ ...prev, [field]: false }))
+      // Reset input so the same file can be re-selected after an error
+      e.target.value = ''
     }
   }
 
   async function handleSubmit() {
+    if (!profilePhoto) {
+      toast.error('Please upload your profile photo')
+      return
+    }
     if (!idDocument || !licenseDocument || !bikePapers) {
       setError('Please upload your ID, driver\'s license, and bike papers.')
       return
@@ -104,6 +129,7 @@ export default function RiderRegisterDocsPage() {
     setLoading(true)
     try {
       await api.post('/riders/me/kyc', {
+        profilePhoto,
         idDocument,
         licenseDocument,
         bikePapers,
@@ -236,6 +262,52 @@ export default function RiderRegisterDocsPage() {
       </header>
 
       <main className="pt-24 pb-12 px-6 max-w-lg mx-auto space-y-8">
+
+        {/* Section 0 — Profile Photo */}
+        <section className="space-y-3">
+          <div className="px-1">
+            <h2 className="font-headline font-bold text-on-surface">Profile Photo</h2>
+            <p className="text-xs text-on-surface-variant mt-0.5">Upload a clear photo of your face — customers will see this during delivery</p>
+          </div>
+          <div className="flex flex-col items-center gap-3">
+            <button
+              type="button"
+              onClick={() => profilePhotoRef.current?.click()}
+              className="relative"
+            >
+              <div className={`w-24 h-24 rounded-full border-4 overflow-hidden flex items-center justify-center transition-all ${
+                profilePhoto ? 'border-primary' : 'border-outline-variant bg-surface-container-high'
+              }`}>
+                {uploading.profilePhoto ? (
+                  <span className="material-symbols-outlined text-primary text-3xl animate-spin">progress_activity</span>
+                ) : profilePhoto ? (
+                  <img src={profilePhoto} alt="Profile" className="w-full h-full object-cover" />
+                ) : (
+                  <span className="material-symbols-outlined text-on-surface-variant text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>person</span>
+                )}
+              </div>
+              <div className={`absolute bottom-0 right-0 w-8 h-8 rounded-full border-2 border-white flex items-center justify-center shadow-md ${
+                profilePhoto ? 'bg-primary' : 'bg-surface-container-high'
+              }`}>
+                {profilePhoto ? (
+                  <span className="material-symbols-outlined text-on-primary" style={{ fontSize: '16px', fontVariationSettings: "'FILL' 1" }}>check</span>
+                ) : (
+                  <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: '16px' }}>photo_camera</span>
+                )}
+              </div>
+            </button>
+            <p className="text-sm text-on-surface-variant">
+              {uploading.profilePhoto ? 'Compressing…' : profilePhoto ? 'Tap to replace' : 'Tap to upload photo'}
+            </p>
+          </div>
+          <input
+            ref={profilePhotoRef}
+            type="file"
+            accept="image/*"
+            className="sr-only"
+            onChange={(e) => handleFileSelect(e, 'profilePhoto', setProfilePhoto)}
+          />
+        </section>
 
         {/* Section 1 — Personal Info (read-only) */}
         <section className="bg-surface-container-lowest rounded-xl p-5 shadow-sm space-y-3">
