@@ -38,6 +38,8 @@ export default function RiderHomePage() {
   const [stats, setStats] = useState<RiderStats>({ todayEarnings: 0, todayTrips: 0, isOnline: false })
   const [toggling, setToggling] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [checking, setChecking] = useState(true)
+  const [riderName, setRiderName] = useState('')
   const socketRef = useRef<Socket | null>(null)
 
   useEffect(() => {
@@ -50,18 +52,27 @@ export default function RiderHomePage() {
 
     api.get('/riders/me')
       .then(({ data }) => {
+        // Redirect BEFORE rendering the home UI if not yet approved.
+        // This prevents the flicker where the home screen briefly shows
+        // then jumps to under-review on stale persisted auth state.
+        if (data.verificationStatus !== 'VERIFIED') {
+          router.replace('/status/under-review')
+          return
+        }
         setIsOnline(data.isOnline ?? false)
         setStats({
           todayEarnings: data.todayEarnings ?? 0,
           todayTrips: data.todayTrips ?? 0,
           isOnline: data.isOnline ?? false,
         })
-
-        if (data.verificationStatus !== 'VERIFIED') {
-          router.replace('/status/under-review')
-        }
+        setRiderName(data.user?.name ?? '')
+        setChecking(false)
       })
-      .catch(() => {})
+      .catch(() => {
+        // Network error or invalid token — unblock the UI;
+        // the auth interceptor will handle token expiry/clearAuth separately.
+        setChecking(false)
+      })
   }, [isAuthenticated, role, router])
 
   useEffect(() => {
@@ -92,6 +103,25 @@ export default function RiderHomePage() {
     } finally {
       setToggling(false)
     }
+  }
+
+  // Block the home UI until the server has confirmed verificationStatus === VERIFIED.
+  // This eliminates the flicker where stale persisted auth causes the screen to
+  // render briefly before the async check redirects to under-review.
+  if (checking) {
+    return (
+      <ScreenWrapper className="bg-surface">
+        <div className="h-screen flex items-center justify-center">
+          <span
+            className="material-symbols-outlined text-primary"
+            style={{ fontSize: '40px', animation: 'spin 1s linear infinite' }}
+          >
+            progress_activity
+          </span>
+        </div>
+        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      </ScreenWrapper>
+    )
   }
 
   return (
@@ -206,9 +236,11 @@ export default function RiderHomePage() {
           <div className="relative w-72 bg-surface h-full shadow-2xl flex flex-col" onClick={(e) => e.stopPropagation()}>
             <div className="bg-primary p-6 pt-14">
               <div className="w-14 h-14 rounded-full bg-primary-container flex items-center justify-center mb-3">
-                <span className="font-headline font-bold text-xl text-on-primary">RD</span>
+                <span className="font-headline font-bold text-xl text-on-primary">
+                  {riderName ? riderName.charAt(0).toUpperCase() : 'R'}
+                </span>
               </div>
-              <p className="font-headline font-bold text-on-primary">Rider Driver</p>
+              <p className="font-headline font-bold text-on-primary">{riderName || 'Rider'}</p>
               <span className={`mt-1 inline-block px-2 py-0.5 text-[10px] font-bold rounded-full uppercase tracking-widest ${isOnline ? 'bg-primary-fixed/20 text-primary-fixed' : 'bg-white/10 text-on-primary/60'}`}>
                 {isOnline ? 'Online' : 'Offline'}
               </span>

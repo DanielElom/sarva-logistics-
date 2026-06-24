@@ -87,6 +87,23 @@ export default function RiderRegisterDocsPage() {
     if (role !== 'RIDER') { router.replace('/home'); return }
   }, [isAuthenticated, role, router])
 
+  // Guard: if this rider has already submitted KYC (docs exist on their profile),
+  // redirect to under-review instead of showing the empty upload form.
+  // Catches both the phone-reuse testing scenario and a real user navigating
+  // back to /rider/register/docs after already submitting.
+  useEffect(() => {
+    if (!isAuthenticated || role !== 'RIDER') return
+    api.get('/riders/me')
+      .then(({ data }) => {
+        if (data.idDocument) {
+          router.replace('/status/under-review')
+        }
+      })
+      .catch(() => {
+        // 404 = brand-new rider with no profile row yet — show the form normally
+      })
+  }, [isAuthenticated, role, router])
+
   async function handleFileSelect(
     e: React.ChangeEvent<HTMLInputElement>,
     field: DocField,
@@ -153,14 +170,12 @@ export default function RiderRegisterDocsPage() {
     isUploading,
     icon,
     onTap,
-    accept = 'image/*,application/pdf',
   }: {
     label: string
     value: string | null
     isUploading: boolean
     icon: string
     onTap: () => void
-    accept?: string
   }) {
     return (
       <button
@@ -226,14 +241,14 @@ export default function RiderRegisterDocsPage() {
         }`}
       >
         {value ? (
-          <div className="w-full aspect-[4/3] rounded-lg overflow-hidden relative">
+          <div className="w-full aspect-4/3 rounded-lg overflow-hidden relative">
             <img src={value} alt={label} className="w-full h-full object-cover" />
             <div className="absolute top-1 right-1 bg-primary rounded-full p-0.5">
               <span className="material-symbols-outlined text-on-primary text-xs" style={{ fontVariationSettings: "'FILL' 1", fontSize: '14px' }}>check</span>
             </div>
           </div>
         ) : (
-          <div className="w-full aspect-[4/3] rounded-lg bg-surface-container-high flex items-center justify-center">
+          <div className="w-full aspect-4/3 rounded-lg bg-surface-container-high flex items-center justify-center">
             {isUploading ? (
               <span className="material-symbols-outlined text-primary animate-spin text-3xl">progress_activity</span>
             ) : (
@@ -440,7 +455,7 @@ export default function RiderRegisterDocsPage() {
         <button
           onClick={handleSubmit}
           disabled={loading}
-          className="w-full h-14 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold text-lg rounded-xl shadow-xl shadow-primary/20 active:scale-95 transition-all duration-150 disabled:opacity-60"
+          className="w-full h-14 bg-linear-to-br from-primary to-primary-container text-on-primary font-headline font-bold text-lg rounded-xl shadow-xl shadow-primary/20 active:scale-95 transition-all duration-150 disabled:opacity-60"
         >
           {loading ? 'Submitting…' : 'Complete Registration'}
         </button>
