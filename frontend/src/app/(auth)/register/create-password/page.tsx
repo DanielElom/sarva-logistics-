@@ -87,8 +87,14 @@ export default function CreatePasswordPage() {
         try {
           await api.patch('/users/me', {
             name: pendingProfile.name,
-            email: pendingProfile.email,
+            ...(pendingProfile.email && { email: pendingProfile.email }),
           })
+          // Update the store so the next screen reads the saved name immediately.
+          // setAuth was called at OTP time when user.name was still null.
+          const currentUser = useAuthStore.getState().user
+          if (currentUser && pendingProfile.name) {
+            useAuthStore.setState({ user: { ...currentUser, name: pendingProfile.name } })
+          }
         } catch {
           // non-fatal — user can update profile later
         }

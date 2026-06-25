@@ -43,7 +43,7 @@ export default function RiderDashboardPage() {
 
   useEffect(() => {
     if (!isAuthenticated || role !== 'RIDER') return
-    api.get('/riders/me/profile')
+    api.get('/riders/me')
       .then(({ data }) => setProfile(data))
       .catch(() => {})
       .finally(() => setLoading(false))
