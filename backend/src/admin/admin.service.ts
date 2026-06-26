@@ -216,10 +216,16 @@ export class AdminService {
   ) {
     const rider = await this.db.riderProfile.findUnique({ where: { id: riderId } });
     if (!rider) throw new NotFoundException('Rider not found');
-    return this.db.riderProfile.update({
+    const updated = await this.db.riderProfile.update({
       where: { id: riderId },
       data: { verificationStatus: status },
     });
+    // Sync User.status so GET /users/me reflects the change for the poll.
+    await this.db.user.update({
+      where: { id: rider.userId },
+      data: { status: status === VerificationStatus.VERIFIED ? 'ACTIVE' : 'PENDING_VERIFICATION' },
+    });
+    return updated;
   }
 
   async changeRiderFleet(riderId: string, riderType: RiderType) {
