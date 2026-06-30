@@ -93,7 +93,7 @@ export default function InTransitPage() {
       <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
         <div className="bg-primary-container rounded-2xl p-4 shadow-xl flex items-center gap-3">
           <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
-            <span className="material-symbols-outlined text-on-primary" style={{ fontVariationSettings: "'FILL' 1" }}>local_shipping</span>
+            <span className="material-symbols-outlined text-on-primary" style={{ fontVariationSettings: "'FILL' 1" }}>two_wheeler</span>
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-0.5">

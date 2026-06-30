@@ -40,7 +40,7 @@ const STATUS_STEPS = [
   { key: 'EN_ROUTE_TO_PICKUP', label: 'Rider En Route', icon: 'electric_moped' },
   { key: 'ARRIVED_AT_PICKUP', label: 'Arrived at Pickup', icon: 'trip_origin' },
   { key: 'PICKED_UP', label: 'Package Picked Up', icon: 'inventory_2' },
-  { key: 'IN_TRANSIT', label: 'In Transit', icon: 'local_shipping' },
+  { key: 'IN_TRANSIT', label: 'In Transit', icon: 'two_wheeler' },
   { key: 'ARRIVED_AT_DELIVERY', label: 'Arrived at Delivery', icon: 'location_on' },
   { key: 'DELIVERED', label: 'Delivered', icon: 'task_alt' },
 ]

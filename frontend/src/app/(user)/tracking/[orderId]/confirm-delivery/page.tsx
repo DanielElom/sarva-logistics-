@@ -159,7 +159,7 @@ export default function ConfirmDeliveryPage() {
               className="material-symbols-outlined text-white"
               style={{ fontVariationSettings: "'FILL' 1", fontSize: '40px' }}
             >
-              local_shipping
+              two_wheeler
             </span>
           </div>
           <div className="px-4 py-1.5 bg-secondary-container rounded-full">

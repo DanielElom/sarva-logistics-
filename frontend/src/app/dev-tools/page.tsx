@@ -842,8 +842,8 @@ function QuickResetTab() {
     {
       key: 'pricing',
       label: '💰 Reset Pricing to Defaults',
-      desc: 'Sets base fare ₦300, per km ₦120, surge 1.0x.',
-      fn: () => call('PATCH', '/dev/pricing', null, { baseFare: 300, perKmRate: 120, surgeMultiplier: 1.0 }),
+      desc: 'Sets base fare ₦500, per km ₦150, surge 1.0x.',
+      fn: () => call('PATCH', '/dev/pricing', null, { baseFare: 500, perKmRate: 150, surgeMultiplier: 1.0 }),
       color: 'amber' as const,
     },
   ]

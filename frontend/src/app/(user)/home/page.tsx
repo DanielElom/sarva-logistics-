@@ -242,7 +242,7 @@ export default function HomePage() {
             onClick={() => router.push('/book/type')}
             className="w-full py-5 rounded-[1.5rem] font-headline font-extrabold text-lg text-on-primary shadow-[0_12px_32px_rgba(0,77,38,0.30)] active:scale-[0.98] transition-all flex items-center justify-center gap-3 editorial-gradient"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '22px' }}>local_shipping</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '22px' }}>two_wheeler</span>
             BOOK NEW DELIVERY
           </button>
         </div>

@@ -7,14 +7,15 @@
  * Price = (baseFare + (distanceKm × perKmRate)) × surgeMultiplier
  *
  * Default config values (stored in Redis, updatable via admin panel):
- *   config:baseFare        → ₦300   (covers first km + platform overhead)
- *   config:perKmRate       → ₦120   (per km after base)
+ *   config:baseFare        → ₦500   (covers first km + platform overhead)
+ *   config:perKmRate       → ₦150   (per km after base)
  *   config:surgeMultiplier → 1.0    (1.0 = normal, 2.0 = double surge)
  *
  * Values are read from Redis on every order creation so admin pricing
  * changes take effect immediately without a server restart.
+ * Minimum fare is ₦500 regardless of distance.
  *
- * Example: 5km delivery = (₦300 + 5×₦120) × 1.0 = ₦900
+ * Example: 5km delivery = max(₦500, (₦500 + 5×₦150) × 1.0) = ₦1,250
  *
  * CANCELLABLE STATUSES: PENDING, ASSIGNED, EN_ROUTE_TO_PICKUP
  * Once a rider is IN_TRANSIT, cancellation is not allowed via this service.
@@ -83,11 +84,11 @@ export class OrdersService {
       this.redis.get('config:perKmRate'),
       // V2_FEATURE: SURGE_PRICING — this.redis.get('config:surgeMultiplier')
     ]);
-    const baseFare = parseFloat(baseFareRaw ?? '300');
-    const perKmRate = parseFloat(perKmRateRaw ?? '120');
+    const baseFare = parseFloat(baseFareRaw ?? '500');
+    const perKmRate = parseFloat(perKmRateRaw ?? '150');
     const surgeMultiplier = 1.0; // V2_FEATURE: SURGE_PRICING — read from Redis and apply dynamic surge
 
-    const finalPrice = Math.round((baseFare + distanceKm * perKmRate) * surgeMultiplier);
+    const finalPrice = Math.max(500, Math.round((baseFare + distanceKm * perKmRate) * surgeMultiplier));
 
     const isPremium = await this.subscriptions.hasActiveSubscription(userId);
 

@@ -222,7 +222,7 @@ export default function RegisterOtpPage() {
 
         <div className="w-full aspect-video rounded-2xl editorial-gradient flex items-center justify-center overflow-hidden">
           <span className="material-symbols-outlined text-on-primary/30" style={{ fontSize: '72px' }}>
-            local_shipping
+            two_wheeler
           </span>
         </div>
 

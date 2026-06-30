@@ -16,7 +16,7 @@ import BottomNav from '@/components/ui/BottomNav'
 const FAQ_SECTIONS = [
   {
     category: 'Delivery & Booking',
-    icon: 'local_shipping',
+    icon: 'two_wheeler',
     items: [
       {
         q: 'How do I book a delivery?',

@@ -42,6 +42,7 @@ export default function RiderHomePage() {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [checking, setChecking] = useState(true)
   const [riderName, setRiderName] = useState('')
+  const [hasLocation, setHasLocation] = useState(false)
   const socketRef = useRef<Socket | null>(null)
 
   useEffect(() => {
@@ -96,15 +97,19 @@ export default function RiderHomePage() {
 
   // Continuous GPS watch while online — cleans up when rider goes offline or unmounts.
   useEffect(() => {
-    if (checking || !isOnline || typeof navigator === 'undefined' || !navigator.geolocation) return
+    if (checking || !isOnline || typeof navigator === 'undefined' || !navigator.geolocation) {
+      if (!isOnline) setHasLocation(false)
+      return
+    }
     const watchId = navigator.geolocation.watchPosition(
       (pos) => {
+        setHasLocation(true)
         socketRef.current?.emit('location_update', {
           latitude: pos.coords.latitude,
           longitude: pos.coords.longitude,
         })
       },
-      () => {},
+      () => { setHasLocation(false) },
       { enableHighAccuracy: false, maximumAge: 30000, timeout: 20000 },
     )
     return () => navigator.geolocation.clearWatch(watchId)
@@ -186,8 +191,8 @@ export default function RiderHomePage() {
         <span className="material-symbols-outlined text-on-surface">menu</span>
       </button>
 
-      {/* Online/Offline toggle pill */}
-      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
+      {/* Online/Offline toggle pill + GPS status */}
+      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2">
         <button
           onClick={toggleOnline}
           disabled={toggling}
@@ -202,6 +207,16 @@ export default function RiderHomePage() {
           />
           {toggling ? 'Updating…' : isOnline ? 'Online' : 'Go Online'}
         </button>
+        {isOnline && (
+          <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium backdrop-blur-md shadow ${
+            hasLocation
+              ? 'bg-green-500/90 text-white'
+              : 'bg-red-500/90 text-white'
+          }`}>
+            <div className={`w-1.5 h-1.5 rounded-full ${hasLocation ? 'bg-white animate-pulse' : 'bg-white/70'}`} />
+            {hasLocation ? 'Location Active' : 'Location Off'}
+          </div>
+        )}
       </div>
 
       {/* Location pin with pulse */}
@@ -265,8 +280,27 @@ export default function RiderHomePage() {
 
       {/* FABs */}
       <div className="fixed right-4 bottom-36 z-30 flex flex-col gap-3">
-        <button className="w-12 h-12 bg-surface-container-lowest rounded-full shadow-lg flex items-center justify-center border border-outline-variant/20">
-          <span className="material-symbols-outlined text-primary">my_location</span>
+        <button
+          onClick={() => {
+            if (typeof navigator === 'undefined' || !navigator.geolocation) return
+            navigator.geolocation.getCurrentPosition(
+              (pos) => {
+                setHasLocation(true)
+                socketRef.current?.emit('location_update', {
+                  latitude: pos.coords.latitude,
+                  longitude: pos.coords.longitude,
+                })
+              },
+              () => {
+                setHasLocation(false)
+                toast('Could not get location — check GPS permissions', { icon: '📍' })
+              },
+              { timeout: 10000, maximumAge: 5000 },
+            )
+          }}
+          className="w-12 h-12 bg-surface-container-lowest rounded-full shadow-lg flex items-center justify-center border border-outline-variant/20 active:scale-95 transition-transform"
+        >
+          <span className={`material-symbols-outlined ${hasLocation ? 'text-primary' : 'text-on-surface-variant'}`}>my_location</span>
         </button>
         <button className="w-12 h-12 bg-surface-container-lowest rounded-full shadow-lg flex items-center justify-center border border-outline-variant/20">
           <span className="material-symbols-outlined text-on-surface-variant">layers</span>
@@ -275,7 +309,7 @@ export default function RiderHomePage() {
 
       {/* Side drawer */}
       {drawerOpen && (
-        <div className="fixed inset-0 z-[100] flex" onClick={() => setDrawerOpen(false)}>
+        <div className="fixed inset-0 z-100 flex" onClick={() => setDrawerOpen(false)}>
           <div className="absolute inset-0 bg-on-background/30 backdrop-blur-sm" />
           <div className="relative w-72 bg-surface h-full shadow-2xl flex flex-col" onClick={(e) => e.stopPropagation()}>
             <div className="bg-primary p-6 pt-14">

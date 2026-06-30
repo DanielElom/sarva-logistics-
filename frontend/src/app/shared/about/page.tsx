@@ -11,7 +11,7 @@ import ScreenWrapper from '@/components/layout/ScreenWrapper'
 
 const STATS = [
   { icon: 'location_on', label: 'Launching in Abuja', sub: 'Serving the FCT first' },
-  { icon: 'local_shipping', label: '10,000+ deliveries', sub: 'Planned at launch' },
+  { icon: 'two_wheeler', label: '10,000+ deliveries', sub: 'Planned at launch' },
   { icon: 'verified', label: 'Verified riders only', sub: 'Every courier screened' },
 ]
 

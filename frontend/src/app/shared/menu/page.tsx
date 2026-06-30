@@ -11,7 +11,7 @@ import { useAuthStore } from '@/stores/auth.store'
 import BottomNav from '@/components/ui/BottomNav'
 
 const MENU_ITEMS = [
-  { icon: 'local_shipping', label: 'Book Delivery', href: '/book/address', section: 'Services' },
+  { icon: 'two_wheeler', label: 'Book Delivery', href: '/book/address', section: 'Services' },
   { icon: 'history', label: 'Trip History', href: '/history', section: 'Services' },
   { icon: 'payments', label: 'Wallet & Payments', href: '/home', section: 'Services' },
   { icon: 'notifications', label: 'Notifications', href: '/notifications', section: 'Account' },

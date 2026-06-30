@@ -33,7 +33,7 @@ function deliverySubtext(type: string | null) {
 
 function deliveryIcon(type: string | null) {
   if (type === 'SCHEDULED') return 'event'
-  if (type === 'SAME_DAY') return 'local_shipping'
+  if (type === 'SAME_DAY') return 'two_wheeler'
   return 'electric_moped'
 }
 

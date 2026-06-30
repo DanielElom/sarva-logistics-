@@ -171,7 +171,7 @@ export default function RiderDashboardPage() {
         {/* Stats grid */}
         <div className="grid grid-cols-2 gap-4">
           {[
-            { label: 'Total Trips', value: profile?.totalTrips ?? 0, icon: 'local_shipping' },
+            { label: 'Total Trips', value: profile?.totalTrips ?? 0, icon: 'two_wheeler' },
             { label: 'Rating', value: `${(profile?.rating ?? 5).toFixed(1)} ★`, icon: 'star' },
           ].map((s) => (
             <div key={s.label} className="bg-surface-container-lowest rounded-xl p-5 shadow-sm">

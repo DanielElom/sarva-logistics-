@@ -9,7 +9,7 @@ const NAV = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: 'dashboard' },
   { href: '/admin/operations', label: 'Live Operations', icon: 'map' },
   { href: '/admin/riders', label: 'Riders', icon: 'people' },
-  { href: '/admin/trips', label: 'Trips', icon: 'local_shipping' },
+  { href: '/admin/trips', label: 'Trips', icon: 'two_wheeler' },
   { href: '/admin/payments', label: 'Payments', icon: 'account_balance_wallet' },
   { href: '/admin/pricing', label: 'Pricing', icon: 'payments' },
   { href: '/admin/settings', label: 'Settings', icon: 'settings_suggest' },

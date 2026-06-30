@@ -92,7 +92,7 @@ export default function AdminDashboardPage() {
         <div className="grid grid-cols-3 gap-4">
           <div className="bg-primary text-on-primary rounded-xl p-6 col-span-1 relative overflow-hidden">
             <div className="absolute -right-6 -bottom-6 opacity-10">
-              <span className="material-symbols-outlined text-[120px]">local_shipping</span>
+              <span className="material-symbols-outlined text-[120px]">two_wheeler</span>
             </div>
             <p className="text-xs font-bold uppercase tracking-widest opacity-70 mb-2">Total Trips Today</p>
             <p className="font-headline font-extrabold text-4xl">{stats.totalTrips.toLocaleString()}</p>

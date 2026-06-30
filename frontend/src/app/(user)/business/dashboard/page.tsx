@@ -205,7 +205,7 @@ export default function BusinessDashboardPage() {
 
             {/* stats grid */}
             <div className="grid grid-cols-2 gap-3">
-              <StatCard icon="local_shipping" label="Deliveries This Month" value={String(thisMonth.length)} />
+              <StatCard icon="two_wheeler" label="Deliveries This Month" value={String(thisMonth.length)} />
               <StatCard icon="task_alt" label="Completed" value={String(completedThisMonth.length)} dark />
               <StatCard
                 icon="payments"
@@ -268,7 +268,7 @@ export default function BusinessDashboardPage() {
                         className="w-full bg-surface-container-lowest rounded-2xl shadow-sm p-4 flex items-center gap-4 active:bg-surface-container-low transition-colors text-left"
                       >
                         <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                          <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1", fontSize: '18px' }}>local_shipping</span>
+                          <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1", fontSize: '18px' }}>two_wheeler</span>
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-semibold text-on-surface truncate">{order.dropoffAddress}</p>

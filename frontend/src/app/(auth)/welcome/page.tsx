@@ -53,7 +53,7 @@ export default function WelcomePage() {
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 editorial-gradient rounded-xl flex items-center justify-center shadow-lg shadow-emerald-950/20">
               <span className="material-symbols-outlined text-white" style={{ fontVariationSettings: "'FILL' 1" }}>
-                local_shipping
+                two_wheeler
               </span>
             </div>
             <h1 className="font-headline font-extrabold text-2xl tracking-tighter text-white">Courier</h1>

@@ -42,7 +42,7 @@ const PRICING_KEYS = {
   surgeMultiplier: 'config:surgeMultiplier',
 } as const;
 
-const PRICING_DEFAULTS = { baseFare: 300, perKmRate: 120, surgeMultiplier: 1.0 };
+const PRICING_DEFAULTS = { baseFare: 500, perKmRate: 150, surgeMultiplier: 1.0 };
 
 @Injectable()
 export class AdminService {

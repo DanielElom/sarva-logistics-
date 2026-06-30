@@ -136,7 +136,7 @@ export default function NavigationDrawer({ isOpen, onClose }: Props) {
     {
       title: 'Delivery',
       items: [
-        { icon: 'local_shipping', label: 'Book a Delivery', action: () => navigate('/book/type') },
+        { icon: 'two_wheeler', label: 'Book a Delivery', action: () => navigate('/book/type') },
         {
           icon: 'gps_fixed',
           label: 'Active Order',
@@ -184,7 +184,7 @@ export default function NavigationDrawer({ isOpen, onClose }: Props) {
     {
       title: 'Delivery',
       items: [
-        { icon: 'local_shipping', label: 'Book a Delivery', action: () => navigate('/book/type') },
+        { icon: 'two_wheeler', label: 'Book a Delivery', action: () => navigate('/book/type') },
         {
           icon: 'gps_fixed',
           label: 'Active Orders',
