@@ -12,6 +12,7 @@ import ScreenWrapper from '@/components/layout/ScreenWrapper'
 import Input from '@/components/ui/Input'
 import { useAuthStore } from '@/stores/auth.store'
 import api from '@/lib/api'
+import { suggestEmailCorrection } from '@/lib/email-typo-check'
 
 function formatPhone(raw: string): string {
   const digits = raw.replace(/\D/g, '')
@@ -58,6 +59,7 @@ export default function RegisterProfilePage() {
   const [phone, setPhone] = useState('')
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<FieldErrors>({})
+  const [emailSuggestion, setEmailSuggestion] = useState<string | null>(null)
 
   useEffect(() => {
     if (selectedRole === null) {
@@ -164,19 +166,46 @@ export default function RegisterProfilePage() {
               error={errors.name}
               autoComplete="name"
             />
-            <Input
-              label="Email Address"
-              id="email"
-              type="email"
-              placeholder="name@example.com"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value)
-                if (errors.email) setErrors((p) => ({ ...p, email: undefined }))
-              }}
-              error={errors.email}
-              autoComplete="email"
-            />
+            <div onBlur={() => setEmailSuggestion(suggestEmailCorrection(email.trim()))}>
+              <Input
+                label="Email Address"
+                id="email"
+                type="email"
+                placeholder="name@example.com"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value)
+                  if (errors.email) setErrors((p) => ({ ...p, email: undefined }))
+                  if (emailSuggestion) setEmailSuggestion(null)
+                }}
+                error={errors.email}
+                autoComplete="email"
+              />
+              {emailSuggestion && (
+                <div className="mt-1.5 flex items-start gap-1.5 text-xs font-body">
+                  <span className="material-symbols-outlined text-amber-500 shrink-0" style={{ fontSize: '14px', marginTop: '1px' }}>info</span>
+                  <span className="text-on-surface-variant">
+                    Did you mean{' '}
+                    <span className="font-semibold text-on-surface">{emailSuggestion}</span>?{' '}
+                    <button
+                      type="button"
+                      onClick={() => { setEmail(emailSuggestion); setEmailSuggestion(null) }}
+                      className="font-bold text-primary underline underline-offset-2"
+                    >
+                      Use this
+                    </button>
+                    {' · '}
+                    <button
+                      type="button"
+                      onClick={() => setEmailSuggestion(null)}
+                      className="text-on-surface-variant underline underline-offset-2"
+                    >
+                      Dismiss
+                    </button>
+                  </span>
+                </div>
+              )}
+            </div>
 
             {/* Phone — inline icon variant */}
             <div className="w-full">

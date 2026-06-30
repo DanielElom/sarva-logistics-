@@ -182,11 +182,30 @@ export class DevService {
   }
 
   async getPendingApprovals() {
-    return this.db.user.findMany({
-      where: { status: 'PENDING_VERIFICATION' },
-      select: { id: true, name: true, phone: true, role: true, status: true, verificationStatus: true },
-      take: 50,
-    });
+    const [riders, businesses] = await Promise.all([
+      // Riders who have submitted KYC (verificationStatus = PENDING on RiderProfile)
+      this.db.user.findMany({
+        where: {
+          role: 'RIDER',
+          riderProfile: { verificationStatus: 'PENDING' },
+        },
+        select: {
+          id: true, name: true, phone: true, role: true, status: true,
+          riderProfile: { select: { verificationStatus: true } },
+        },
+        take: 50,
+      }),
+      // Business accounts pending approval (INDIVIDUAL excluded)
+      this.db.user.findMany({
+        where: {
+          status: 'PENDING_VERIFICATION',
+          role: { in: ['VENDOR', 'RESTAURANT', 'CORPORATE'] },
+        },
+        select: { id: true, name: true, phone: true, role: true, status: true },
+        take: 50,
+      }),
+    ]);
+    return [...riders, ...businesses];
   }
 
   async updatePricing(baseFare: number, perKmRate: number, surgeMultiplier: number) {

@@ -32,7 +32,15 @@ export class SmsService {
 
   async sendSms(phone: string, message: string): Promise<void> {
     if (!this.at) {
-      this.logger.log(`[DEV SMS] ${phone}: ${message}`);
+      // Extract and print the OTP prominently so it's easy to spot in the terminal.
+      const match = message.match(/\b\d{6}\b/);
+      if (match) {
+        console.log('\n' + '='.repeat(40));
+        console.log(`  OTP for ${phone}: ${match[0]}`);
+        console.log('='.repeat(40) + '\n');
+      } else {
+        this.logger.log(`[DEV SMS] ${phone}: ${message}`);
+      }
       return;
     }
     await this.at.SMS.send({ to: phone, message });
