@@ -96,6 +96,8 @@ export default function RegisterOtpPage() {
         (err as { response?: { data?: { message?: string } } })?.response?.data?.message ??
         'Invalid code. Please try again.'
       toast.error(msg)
+      setDigits(Array(OTP_LENGTH).fill(''))
+      focusBox(0)
     } finally {
       setLoading(false)
     }

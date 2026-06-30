@@ -60,6 +60,14 @@ api.interceptors.response.use(
 
       const { refreshToken, setAccessToken, clearAuth } = useAuthStore.getState()
 
+      // Pre-auth 401 (e.g. wrong OTP, bad credentials on a public endpoint).
+      // No token means the user was never authenticated — don't wipe state or
+      // redirect. Just let the error propagate to the call-site catch block.
+      const hasToken = !!localStorage.getItem('fair-ride-token')
+      if (!hasToken && !refreshToken) {
+        return Promise.reject(error)
+      }
+
       if (refreshToken) {
         try {
           if (!refreshing) {
