@@ -207,6 +207,7 @@ export default function SettingsPage() {
     const file = e.target.files?.[0]
     if (!file) return
     e.target.value = ''
+    const prevSrc = photoSrc
     setPhotoUploading(true)
     try {
       const compressed = await compressImage(file)
@@ -218,7 +219,7 @@ export default function SettingsPage() {
       toast.success('Profile photo updated')
     } catch {
       toast.error('Could not upload photo. Please try again.')
-      setPhotoSrc(null)
+      setPhotoSrc(prevSrc)
     } finally {
       setPhotoUploading(false)
     }
@@ -233,7 +234,8 @@ export default function SettingsPage() {
       })
       setProfile(data)
       if (storeUser) {
-        setAuth({ ...storeUser, name: data.name }, useAuthStore.getState().token ?? '')
+        const { token, refreshToken } = useAuthStore.getState()
+        setAuth({ ...storeUser, name: data.name }, token ?? '', refreshToken ?? undefined)
       }
       setEditing(false)
       toast.success('Profile updated')
