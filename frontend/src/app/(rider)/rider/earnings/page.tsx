@@ -85,7 +85,8 @@ export default function RiderEarningsPage() {
     }
   }
 
-  const maxBar = data ? Math.max(...data.dailyBars, 1) : 1
+  const bars = data?.dailyBars ?? []
+  const maxBar = bars.length > 0 ? Math.max(...bars, 1) : 1
   const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
 
   if (loading) {
@@ -154,11 +155,11 @@ export default function RiderEarningsPage() {
         </div>
 
         {/* Daily bar chart */}
-        {data && data.dailyBars.length > 0 && (
+        {bars.length > 0 && (
           <div className="bg-surface-container-lowest rounded-xl p-6 shadow-sm">
             <h3 className="font-headline font-bold text-on-surface mb-4">This Week</h3>
             <div className="flex items-end gap-2 h-32">
-              {data.dailyBars.map((v, i) => {
+              {bars.map((v, i) => {
                 const pct = Math.round((v / maxBar) * 100)
                 const isToday = i === new Date().getDay() - 1
                 return (

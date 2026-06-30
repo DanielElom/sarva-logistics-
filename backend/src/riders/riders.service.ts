@@ -92,20 +92,58 @@ export class RidersService {
     const profile = await this.db.riderProfile.findUnique({ where: { userId } });
     if (!profile) throw new NotFoundException('Rider profile not found');
 
+    const now = new Date();
+    const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const startOfWeek = new Date(startOfToday);
+    startOfWeek.setDate(startOfToday.getDate() - startOfToday.getDay());
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+    const completedOrders = await this.db.order.findMany({
+      where: { riderId: profile.id, status: 'DELIVERED_CONFIRMED' },
+      include: { payment: { select: { riderPayout: true } } },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    let today = 0, week = 0, month = 0, allTime = 0;
+    const dailyBars: number[] = Array(7).fill(0);
+
+    for (const order of completedOrders) {
+      const net = Number(order.payment?.riderPayout ?? 0);
+      allTime += net;
+      if (order.createdAt >= startOfMonth) month += net;
+      if (order.createdAt >= startOfWeek) week += net;
+      if (order.createdAt >= startOfToday) today += net;
+      const daysAgo = Math.floor(
+        (now.getTime() - new Date(order.createdAt).getTime()) / 86_400_000,
+      );
+      if (daysAgo >= 0 && daysAgo < 7) {
+        dailyBars[6 - daysAgo] += net;
+      }
+    }
+
+    const recentEarnings = completedOrders.slice(0, 10).map((o: any) => ({
+      id: o.id,
+      date: o.createdAt,
+      fare: Number(o.finalPrice),
+      commission: Number(o.finalPrice) - Number(o.payment?.riderPayout ?? 0),
+      net: Number(o.payment?.riderPayout ?? 0),
+      status: 'PAID',
+    }));
+
     const pendingPayouts = await this.db.payout.aggregate({
       where: { riderId: profile.id, status: 'PENDING' },
       _sum: { amount: true },
     });
 
-    const totalPaid = await this.db.payout.aggregate({
-      where: { riderId: profile.id, status: 'PAID' },
-      _sum: { amount: true },
-    });
-
     return {
-      walletBalance: profile.walletBalance,
-      totalEarned: totalPaid._sum.amount ?? 0,
-      pendingPayouts: pendingPayouts._sum.amount ?? 0,
+      walletBalance: Number(profile.walletBalance),
+      today,
+      week,
+      month,
+      allTime,
+      dailyBars,
+      recentEarnings,
+      pendingPayouts: Number(pendingPayouts._sum.amount ?? 0),
     };
   }
 
