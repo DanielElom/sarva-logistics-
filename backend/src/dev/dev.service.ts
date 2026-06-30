@@ -93,11 +93,12 @@ export class DevService {
   }
 
   async verifyRider(userId: string) {
-    const rider = await this.db.riderProfile.findUnique({ where: { userId } });
-    if (!rider) throw new Error('Rider profile not found for this user');
-    await this.db.riderProfile.update({
+    // upsert handles riders who registered but never hit GET /riders/me
+    // (which lazily creates the RiderProfile via ensureProfile)
+    await this.db.riderProfile.upsert({
       where: { userId },
-      data: { verificationStatus: 'VERIFIED', isOnline: true },
+      create: { userId, verificationStatus: 'VERIFIED', isOnline: true },
+      update: { verificationStatus: 'VERIFIED', isOnline: true },
     });
     // Must also set User.status = ACTIVE so the under-review poll
     // (which watches GET /users/me → data.status) can detect approval.
