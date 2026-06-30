@@ -21,6 +21,7 @@ interface UserProfile {
   phone: string
   status: string
   role: string
+  profilePhoto?: string | null
 }
 
 type NotifKey = 'order_updates' | 'promotions' | 'security_alerts'
@@ -50,7 +51,17 @@ function Toggle({ on, onChange }: { on: boolean; onChange: (v: boolean) => void 
   )
 }
 
-function Avatar({ name }: { name: string }) {
+function Avatar({
+  name,
+  photoSrc,
+  uploading,
+  onClick,
+}: {
+  name: string
+  photoSrc: string | null
+  uploading: boolean
+  onClick: () => void
+}) {
   const initials = name
     .split(' ')
     .map((n) => n[0])
@@ -58,19 +69,34 @@ function Avatar({ name }: { name: string }) {
     .slice(0, 2)
     .toUpperCase()
   return (
-    <div className="relative">
-      <div className="w-20 h-20 rounded-full bg-primary/10 border-4 border-surface flex items-center justify-center shadow-md">
-        <span className="font-['Manrope'] font-extrabold text-2xl text-primary">{initials}</span>
+    <button
+      type="button"
+      onClick={onClick}
+      className="relative focus:outline-none active:scale-95 transition-transform"
+      aria-label="Change profile photo"
+    >
+      <div className="w-20 h-20 rounded-full bg-primary/10 border-4 border-surface shadow-md overflow-hidden">
+        {photoSrc ? (
+          <img src={photoSrc} alt={name} className="w-full h-full object-cover" />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="font-['Manrope'] font-extrabold text-2xl text-primary">{initials}</span>
+          </div>
+        )}
       </div>
-      <div className="absolute bottom-0 right-0 bg-primary p-1.5 rounded-full border-2 border-surface">
-        <span
-          className="material-symbols-outlined text-white"
-          style={{ fontVariationSettings: "'FILL' 1", fontSize: '12px' }}
-        >
-          verified
-        </span>
+      <div className="absolute bottom-0 right-0 bg-primary p-1.5 rounded-full border-2 border-surface flex items-center justify-center">
+        {uploading ? (
+          <span className="w-3 h-3 border-2 border-white/40 border-t-white rounded-full animate-spin block" />
+        ) : (
+          <span
+            className="material-symbols-outlined text-white"
+            style={{ fontVariationSettings: "'FILL' 1", fontSize: '12px' }}
+          >
+            photo_camera
+          </span>
+        )}
       </div>
-    </div>
+    </button>
   )
 }
 
@@ -80,6 +106,35 @@ function SectionHeader({ title }: { title: string }) {
       {title}
     </h2>
   )
+}
+
+function compressImage(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    const timeout = setTimeout(() => reject(new Error('Image read timed out')), 15000)
+    reader.onerror = () => { clearTimeout(timeout); reject(new Error('Failed to read image')) }
+    reader.onload = (e) => {
+      const img = new Image()
+      img.onerror = () => { clearTimeout(timeout); reject(new Error('Failed to load image')) }
+      img.onload = () => {
+        clearTimeout(timeout)
+        const MAX = 800
+        let { width, height } = img
+        if (width > MAX || height > MAX) {
+          if (width > height) { height = Math.round((height * MAX) / width); width = MAX }
+          else { width = Math.round((width * MAX) / height); height = MAX }
+        }
+        const canvas = document.createElement('canvas')
+        canvas.width = width
+        canvas.height = height
+        const ctx = canvas.getContext('2d')!
+        ctx.drawImage(img, 0, 0, width, height)
+        resolve(canvas.toDataURL('image/jpeg', 0.75))
+      }
+      img.src = e.target!.result as string
+    }
+    reader.readAsDataURL(file)
+  })
 }
 
 export default function SettingsPage() {
@@ -103,7 +158,10 @@ export default function SettingsPage() {
     promotions: false,
     security_alerts: true,
   })
+  const [photoSrc, setPhotoSrc] = useState<string | null>(null)
+  const [photoUploading, setPhotoUploading] = useState(false)
 
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const initialised = useRef(false)
 
   useEffect(() => {
@@ -124,10 +182,12 @@ export default function SettingsPage() {
         setProfile(data)
         setNameVal(data.name ?? '')
         setEmailVal(data.email ?? '')
+        if (data.profilePhoto) setPhotoSrc(data.profilePhoto)
       })
       .catch(() => {
         if (storeUser) {
           setNameVal(storeUser.name ?? '')
+          if (storeUser.profilePhoto) setPhotoSrc(storeUser.profilePhoto)
         }
       })
 
@@ -141,6 +201,27 @@ export default function SettingsPage() {
     const next = { ...notifs, [key]: val }
     setNotifs(next)
     try { localStorage.setItem('fair-ride-notif-prefs', JSON.stringify(next)) } catch {}
+  }
+
+  async function handlePhotoChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    e.target.value = ''
+    setPhotoUploading(true)
+    try {
+      const compressed = await compressImage(file)
+      setPhotoSrc(compressed)
+      const { data } = await api.patch('/users/me', { profilePhoto: compressed })
+      useAuthStore.setState((s) => ({
+        user: s.user ? { ...s.user, profilePhoto: data.profilePhoto } : s.user,
+      }))
+      toast.success('Profile photo updated')
+    } catch {
+      toast.error('Could not upload photo. Please try again.')
+      setPhotoSrc(null)
+    } finally {
+      setPhotoUploading(false)
+    }
   }
 
   async function handleSaveProfile() {
@@ -175,6 +256,15 @@ export default function SettingsPage() {
 
   return (
     <ScreenWrapper>
+      {/* hidden file input */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={handlePhotoChange}
+      />
+
       {/* header */}
       <header className="sticky top-0 z-30 bg-[#f8faf4] px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
@@ -200,8 +290,14 @@ export default function SettingsPage() {
       <main className="max-w-xl mx-auto px-6 pt-2 pb-32 space-y-6">
         {/* profile header card */}
         <div className="bg-surface-container-lowest rounded-2xl p-6 flex flex-col items-center text-center shadow-sm">
-          <Avatar name={displayName} />
-          <h2 className="font-['Manrope'] font-bold text-xl text-on-surface mt-4 mb-0.5">
+          <Avatar
+            name={displayName}
+            photoSrc={photoSrc}
+            uploading={photoUploading}
+            onClick={() => fileInputRef.current?.click()}
+          />
+          <p className="text-[10px] text-on-surface-variant mt-2 mb-1">Tap photo to change</p>
+          <h2 className="font-['Manrope'] font-bold text-xl text-on-surface mb-0.5">
             {displayName}
           </h2>
           <p className="text-on-surface-variant text-sm">{displayPhone}</p>

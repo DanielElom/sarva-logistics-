@@ -39,6 +39,7 @@ export interface AuthUser {
   role: UserRole
   status: string
   fcmToken?: string | null
+  profilePhoto?: string | null
 }
 
 export interface PendingProfile {
