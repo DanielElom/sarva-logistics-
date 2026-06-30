@@ -71,14 +71,9 @@ export class AuthService {
     await this.redis.set(`${OTP_PREFIX}${phone}`, otp, OTP_TTL);
     await this.sms.sendOtp(phone, otp);
 
-    console.log(`
-╔════════════════════════════╗
-║       FAIR-RIDE OTP        ║
-╠════════════════════════════╣
-║ Phone: ${phone.padEnd(19)}║
-║ OTP:   ${otp.padEnd(19)}║
-╚════════════════════════════╝
-`);
+    process.stdout.write(
+      `\x1b[32m\n╔════════════════════════════════╗\n║         FAIR-RIDE OTP          ║\n╠════════════════════════════════╣\n║ Phone: ${phone.padEnd(23)}║\n║ OTP:   ${otp.padEnd(23)}║\n╚════════════════════════════════╝\x1b[0m\n\n`,
+    );
 
     const db = this.prisma as any;
     const user: User | null = await db.user.findUnique({ where: { phone } });
@@ -243,14 +238,9 @@ export class AuthService {
     await this.redis.set(`${FORGOT_PREFIX}${phone}`, otp, OTP_TTL);
     await this.sms.sendOtp(phone, otp);
 
-    console.log(`
-╔════════════════════════════╗
-║    FAIR-RIDE RESET OTP     ║
-╠════════════════════════════╣
-║ Phone: ${phone.padEnd(19)}║
-║ OTP:   ${otp.padEnd(19)}║
-╚════════════════════════════╝
-`);
+    process.stdout.write(
+      `\x1b[33m\n╔════════════════════════════════╗\n║      FAIR-RIDE RESET OTP       ║\n╠════════════════════════════════╣\n║ Phone: ${phone.padEnd(23)}║\n║ OTP:   ${otp.padEnd(23)}║\n╚════════════════════════════════╝\x1b[0m\n\n`,
+    );
 
     const db = this.prisma as any;
     const user: User | null = await db.user.findUnique({ where: { phone } });

@@ -7,11 +7,10 @@
  * CommonJS and causes ESM resolution issues with the NestJS build when
  * imported statically.
  */
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class SmsService {
-  private readonly logger = new Logger(SmsService.name);
   private readonly at: any;
 
   constructor() {
@@ -32,14 +31,11 @@ export class SmsService {
 
   async sendSms(phone: string, message: string): Promise<void> {
     if (!this.at) {
-      // Extract and print the OTP prominently so it's easy to spot in the terminal.
       const match = message.match(/\b\d{6}\b/);
       if (match) {
-        console.log('\n' + '='.repeat(40));
-        console.log(`  OTP for ${phone}: ${match[0]}`);
-        console.log('='.repeat(40) + '\n');
+        process.stdout.write(`\x1b[33m[SMS DEV] OTP for ${phone}: ${match[0]}\x1b[0m\n`);
       } else {
-        this.logger.log(`[DEV SMS] ${phone}: ${message}`);
+        process.stdout.write(`\x1b[33m[SMS DEV] ${phone}: ${message}\x1b[0m\n`);
       }
       return;
     }
