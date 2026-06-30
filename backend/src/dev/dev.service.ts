@@ -208,6 +208,15 @@ export class DevService {
     return [...riders, ...businesses];
   }
 
+  async setRiderLocation(userId: string, latitude: number, longitude: number) {
+    const updated = await this.db.riderProfile.updateMany({
+      where: { userId },
+      data: { latitude, longitude, lastSeenAt: new Date() },
+    });
+    if (updated.count === 0) throw new Error(`No RiderProfile found for userId ${userId}`);
+    return { userId, latitude, longitude };
+  }
+
   async updatePricing(baseFare: number, perKmRate: number, surgeMultiplier: number) {
     await Promise.all([
       this.db.appConfig.upsert({

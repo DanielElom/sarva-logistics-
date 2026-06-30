@@ -7,6 +7,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 import { useAuthStore } from '@/stores/auth.store'
 import ScreenWrapper from '@/components/layout/ScreenWrapper'
 import BottomNav from '@/components/ui/BottomNav'
@@ -33,6 +34,7 @@ export default function RiderHomePage() {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
   const role = useAuthStore((s) => s.role)
   const token = useAuthStore((s) => s.token)
+  const storeUser = useAuthStore((s) => s.user)
 
   const [isOnline, setIsOnline] = useState(false)
   const [stats, setStats] = useState<RiderStats>({ todayEarnings: 0, todayTrips: 0, isOnline: false })
@@ -79,7 +81,7 @@ export default function RiderHomePage() {
     if (!token || !isAuthenticated || role !== 'RIDER') return
 
     const socket = io('http://localhost:3001', {
-      auth: { token },
+      auth: { token, userId: storeUser?.id },
       transports: ['websocket'],
     })
     socketRef.current = socket
@@ -92,14 +94,56 @@ export default function RiderHomePage() {
     return () => { socket.disconnect() }
   }, [token, isAuthenticated, role, router])
 
+  // Continuous GPS watch while online — cleans up when rider goes offline or unmounts.
+  useEffect(() => {
+    if (checking || !isOnline || typeof navigator === 'undefined' || !navigator.geolocation) return
+    const watchId = navigator.geolocation.watchPosition(
+      (pos) => {
+        socketRef.current?.emit('location_update', {
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude,
+        })
+      },
+      () => {},
+      { enableHighAccuracy: false, maximumAge: 30000, timeout: 20000 },
+    )
+    return () => navigator.geolocation.clearWatch(watchId)
+  }, [isOnline, checking])
+
   async function toggleOnline() {
-    setToggling(true)
     const next = !isOnline
+    setToggling(true)
     try {
-      await api.patch('/riders/me/status', { isOnline: next })
-      setIsOnline(next)
+      if (next) {
+        // Grab device position before going online so matching engine has coordinates immediately.
+        let lat: number | null = null
+        let lng: number | null = null
+        if (typeof navigator !== 'undefined' && navigator.geolocation) {
+          try {
+            const pos = await new Promise<GeolocationPosition>((resolve, reject) =>
+              navigator.geolocation.getCurrentPosition(resolve, reject, {
+                timeout: 10000,
+                maximumAge: 60000,
+              })
+            )
+            lat = pos.coords.latitude
+            lng = pos.coords.longitude
+          } catch {
+            toast('GPS unavailable — move to an area with signal, then retry', { icon: '⚠️' })
+          }
+        }
+        await api.patch('/riders/me/status', { isOnline: true })
+        setIsOnline(true)
+        // Seed coordinates immediately so the matching query finds this rider.
+        if (lat !== null && lng !== null) {
+          socketRef.current?.emit('location_update', { latitude: lat, longitude: lng })
+        }
+      } else {
+        await api.patch('/riders/me/status', { isOnline: false })
+        setIsOnline(false)
+      }
     } catch {
-      // revert on failure
+      // API call failed — local state unchanged (reverts automatically)
     } finally {
       setToggling(false)
     }

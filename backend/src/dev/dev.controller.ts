@@ -90,4 +90,15 @@ export class DevController {
     assertDev();
     return this.dev.updatePricing(body.baseFare, body.perKmRate, body.surgeMultiplier);
   }
+
+  /** Seeds GPS coordinates for a rider (by userId) — used for matching tests without real GPS. */
+  @Patch('set-rider-location/:userId')
+  @HttpCode(200)
+  async setRiderLocation(
+    @Param('userId') userId: string,
+    @Body() body: { latitude: number; longitude: number },
+  ) {
+    assertDev();
+    return this.dev.setRiderLocation(userId, body.latitude, body.longitude);
+  }
 }
