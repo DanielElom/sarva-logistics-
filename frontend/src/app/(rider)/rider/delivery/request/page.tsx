@@ -13,11 +13,15 @@ import api from '@/lib/api'
 
 interface JobRequest {
   orderId: string
-  pickupAddress: string
-  dropoffAddress: string
-  estimatedPayout: number
-  estimatedDistance: string
-  estimatedTime: string
+  pickupAddress?: string
+  dropoffAddress?: string
+  estimatedPayout?: number
+  estimatedFare?: number
+  estimatedDistance?: string
+  estimatedTime?: string
+  distanceKm?: number
+  paymentMethod?: string
+  isPremium?: boolean
 }
 
 const COUNTDOWN_SECONDS = 30
@@ -95,6 +99,13 @@ export default function DeliveryRequestPage() {
 
   if (!job) return null
 
+  // Derive safe display values after the null guard — avoids TS strict-null errors in JSX
+  const displayPayout = (job.estimatedPayout ?? job.estimatedFare ?? 0).toLocaleString()
+  const displayTime = job.estimatedTime ?? '—'
+  const displayDistance = job.estimatedDistance ?? (job.distanceKm != null ? `${job.distanceKm.toFixed(1)} km` : '—')
+  const displayPickup = job.pickupAddress ?? 'Pickup location'
+  const displayDropoff = job.dropoffAddress ?? 'Dropoff location'
+
   return (
     <ScreenWrapper className="bg-surface">
       {/* Map background */}
@@ -153,7 +164,7 @@ export default function DeliveryRequestPage() {
                   Est. Payout
                 </p>
                 <p className="font-headline font-extrabold text-xl text-primary">
-                  ₦{job.estimatedPayout.toLocaleString()}
+                  ₦{displayPayout}
                 </p>
               </div>
               <div className="bg-surface-container-low rounded-xl p-4">
@@ -161,7 +172,7 @@ export default function DeliveryRequestPage() {
                   Est. Time
                 </p>
                 <p className="font-headline font-extrabold text-xl text-on-surface">
-                  {job.estimatedTime}
+                  {displayTime}
                 </p>
               </div>
             </div>
@@ -177,16 +188,16 @@ export default function DeliveryRequestPage() {
                 <div className="flex-1 space-y-3">
                   <div>
                     <p className="text-[10px] uppercase text-on-surface-variant font-bold">Pickup</p>
-                    <p className="text-sm font-medium text-on-surface line-clamp-1">{job.pickupAddress}</p>
+                    <p className="text-sm font-medium text-on-surface line-clamp-1">{displayPickup}</p>
                   </div>
                   <div>
                     <p className="text-[10px] uppercase text-on-surface-variant font-bold">Dropoff</p>
-                    <p className="text-sm font-medium text-on-surface line-clamp-1">{job.dropoffAddress}</p>
+                    <p className="text-sm font-medium text-on-surface line-clamp-1">{displayDropoff}</p>
                   </div>
                 </div>
               </div>
               <div className="mt-3 pt-3 border-t border-outline-variant/30">
-                <p className="text-xs text-on-surface-variant">Distance: {job.estimatedDistance}</p>
+                <p className="text-xs text-on-surface-variant">Distance: {displayDistance}</p>
               </div>
             </div>
 

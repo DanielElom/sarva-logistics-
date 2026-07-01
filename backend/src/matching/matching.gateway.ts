@@ -122,7 +122,20 @@ export class MatchingGateway implements OnGatewayConnection, OnGatewayDisconnect
   }
 
   emitJobRequest(riderUserId: string, order: any) {
-    this.server.to(`user:${riderUserId}`).emit('job_request', order);
+    const distanceKm = Number(order.distanceKm ?? 0);
+    const payout = Number(order.finalPrice ?? 0);
+    this.server.to(`user:${riderUserId}`).emit('job_request', {
+      orderId: order.id,
+      pickupAddress: order.pickupAddress ?? 'Pickup location',
+      dropoffAddress: order.dropoffAddress ?? 'Dropoff location',
+      distanceKm,
+      estimatedPayout: payout,
+      estimatedFare: payout,
+      estimatedDistance: `${distanceKm.toFixed(1)} km`,
+      estimatedTime: `${Math.max(5, Math.ceil(distanceKm * 3))} min`,
+      paymentMethod: order.paymentMethod ?? 'CASH',
+      isPremium: order.isPremium ?? false,
+    });
   }
 
   emitOrderAssigned(userUserId: string, order: any) {
