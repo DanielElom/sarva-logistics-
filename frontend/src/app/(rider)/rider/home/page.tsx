@@ -44,6 +44,7 @@ export default function RiderHomePage() {
   const [riderName, setRiderName] = useState('')
   const [hasLocation, setHasLocation] = useState(false)
   const socketRef = useRef<Socket | null>(null)
+  const lastKnownCoordsRef = useRef<{ latitude: number; longitude: number } | null>(null)
 
   useEffect(() => {
     if (!isAuthenticated) { router.replace('/welcome'); return }
@@ -103,13 +104,19 @@ export default function RiderHomePage() {
     }
     const watchId = navigator.geolocation.watchPosition(
       (pos) => {
+        const coords = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }
+        lastKnownCoordsRef.current = coords
         setHasLocation(true)
-        socketRef.current?.emit('location_update', {
-          latitude: pos.coords.latitude,
-          longitude: pos.coords.longitude,
-        })
+        socketRef.current?.emit('location_update', coords)
       },
-      () => { setHasLocation(false) },
+      () => {
+        if (lastKnownCoordsRef.current) {
+          // GPS temporarily unavailable — re-emit saved position to stay in matching pool
+          socketRef.current?.emit('location_update', lastKnownCoordsRef.current)
+        } else {
+          setHasLocation(false)
+        }
+      },
       { enableHighAccuracy: false, maximumAge: 30000, timeout: 20000 },
     )
     return () => navigator.geolocation.clearWatch(watchId)
@@ -134,14 +141,28 @@ export default function RiderHomePage() {
             lat = pos.coords.latitude
             lng = pos.coords.longitude
           } catch {
-            toast('GPS unavailable — move to an area with signal, then retry', { icon: '⚠️' })
+            // Device GPS unavailable — fall back to saved coordinates from profile
+            try {
+              const { data: profile } = await api.get('/riders/me')
+              if (profile.latitude && profile.longitude) {
+                lat = profile.latitude
+                lng = profile.longitude
+              } else {
+                toast('Location unavailable — you may not receive nearby requests', { icon: '⚠️' })
+              }
+            } catch {
+              toast('Location unavailable — you may not receive nearby requests', { icon: '⚠️' })
+            }
           }
         }
         await api.patch('/riders/me/status', { isOnline: true })
         setIsOnline(true)
         // Seed coordinates immediately so the matching query finds this rider.
         if (lat !== null && lng !== null) {
-          socketRef.current?.emit('location_update', { latitude: lat, longitude: lng })
+          const coords = { latitude: lat, longitude: lng }
+          lastKnownCoordsRef.current = coords
+          socketRef.current?.emit('location_update', coords)
+          setHasLocation(true)
         }
       } else {
         await api.patch('/riders/me/status', { isOnline: false })
@@ -285,15 +306,18 @@ export default function RiderHomePage() {
             if (typeof navigator === 'undefined' || !navigator.geolocation) return
             navigator.geolocation.getCurrentPosition(
               (pos) => {
+                const coords = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }
+                lastKnownCoordsRef.current = coords
                 setHasLocation(true)
-                socketRef.current?.emit('location_update', {
-                  latitude: pos.coords.latitude,
-                  longitude: pos.coords.longitude,
-                })
+                socketRef.current?.emit('location_update', coords)
               },
               () => {
-                setHasLocation(false)
-                toast('Could not get location — check GPS permissions', { icon: '📍' })
+                if (lastKnownCoordsRef.current) {
+                  socketRef.current?.emit('location_update', lastKnownCoordsRef.current)
+                } else {
+                  setHasLocation(false)
+                  toast('Could not get location — check GPS permissions', { icon: '📍' })
+                }
               },
               { timeout: 10000, maximumAge: 5000 },
             )
