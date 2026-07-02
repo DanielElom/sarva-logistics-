@@ -10,3 +10,4 @@ restartPolicyMaxRetries = 3
 [environments.production.variables]
 NODE_ENV = "production"
 PORT = "3001"
+NODE_VERSION = "20"
