@@ -97,8 +97,8 @@ export class DevService {
     // (which lazily creates the RiderProfile via ensureProfile)
     await this.db.riderProfile.upsert({
       where: { userId },
-      create: { userId, verificationStatus: 'VERIFIED', isOnline: true },
-      update: { verificationStatus: 'VERIFIED', isOnline: true },
+      create: { userId, verificationStatus: 'VERIFIED' },
+      update: { verificationStatus: 'VERIFIED' },
     });
     // Must also set User.status = ACTIVE so the under-review poll
     // (which watches GET /users/me → data.status) can detect approval.

@@ -127,42 +127,48 @@ export default function RiderHomePage() {
     setToggling(true)
     try {
       if (next) {
-        // Grab device position before going online so matching engine has coordinates immediately.
         let lat: number | null = null
         let lng: number | null = null
+
+        // Step 1 — Check saved coordinates from DB first (instant, no timeout)
+        try {
+          const { data: profile } = await api.get('/riders/me')
+          if (profile.latitude && profile.longitude) {
+            lat = profile.latitude
+            lng = profile.longitude
+            lastKnownCoordsRef.current = { latitude: Number(lat), longitude: Number(lng) }
+            setHasLocation(true)
+          }
+        } catch {
+          // DB check failed — proceed to device GPS
+        }
+
+        // Step 2 — Try device GPS (overrides saved coords if more accurate position is available)
         if (typeof navigator !== 'undefined' && navigator.geolocation) {
           try {
             const pos = await new Promise<GeolocationPosition>((resolve, reject) =>
               navigator.geolocation.getCurrentPosition(resolve, reject, {
-                timeout: 10000,
+                timeout: 5000,  // short timeout — we already have fallback from Step 1
                 maximumAge: 60000,
               })
             )
             lat = pos.coords.latitude
             lng = pos.coords.longitude
+            lastKnownCoordsRef.current = { latitude: lat, longitude: lng }
+            setHasLocation(true)
           } catch {
-            // Device GPS unavailable — fall back to saved coordinates from profile
-            try {
-              const { data: profile } = await api.get('/riders/me')
-              if (profile.latitude && profile.longitude) {
-                lat = profile.latitude
-                lng = profile.longitude
-              } else {
-                toast('Location unavailable — you may not receive nearby requests', { icon: '⚠️' })
-              }
-            } catch {
-              toast('Location unavailable — you may not receive nearby requests', { icon: '⚠️' })
+            // Device GPS unavailable — Step 1 saved coords are used if available
+            if (lat === null || lng === null) {
+              setHasLocation(false)
+              toast('Location unavailable — seed via dev tools to receive requests', { icon: '⚠️' })
             }
           }
         }
+
         await api.patch('/riders/me/status', { isOnline: true })
         setIsOnline(true)
-        // Seed coordinates immediately so the matching query finds this rider.
         if (lat !== null && lng !== null) {
-          const coords = { latitude: lat, longitude: lng }
-          lastKnownCoordsRef.current = coords
-          socketRef.current?.emit('location_update', coords)
-          setHasLocation(true)
+          socketRef.current?.emit('location_update', { latitude: lat, longitude: lng })
         }
       } else {
         await api.patch('/riders/me/status', { isOnline: false })

@@ -37,7 +37,6 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { RedisService } from '../redis/redis.service';
-import { OrdersService } from '../orders/orders.service';
 import { MatchingGateway } from './matching.gateway';
 import { NotificationsService } from '../notifications/notifications.service';
 import { OrderStatus, RiderType } from '../../generated/prisma/enums';
@@ -95,8 +94,6 @@ export class MatchingService implements OnModuleInit, OnModuleDestroy {
   constructor(
     private prisma: PrismaService,
     private redisService: RedisService,
-    @Inject(forwardRef(() => OrdersService))
-    private readonly ordersService: OrdersService,
     @Inject(forwardRef(() => MatchingGateway))
     private gateway: MatchingGateway,
     private notifications: NotificationsService,
@@ -135,6 +132,8 @@ export class MatchingService implements OnModuleInit, OnModuleDestroy {
     const lat = parseFloat(order.pickupLatitude.toString());
     const lng = parseFloat(order.pickupLongitude.toString());
 
+    process.stdout.write(`\x1b[36m[MATCHING] Order ${orderId}: searching from lat=${lat} lng=${lng} radius=${RADIUS_METRES}m\x1b[0m\n`);
+
     const raw = (await (this.prisma as any).$queryRawUnsafe(
       NEARBY_RIDERS_SQL,
       lng,
@@ -146,6 +145,11 @@ export class MatchingService implements OnModuleInit, OnModuleDestroy {
     if (order.isPremium) {
       candidates = candidates.filter((r) => r.riderType === RiderType.FLEET);
     }
+
+    process.stdout.write(`\x1b[36m[MATCHING] Found ${candidates.length} candidate(s)\x1b[0m\n`);
+    candidates.forEach((c) =>
+      process.stdout.write(`\x1b[36m[MATCHING]   → userId=${c.userId} distance=${Math.round(c.distance_metres)}m type=${c.riderType}\x1b[0m\n`),
+    );
 
     this.logger.log(
       `Order ${orderId}: found ${candidates.length} candidate(s) within ${RADIUS_METRES}m` +
