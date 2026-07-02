@@ -1,0 +1,24 @@
+{
+  "name": "Fair-Ride Logistics",
+  "short_name": "Fair-Ride",
+  "description": "Real-time dispatch logistics for Abuja",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8faf4",
+  "theme_color": "#003418",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -16,9 +16,14 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Fair-Ride',
-  description: 'On-demand logistics and delivery — fast, fair, reliable.',
+  title: 'Fair-Ride Logistics',
+  description: 'Real-time dispatch logistics for Abuja — on-demand, scheduled, and same-day delivery.',
   manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Fair-Ride',
+  },
 }
 
 export const viewport: Viewport = {

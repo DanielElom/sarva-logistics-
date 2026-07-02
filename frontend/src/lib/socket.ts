@@ -2,6 +2,8 @@
 
 import { io, Socket } from 'socket.io-client'
 
+const SOCKET_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'
+
 let socket: Socket | null = null
 
 export function getSocket(): Socket {
@@ -11,7 +13,7 @@ export function getSocket(): Socket {
         ? localStorage.getItem('fair-ride-token') ?? ''
         : ''
 
-    socket = io('http://localhost:3001', {
+    socket = io(SOCKET_URL, {
       query: { token },
       autoConnect: false,
       transports: ['websocket'],
@@ -26,7 +28,7 @@ export function getChatSocket(): Socket {
       ? localStorage.getItem('fair-ride-token') ?? ''
       : ''
 
-  return io('http://localhost:3001/chat', {
+  return io(`${SOCKET_URL}/chat`, {
     auth: { token },
     autoConnect: false,
     transports: ['websocket'],
