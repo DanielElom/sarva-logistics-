@@ -17,7 +17,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CallType, MessageType, OrderStatus } from '../../generated/prisma/enums';
+import { CallType, MessageType, OrderStatus } from '../../generated/prisma';
 
 const ACTIVE_ORDER_STATUSES: OrderStatus[] = [
   OrderStatus.ASSIGNED,

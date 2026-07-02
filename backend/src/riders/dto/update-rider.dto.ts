@@ -1,5 +1,5 @@
 import { IsEnum, IsOptional, IsString } from 'class-validator';
-import { CommissionModel, RiderType } from '../../../generated/prisma/enums';
+import { CommissionModel, RiderType } from '../../../generated/prisma';
 
 export class UpdateRiderDto {
   @IsOptional()

@@ -14,7 +14,7 @@ import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
 import { LogCallDto } from './dto/log-call.dto';
-import { UserRole } from '../../generated/prisma/enums';
+import { UserRole } from '../../generated/prisma';
 
 @ApiTags('chat')
 @ApiBearerAuth('JWT')

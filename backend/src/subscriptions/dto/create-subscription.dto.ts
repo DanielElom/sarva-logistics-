@@ -1,5 +1,5 @@
 import { IsEnum, IsInt, IsOptional, Max, Min } from 'class-validator';
-import { SubscriptionPlan } from '../../../generated/prisma/enums';
+import { SubscriptionPlan } from '../../../generated/prisma';
 
 export class CreateSubscriptionDto {
   @IsEnum(SubscriptionPlan)

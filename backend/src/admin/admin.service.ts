@@ -34,7 +34,7 @@ import {
   SubscriptionStatus,
   UserStatus,
   VerificationStatus,
-} from '../../generated/prisma/enums';
+} from '../../generated/prisma';
 
 const PRICING_KEYS = {
   baseFare: 'config:baseFare',

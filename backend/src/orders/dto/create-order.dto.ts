@@ -5,7 +5,7 @@ import {
   IsString,
   ValidateIf,
 } from 'class-validator';
-import { DeliveryType, PaymentMethod } from '../../../generated/prisma/enums';
+import { DeliveryType, PaymentMethod } from '../../../generated/prisma';
 
 export class CreateOrderDto {
   @IsNumber()

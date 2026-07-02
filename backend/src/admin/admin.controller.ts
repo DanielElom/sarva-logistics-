@@ -23,7 +23,7 @@ import {
   UserRole,
   UserStatus,
   VerificationStatus,
-} from '../../generated/prisma/enums';
+} from '../../generated/prisma';
 
 @ApiTags('admin')
 @ApiBearerAuth('JWT')

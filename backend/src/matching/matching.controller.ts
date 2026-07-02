@@ -13,7 +13,7 @@ import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
 import { JobResponseDto } from './dto/job-response.dto';
-import { UserRole } from '../../generated/prisma/enums';
+import { UserRole } from '../../generated/prisma';
 
 @ApiTags('matching')
 @ApiBearerAuth('JWT')

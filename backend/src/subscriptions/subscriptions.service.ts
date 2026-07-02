@@ -35,7 +35,7 @@ import {
   NotificationType,
   SubscriptionPlan,
   SubscriptionStatus,
-} from '../../generated/prisma/enums';
+} from '../../generated/prisma';
 
 export interface PlanDefinition {
   id: string;

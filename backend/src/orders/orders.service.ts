@@ -36,7 +36,7 @@ import { MatchingService } from '../matching/matching.service';
 import { SubscriptionsService } from '../subscriptions/subscriptions.service';
 import { NotificationsService } from '../notifications/notifications.service';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { OrderStatus } from '../../generated/prisma/enums';
+import { OrderStatus } from '../../generated/prisma';
 
 const CANCELLABLE_STATUSES: OrderStatus[] = [
   OrderStatus.PENDING,

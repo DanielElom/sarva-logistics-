@@ -30,7 +30,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { UserRole, UserStatus } from '../../generated/prisma/enums';
+import { UserRole, UserStatus } from '../../generated/prisma';
 import { User } from '../../generated/prisma';
 import { PrismaService } from '../prisma/prisma.service';
 import { RedisService } from '../redis/redis.service';

@@ -22,7 +22,7 @@ import { VerifyRiderDto } from './dto/verify-rider.dto';
 import {
   UserStatus,
   VerificationStatus,
-} from '../../generated/prisma/enums';
+} from '../../generated/prisma';
 
 @Injectable()
 export class RidersService {

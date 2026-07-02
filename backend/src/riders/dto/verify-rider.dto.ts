@@ -1,5 +1,5 @@
 import { IsEnum, IsOptional, IsString } from 'class-validator';
-import { VerificationStatus } from '../../../generated/prisma/enums';
+import { VerificationStatus } from '../../../generated/prisma';
 
 export class VerifyRiderDto {
   @IsEnum(VerificationStatus)

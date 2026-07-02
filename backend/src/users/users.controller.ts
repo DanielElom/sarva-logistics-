@@ -20,7 +20,7 @@ import { BusinessAccountDto } from './dto/business-account.dto';
 import { SaveAddressDto } from './dto/save-address.dto';
 import { UpdateStatusDto } from './dto/update-status.dto';
 import { UpdateFcmTokenDto } from './dto/update-fcm-token.dto';
-import { UserRole } from '../../generated/prisma/enums';
+import { UserRole } from '../../generated/prisma';
 
 @ApiTags('users')
 @ApiBearerAuth('JWT')

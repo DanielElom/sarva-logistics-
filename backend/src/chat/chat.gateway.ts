@@ -34,7 +34,7 @@ import {
 import { Server, Socket } from 'socket.io';
 import * as jwt from 'jsonwebtoken';
 import { ChatService } from './chat.service';
-import { MessageType } from '../../generated/prisma/enums';
+import { MessageType } from '../../generated/prisma';
 
 interface AuthSocket extends Socket {
   userId?: string;

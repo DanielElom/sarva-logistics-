@@ -15,7 +15,7 @@ import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
 import { CreateSubscriptionDto } from './dto/create-subscription.dto';
-import { SubscriptionStatus, UserRole } from '../../generated/prisma/enums';
+import { SubscriptionStatus, UserRole } from '../../generated/prisma';
 
 @ApiTags('subscriptions')
 @ApiBearerAuth('JWT')

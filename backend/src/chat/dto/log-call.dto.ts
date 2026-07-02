@@ -1,5 +1,5 @@
 import { IsEnum, IsInt, IsString, Min } from 'class-validator';
-import { CallType } from '../../../generated/prisma/enums';
+import { CallType } from '../../../generated/prisma';
 
 export class LogCallDto {
   @IsString()

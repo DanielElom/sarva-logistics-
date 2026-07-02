@@ -39,7 +39,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { RedisService } from '../redis/redis.service';
 import { MatchingGateway } from './matching.gateway';
 import { NotificationsService } from '../notifications/notifications.service';
-import { OrderStatus, RiderType } from '../../generated/prisma/enums';
+import { OrderStatus, RiderType } from '../../generated/prisma';
 import { Queue } from 'bullmq';
 import Redis from 'ioredis';
 

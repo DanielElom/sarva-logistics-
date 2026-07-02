@@ -1,5 +1,5 @@
 import { IsEnum, IsString, IsNotEmpty } from 'class-validator';
-import { MessageType } from '../../../generated/prisma/enums';
+import { MessageType } from '../../../generated/prisma';
 
 export class SendMessageDto {
   @IsString()

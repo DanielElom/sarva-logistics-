@@ -15,7 +15,7 @@ import { Roles } from '../auth/roles.decorator';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { CancelOrderDto } from './dto/cancel-order.dto';
-import { OrderStatus, UserRole } from '../../generated/prisma/enums';
+import { OrderStatus, UserRole } from '../../generated/prisma';
 
 @ApiTags('orders')
 @ApiBearerAuth('JWT')

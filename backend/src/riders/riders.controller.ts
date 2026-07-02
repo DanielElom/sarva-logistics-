@@ -18,7 +18,7 @@ import { UpdateRiderDto } from './dto/update-rider.dto';
 import { KycDto } from './dto/kyc.dto';
 import { VerifyRiderDto } from './dto/verify-rider.dto';
 import { ToggleStatusDto } from './dto/toggle-status.dto';
-import { UserRole } from '../../generated/prisma/enums';
+import { UserRole } from '../../generated/prisma';
 
 @ApiTags('riders')
 @ApiBearerAuth('JWT')

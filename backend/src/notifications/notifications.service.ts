@@ -18,7 +18,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { SmsService } from '../sms/sms.service';
-import { NotificationType } from '../../generated/prisma/enums';
+import { NotificationType } from '../../generated/prisma';
 
 type OrderEvent =
   | 'PENDING'

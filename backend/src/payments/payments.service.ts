@@ -38,7 +38,7 @@ import {
   OrderStatus,
   PaymentMethod,
   PaymentStatus,
-} from '../../generated/prisma/enums';
+} from '../../generated/prisma';
 
 const PLATFORM_RATE = 0.0; // V1: 0% commission — rider keeps 100%
 /* V2_FEATURE: COMMISSION

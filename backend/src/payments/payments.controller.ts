@@ -18,7 +18,7 @@ import { Roles } from '../auth/roles.decorator';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
 import { InitiatePaymentDto } from './dto/initiate-payment.dto';
 import { CashConfirmDto } from './dto/cash-confirm.dto';
-import { PayoutStatus, UserRole } from '../../generated/prisma/enums';
+import { PayoutStatus, UserRole } from '../../generated/prisma';
 
 @ApiTags('payments')
 @ApiBearerAuth('JWT')

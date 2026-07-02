@@ -17,7 +17,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { BusinessAccountDto } from './dto/business-account.dto';
 import { SaveAddressDto } from './dto/save-address.dto';
-import { UserStatus, VerificationStatus } from '../../generated/prisma/enums';
+import { UserStatus, VerificationStatus } from '../../generated/prisma';
 
 @Injectable()
 export class UsersService {
