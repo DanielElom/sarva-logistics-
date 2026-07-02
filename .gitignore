@@ -19,3 +19,7 @@ pnpm-debug.log*
 # Editor
 .vscode/
 .idea/
+admin-token.txt
+stitch_logistics_dispatch_pwa/
+stitch_logistics_dispatch_pwa 2/
+designs/
