@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "rm -rf dist && node scripts/copy-prisma.js && npx tsc -p tsconfig.build.json && node scripts/copy-prisma.js",
+    "build": "rm -rf dist && prisma generate && node scripts/copy-prisma.js && npx tsc -p tsconfig.build.json && node scripts/copy-prisma.js",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "node scripts/copy-prisma.js && nest start --watch",
