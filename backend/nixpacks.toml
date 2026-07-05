@@ -8,4 +8,4 @@ cmds = ["corepack enable && corepack prepare pnpm@latest --activate && pnpm i --
 cmds = ["pnpm build"]
 
 [start]
-cmd = "node dist/src/main.js"
+cmd = "npx prisma migrate deploy && node scripts/seed-if-empty.js && node dist/src/main.js"
