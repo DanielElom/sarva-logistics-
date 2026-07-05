@@ -68,8 +68,10 @@ async function bootstrap() {
     },
   });
 
+  // Railway sets PORT dynamically — must bind to it, and '0.0.0.0' so the
+  // container is reachable by Railway's healthcheck/edge proxy.
   const port = process.env.PORT || 3001;
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
   console.log(`Fair-Ride backend running on port ${port}`);
   console.log(`Swagger UI: http://localhost:${port}/api`);
 }
