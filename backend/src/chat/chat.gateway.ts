@@ -34,6 +34,7 @@ import {
 import { Server, Socket } from 'socket.io';
 import * as jwt from 'jsonwebtoken';
 import { ChatService } from './chat.service';
+import { getAllowedOrigins } from '../config/cors.config';
 import { MessageType } from '../../generated/prisma';
 
 interface AuthSocket extends Socket {
@@ -41,7 +42,13 @@ interface AuthSocket extends Socket {
   userRole?: string;
 }
 
-@WebSocketGateway({ cors: { origin: '*' }, namespace: '/chat' })
+@WebSocketGateway({
+  cors: {
+    origin: getAllowedOrigins(),
+    credentials: true,
+  },
+  namespace: '/chat',
+})
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer() server!: Server;
   private readonly logger = new Logger(ChatGateway.name);

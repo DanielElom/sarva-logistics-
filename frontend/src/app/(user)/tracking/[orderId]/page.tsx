@@ -261,7 +261,7 @@ export default function LiveTrackingPage() {
 
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
   const role = useAuthStore((s) => s.role)
-  const userId = useAuthStore((s) => s.user?.id)
+  const token = useAuthStore((s) => s.token)
 
   const activeOrder = useOrderStore((s) => s.activeOrder)
   const setActiveOrder = useOrderStore((s) => s.setActiveOrder)
@@ -348,11 +348,11 @@ export default function LiveTrackingPage() {
 
   /* ── socket ───────────────────────────────────────────────────── */
   useEffect(() => {
-    if (!userId || !orderId) return
+    if (!token || !orderId) return
 
-    const sock = io('http://localhost:3001', {
-      auth: { userId },
-      query: { userId },
+    const sock = io(process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001', {
+      auth: { token },
+      query: { token },
       transports: ['websocket'],
     })
     socketRef.current = sock
@@ -381,7 +381,7 @@ export default function LiveTrackingPage() {
       sock.disconnect()
       socketRef.current = null
     }
-  }, [userId, orderId, setActiveOrder, handleStatusChange])
+  }, [token, orderId, setActiveOrder, handleStatusChange])
 
   /* ── cancel ───────────────────────────────────────────────────── */
   async function handleCancel() {
