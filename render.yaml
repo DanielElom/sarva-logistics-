@@ -2,10 +2,12 @@ services:
   - type: web
     name: sarva-backend
     runtime: node
+    region: frankfurt
     rootDir: backend
     buildCommand: corepack enable && corepack prepare pnpm@latest --activate && pnpm install && pnpm build
     startCommand: npx prisma migrate deploy || true && node scripts/seed-if-empty.js || true && node dist/src/main.js
     plan: free
+    healthCheckPath: /
     envVars:
       - key: NODE_ENV
         value: production
@@ -29,6 +31,13 @@ services:
         sync: false
       - key: AFRICAS_TALKING_API_KEY
         sync: false
+      - key: AFRICAS_TALKING_USERNAME
+        sync: false
+      - key: PAYSTACK_SECRET_KEY
+        sync: false
+      - key: OPAY_SECRET_KEY
+        sync: false
+      - key: OPAY_MERCHANT_ID
+        sync: false
       - key: FCM_SERVER_KEY
         sync: false
-
