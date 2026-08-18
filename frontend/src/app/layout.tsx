@@ -16,13 +16,17 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Fair-Ride Logistics',
-  description: 'Real-time dispatch logistics for Abuja — on-demand, scheduled, and same-day delivery.',
+  title: 'Sarva Logistics',
+  description: 'Real-time dispatch logistics — We Grow When You Grow',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'Fair-Ride',
+    title: 'Sarva',
+  },
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/apple-touch-icon.png',
   },
 }
 

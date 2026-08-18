@@ -1,10 +1,10 @@
 {
-  "name": "Fair-Ride Logistics",
-  "short_name": "Fair-Ride",
-  "description": "Real-time dispatch logistics for Abuja",
+  "name": "Sarva Logistics",
+  "short_name": "Sarva",
+  "description": "Real-time dispatch logistics — We Grow When You Grow",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f8faf4",
+  "background_color": "#003418",
   "theme_color": "#003418",
   "orientation": "portrait",
   "icons": [
@@ -19,6 +19,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }

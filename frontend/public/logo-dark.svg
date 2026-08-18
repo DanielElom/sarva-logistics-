@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80">
+  <!-- S mark -->
+  <text x="10" y="68" font-family="Georgia, serif" font-size="72" font-weight="bold" fill="#ffffff">S</text>
+  <rect x="10" y="72" width="56" height="5" rx="2.5" fill="#4CAF50"/>
+  <polygon points="70,67 82,74 70,81" fill="#4CAF50"/>
+  <!-- Divider -->
+  <rect x="100" y="15" width="1.5" height="50" fill="#4CAF50" opacity="0.4"/>
+  <!-- Wordmark -->
+  <text x="112" y="52" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="#ffffff" letter-spacing="3">SARVA</text>
+  <text x="114" y="68" font-family="Arial, sans-serif" font-size="9" fill="#4CAF50" letter-spacing="5">LOGISTICS</text>
+</svg>
