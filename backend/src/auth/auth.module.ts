@@ -1,6 +1,6 @@
 /**
  * @module AuthModule
- * @description Authentication and authorization for Fair-Ride.
+ * @description Authentication and authorization for Sarva.
  *
  * Wires together:
  *   - PassportModule — provides the @UseGuards(JwtAuthGuard) infrastructure

@@ -25,7 +25,7 @@ export class SmsService {
   }
 
   async sendOtp(phone: string, otp: string): Promise<void> {
-    const message = `Your Fair-Ride OTP is: ${otp}. Valid for 10 minutes.`;
+    const message = `Your Sarva OTP is: ${otp}. Valid for 10 minutes.`;
     await this.sendSms(phone, message);
   }
 

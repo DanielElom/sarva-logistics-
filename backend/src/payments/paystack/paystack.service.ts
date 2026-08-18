@@ -1,6 +1,6 @@
 /**
  * @module PaystackService
- * @description Paystack payment gateway integration for Fair-Ride.
+ * @description Paystack payment gateway integration for Sarva.
  *
  * initializeTransaction() — creates a Paystack checkout session, returns
  *   authorizationUrl (redirect user here) and reference (store on order).

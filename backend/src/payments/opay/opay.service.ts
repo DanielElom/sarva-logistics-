@@ -1,6 +1,6 @@
 /**
  * @module OpayService
- * @description OPay mobile money payment gateway integration for Fair-Ride.
+ * @description OPay mobile money payment gateway integration for Sarva.
  *
  * initiatePayment() — creates an OPay cashier session (amount in Naira,
  *   internally converted to kobo for the API call). Returns cashierUrl
@@ -46,9 +46,9 @@ export class OpayService {
       `${BASE_URL}/international/cashier/create`,
       {
         reference,
-        mchShortName: 'FairRide',
+        mchShortName: 'Sarva',
         productName: 'Delivery',
-        productDesc: 'FairRide delivery payment',
+        productDesc: 'Sarva delivery payment',
         supplierInfo: '',
         amount: { total: amountNaira * 100, currency: 'NGN' },
         callbackUrl: '',

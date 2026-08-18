@@ -26,7 +26,7 @@ export default function Logo({
   const color = variant === 'dark' ? '#ffffff' : '#003418'
 
   return (
-    <div className={`flex items-center gap-${showWordmark ? '3' : '0'} ${className}`}>
+    <div className={`flex items-center ${showWordmark ? 'gap-3' : 'gap-0'} ${className}`}>
       {/* S Mark */}
       <div className="relative flex-shrink-0" style={{ width: s.s, height: s.s + 8 }}>
         <span
@@ -68,20 +68,22 @@ export default function Logo({
         />
       </div>
 
+      {/* Divider — sibling of the S mark, not inside the wordmark column */}
+      {showWordmark && (
+        <div
+          style={{
+            width: 1,
+            height: s.s * 0.6,
+            backgroundColor: '#4CAF50',
+            opacity: 0.4,
+            flexShrink: 0,
+          }}
+        />
+      )}
+
       {/* Wordmark */}
       {showWordmark && (
         <div className="flex flex-col justify-center">
-          <div
-            style={{
-              width: 1,
-              height: s.s * 0.6,
-              backgroundColor: '#4CAF50',
-              opacity: 0.4,
-              marginRight: s.gap,
-              display: 'inline-block',
-              verticalAlign: 'middle',
-            }}
-          />
           <span
             style={{
               fontFamily: 'Georgia, serif',

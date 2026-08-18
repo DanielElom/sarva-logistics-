@@ -153,7 +153,7 @@ export default function NavigationDrawer({ isOpen, onClose }: Props) {
       title: 'Support',
       items: [
         { icon: 'support_agent', label: 'Help & Support', action: () => navigate('/shared/support') },
-        { icon: 'info', label: 'About Fair-Ride', action: () => navigate('/shared/about') },
+        { icon: 'info', label: 'About Sarva', action: () => navigate('/shared/about') },
       ],
     },
     {
@@ -209,7 +209,7 @@ export default function NavigationDrawer({ isOpen, onClose }: Props) {
       title: 'Support',
       items: [
         { icon: 'support_agent', label: 'Help & Support', action: () => navigate('/shared/support') },
-        { icon: 'info', label: 'About Fair-Ride', action: () => navigate('/shared/about') },
+        { icon: 'info', label: 'About Sarva', action: () => navigate('/shared/about') },
       ],
     },
     {
@@ -312,7 +312,7 @@ export default function NavigationDrawer({ isOpen, onClose }: Props) {
         {/* ── Logout confirmation inline ── */}
         {showLogoutConfirm && (
           <div className="mx-4 mb-3 p-4 rounded-2xl bg-error-container/30 border border-error/20 space-y-3">
-            <p className="text-sm font-semibold text-on-surface">Log out of Fair-Ride?</p>
+            <p className="text-sm font-semibold text-on-surface">Log out of Sarva?</p>
             <div className="flex gap-2">
               <button
                 onClick={() => setShowLogoutConfirm(false)}
@@ -343,7 +343,7 @@ export default function NavigationDrawer({ isOpen, onClose }: Props) {
             </div>
             <div className="flex flex-col min-w-0">
               <span className="font-['Manrope'] font-extrabold text-xs text-primary leading-tight truncate">
-                Fair-Ride
+                Sarva Logistics
               </span>
               <span className="text-[10px] text-on-surface-variant font-medium">Version 1.0.0</span>
             </div>

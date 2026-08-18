@@ -1,6 +1,6 @@
 /**
  * @module AdminModule
- * @description Back-office management for Fair-Ride operators.
+ * @description Back-office management for Sarva operators.
  *
  * Covers: dashboard metrics, user management, rider KYC verification,
  * order oversight (view/override/reassign), dispute resolution,

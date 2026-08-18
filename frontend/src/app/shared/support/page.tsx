@@ -64,7 +64,7 @@ const FAQ_SECTIONS = [
       },
       {
         q: 'Can I have multiple accounts?',
-        a: 'Each phone number can only be linked to one Fair-Ride account. If you need a business account in addition to a personal account, contact us to discuss multi-account options.',
+        a: 'Each phone number can only be linked to one Sarva account. If you need a business account in addition to a personal account, contact us to discuss multi-account options.',
       },
     ],
   },
@@ -260,8 +260,8 @@ export default function SupportPage() {
             <ContactCard
               icon="mail"
               title="Email Support"
-              subtitle="support@fairride.ng"
-              onClick={() => window.open('mailto:support@fairride.ng')}
+              subtitle="support@sarvalogistics.ng"
+              onClick={() => window.open('mailto:support@sarvalogistics.ng')}
             />
             <ContactCard
               icon="call"

@@ -1,6 +1,6 @@
 /**
  * @page PrivacyPage
- * @description Privacy Policy for Fair-Ride — how we collect, use, and protect your data.
+ * @description Privacy Policy for Sarva — how we collect, use, and protect your data.
  * @route /shared/privacy
  */
 'use client'
@@ -32,7 +32,7 @@ const SECTIONS = [
   {
     icon: 'lock',
     title: 'Data Security',
-    body: 'We implement technical and organizational measures to protect your data including encrypted storage, access controls, and regular security reviews. However, no internet transmission is 100% secure. Please report any security concerns to security@fair-ride.ng.',
+    body: 'We implement technical and organizational measures to protect your data including encrypted storage, access controls, and regular security reviews. However, no internet transmission is 100% secure. Please report any security concerns to security@sarvalogistics.ng.',
   },
   {
     icon: 'accessibility',
@@ -42,7 +42,7 @@ const SECTIONS = [
   {
     icon: 'child_care',
     title: 'Children\'s Privacy',
-    body: 'Fair-Ride is not intended for users under 18 years of age. We do not knowingly collect data from minors. If you believe we have collected data from a minor, please contact us immediately.',
+    body: 'Sarva is not intended for users under 18 years of age. We do not knowingly collect data from minors. If you believe we have collected data from a minor, please contact us immediately.',
   },
   {
     icon: 'update',
@@ -79,7 +79,7 @@ export default function PrivacyPage() {
             privacy_tip
           </span>
           <div>
-            <p className="font-bold text-on-surface text-sm">Fair-Ride Privacy Policy</p>
+            <p className="font-bold text-on-surface text-sm">Sarva Privacy Policy</p>
             <p className="text-xs text-on-surface-variant mt-0.5">Last updated: June 2026 · Version 1.0</p>
           </div>
         </div>
@@ -105,10 +105,10 @@ export default function PrivacyPage() {
 
         <footer className="text-center py-4 space-y-1">
           <p className="text-xs text-on-surface-variant/60">
-            © 2026 Fair-Ride Logistics. All rights reserved.
+            © 2026 Sarva Logistics. All rights reserved.
           </p>
           <p className="text-xs text-on-surface-variant/40">
-            Privacy questions? Contact privacy@fair-ride.ng
+            Privacy questions? Contact privacy@sarvalogistics.ng
           </p>
         </footer>
       </main>

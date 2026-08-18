@@ -1,5 +1,5 @@
 /**
- * Fair-Ride Backend Feature Flags
+ * Sarva Backend Feature Flags
  * Keep in sync with frontend/src/lib/features.ts
  */
 export const FEATURES = {

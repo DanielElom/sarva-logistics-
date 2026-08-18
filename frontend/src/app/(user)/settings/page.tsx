@@ -171,7 +171,7 @@ export default function SettingsPage() {
 
     // Load notification prefs from localStorage
     try {
-      const saved = localStorage.getItem('fair-ride-notif-prefs')
+      const saved = localStorage.getItem('sarva-notif-prefs')
       if (saved) setNotifs(JSON.parse(saved))
     } catch {}
 
@@ -200,7 +200,7 @@ export default function SettingsPage() {
   function toggleNotif(key: NotifKey, val: boolean) {
     const next = { ...notifs, [key]: val }
     setNotifs(next)
-    try { localStorage.setItem('fair-ride-notif-prefs', JSON.stringify(next)) } catch {}
+    try { localStorage.setItem('sarva-notif-prefs', JSON.stringify(next)) } catch {}
   }
 
   async function handlePhotoChange(e: React.ChangeEvent<HTMLInputElement>) {

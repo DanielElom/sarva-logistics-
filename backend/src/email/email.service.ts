@@ -3,7 +3,7 @@
  * @description Transactional email via Resend with branded HTML template.
  *
  * Falls back to console.log when RESEND_API_KEY is unset (dev/test environments).
- * sendOtpEmail uses an inline HTML email with Fair-Ride branding — no external
+ * sendOtpEmail uses an inline HTML email with Sarva branding — no external
  * stylesheet dependencies so email clients render it correctly.
  */
 import { Injectable, Logger } from '@nestjs/common';
@@ -25,7 +25,7 @@ export class EmailService {
 
   async sendOtpEmail(to: string, otp: string, name?: string | null): Promise<void> {
     const displayName = name ?? 'there';
-    const subject = 'Your Fair-Ride OTP Code';
+    const subject = 'Your Sarva Logistics OTP Code';
     const html = this.buildOtpHtml(displayName, otp);
 
     if (!this.resend) {
@@ -34,7 +34,7 @@ export class EmailService {
     }
 
     const { error } = await this.resend.emails.send({
-      from: 'Fair-Ride <onboarding@resend.dev>',
+      from: 'Sarva Logistics <onboarding@resend.dev>',
       to,
       subject,
       html,
@@ -53,7 +53,7 @@ export class EmailService {
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Fair-Ride OTP</title>
+  <title>Your Sarva Logistics OTP</title>
 </head>
 <body style="margin:0;padding:0;background-color:#f8faf4;font-family:'Inter',Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f8faf4;padding:40px 20px;">
@@ -69,7 +69,7 @@ export class EmailService {
                   <td>
                     <div style="display:inline-flex;align-items:center;gap:10px;">
                       <div style="width:40px;height:40px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">🚚</div>
-                      <span style="font-family:'Manrope',Arial,sans-serif;font-size:20px;font-weight:800;color:#ffffff;letter-spacing:-0.5px;">Fair-Ride</span>
+                      <span style="font-family:'Manrope',Arial,sans-serif;font-size:20px;font-weight:800;color:#ffffff;letter-spacing:-0.5px;">Sarva Logistics</span>
                     </div>
                     <p style="color:rgba(255,255,255,0.6);font-size:12px;margin:8px 0 0;letter-spacing:1px;text-transform:uppercase;">Secure Verification</p>
                   </td>
@@ -83,7 +83,7 @@ export class EmailService {
             <td style="padding:40px 40px 32px;">
               <p style="color:#404941;font-size:15px;margin:0 0 8px;">Hi ${name},</p>
               <p style="color:#191d19;font-size:15px;margin:0 0 32px;line-height:1.6;">
-                Use the code below to verify your identity on Fair-Ride. It's valid for <strong>10 minutes</strong>.
+                Use the code below to verify your identity on Sarva. It's valid for <strong>10 minutes</strong>.
               </p>
 
               <!-- OTP Box -->
@@ -98,7 +98,7 @@ export class EmailService {
                   <td style="padding:16px 20px;">
                     <p style="color:#93000a;font-size:13px;font-weight:600;margin:0 0 4px;">⚠ Security Warning</p>
                     <p style="color:#ba1a1a;font-size:13px;margin:0;line-height:1.5;">
-                      Never share this code with anyone. Fair-Ride staff will never ask for your OTP.
+                      Never share this code with anyone. Sarva staff will never ask for your OTP.
                     </p>
                   </td>
                 </tr>
@@ -114,7 +114,7 @@ export class EmailService {
           <tr>
             <td style="background:#f2f4ee;padding:24px 40px;border-top:1px solid #e0e3dd;">
               <p style="color:#707970;font-size:12px;margin:0;text-align:center;line-height:1.6;">
-                Fair-Ride Logistics · On-demand delivery, built for Africa<br/>
+                © 2026 Sarva Logistics · We Grow When You Grow<br/>
                 <span style="color:#c0c9be;">This is an automated message — please do not reply.</span>
               </p>
             </td>

@@ -72,7 +72,7 @@ export default function UnderReviewPage() {
           >
             <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>arrow_back</span>
           </button>
-          <h1 className="font-['Manrope'] font-bold text-lg text-primary">Fair-Ride</h1>
+          <h1 className="font-['Manrope'] font-bold text-lg text-primary">Sarva</h1>
         </div>
         <button
           onClick={() => alert('Options coming soon')}

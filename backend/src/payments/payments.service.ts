@@ -1,6 +1,6 @@
 /**
  * @module PaymentsService
- * @description Payment initiation, webhook handling, and commission split for Fair-Ride.
+ * @description Payment initiation, webhook handling, and commission split for Sarva.
  *
  * COMMISSION SPLIT LOGIC
  * ======================
@@ -96,7 +96,7 @@ export class PaymentsService {
     const callbackUrl = `${process.env['APP_URL'] || 'http://localhost:3000'}/payment/verify?ref=${reference}`;
 
     const result = await this.paystack.initializeTransaction(
-      order.user.email || `${order.user.phone}@fairride.ng`,
+      order.user.email || `${order.user.phone}@sarvalogistics.ng`,
       amountKobo,
       reference,
       callbackUrl,

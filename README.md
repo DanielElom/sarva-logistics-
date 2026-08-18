@@ -1,13 +1,13 @@
-# Fair-Ride
+# Sarva
 
-A production-ready logistics and dispatch platform built for the Nigerian market. Fair-Ride connects senders with riders for on-demand, scheduled, and same-day deliveries. The platform supports individual users, vendors, restaurants, and corporate accounts, with a full admin dashboard and real-time order tracking.
+A production-ready logistics and dispatch platform built for the Nigerian market. Sarva connects senders with riders for on-demand, scheduled, and same-day deliveries. The platform supports individual users, vendors, restaurants, and corporate accounts, with a full admin dashboard and real-time order tracking.
 
 ---
 
 ## Monorepo Structure
 
 ```
-fair-ride/
+sarva/
 ├── backend/      # NestJS 11 REST + WebSocket API
 └── frontend/     # Next.js 16 PWA (in development)
 ```

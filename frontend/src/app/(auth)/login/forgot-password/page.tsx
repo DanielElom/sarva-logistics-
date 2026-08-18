@@ -90,7 +90,7 @@ export default function ForgotPasswordPage() {
             </span>
           </button>
           <span className="font-headline font-bold text-lg tracking-tight text-primary">
-            Fair-Ride
+            Sarva
           </span>
         </div>
       </header>

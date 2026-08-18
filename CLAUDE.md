@@ -1,4 +1,4 @@
-# Fair-Ride Logistics — Claude Code Briefing
+# Sarva Logistics — Claude Code Briefing
 
 ## What this project is
 Full-stack logistics dispatch PWA. Package delivery app for Abuja, Nigeria.
@@ -40,7 +40,7 @@ redis-cli ping
 - SMS:      Africa's Talking (empty key = console log fallback in dev)
 
 ## Project structure
-fair-ride/
+sarva/
 ├── backend/
 │   ├── prisma/
 │   │   ├── schema.prisma        ← all 16 DB models + enums
@@ -96,8 +96,8 @@ All color tokens: primary, surface, on-surface, etc. are defined there.
 
 ### 2. Auth token dual storage
 Token is stored in BOTH `localStorage` AND `document.cookie`.
-Cookie name: `fair-ride-token`
-This is intentional — Next.js `proxy.ts` middleware reads the cookie for SSR route protection.
+Cookie name: `sarva-token`
+This is intentional — Next.js `src/middleware.ts` reads the cookie for SSR route protection.
 Do not remove the cookie sync from `auth.store.ts`.
 
 ### 3. API calls
@@ -130,7 +130,7 @@ When adding a new screen:
 - [ ] Wrap in correct wrapper (ScreenWrapper or AdminWrapper)
 - [ ] Add auth guard
 - [ ] Follow 15 rules in `src/lib/convert-stitch.ts`
-- [ ] Add to `proxy.ts` public routes if pre-auth screen
+- [ ] Add to `src/middleware.ts` public routes if pre-auth screen
 - [ ] Add `@page` JSDoc comment at top
 
 ### 8. Adding a backend module

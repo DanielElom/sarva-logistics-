@@ -128,7 +128,7 @@ export default function CreatePasswordPage() {
             </span>
           </button>
           <span className="font-headline font-bold text-lg tracking-tight text-primary">
-            Fair-Ride
+            Sarva
           </span>
         </div>
         <span className="text-sm font-extrabold text-primary tracking-tighter pr-1">
@@ -143,7 +143,7 @@ export default function CreatePasswordPage() {
             Create Your Password
           </h1>
           <p className="text-on-surface-variant text-sm font-medium leading-relaxed">
-            Choose a strong password to protect your Fair-Ride account.
+            Choose a strong password to protect your Sarva account.
           </p>
         </section>
 

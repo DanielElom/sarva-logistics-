@@ -396,7 +396,7 @@ export default function BusinessSettingsPage() {
                     <div className="flex items-start gap-3">
                       <span className="material-symbols-outlined text-error flex-shrink-0 mt-0.5" style={{ fontVariationSettings: "'FILL' 1", fontSize: '22px' }}>warning</span>
                       <div>
-                        <p className="font-['Manrope'] font-bold text-on-surface text-sm">Sign out of Fair-Ride?</p>
+                        <p className="font-['Manrope'] font-bold text-on-surface text-sm">Sign out of Sarva?</p>
                         <p className="text-xs text-on-surface-variant mt-1">You'll need to sign in again to manage your business account.</p>
                       </div>
                     </div>

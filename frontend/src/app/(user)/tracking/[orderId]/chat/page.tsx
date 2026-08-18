@@ -63,7 +63,7 @@ export default function ChatPage() {
     // Socket
     if (!userId) return
     const sock = io('http://localhost:3001/chat', {
-      auth: { token: typeof window !== 'undefined' ? localStorage.getItem('fair-ride-token') ?? '' : '' },
+      auth: { token: typeof window !== 'undefined' ? localStorage.getItem('sarva-token') ?? '' : '' },
       transports: ['websocket'],
     })
     socketRef.current = sock

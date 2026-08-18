@@ -1,6 +1,6 @@
 /**
  * @module MatchingService
- * @description Implements Fair-Ride's rider-matching algorithm.
+ * @description Implements Sarva's rider-matching algorithm.
  *
  * MATCHING ALGORITHM
  * ==================

@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation'
 import ScreenWrapper from '@/components/layout/ScreenWrapper'
 import { useAuthStore } from '@/stores/auth.store'
 import type { UserRole } from '@/stores/auth.store'
+import Logo from '@/components/ui/Logo'
 
 function homeForRole(role: UserRole): string {
   if (role === 'RIDER') return '/rider/home'
@@ -50,24 +51,17 @@ export default function WelcomePage() {
         />
 
         <div className="absolute top-0 left-0 w-full px-8 py-10 z-20 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 editorial-gradient rounded-xl flex items-center justify-center shadow-lg shadow-emerald-950/20">
-              <span className="material-symbols-outlined text-white" style={{ fontVariationSettings: "'FILL' 1" }}>
-                two_wheeler
-              </span>
-            </div>
-            <h1 className="font-headline font-extrabold text-2xl tracking-tighter text-white">Courier</h1>
-          </div>
+          <Logo variant="dark" size="md" showWordmark={true} />
         </div>
 
         <div className="relative z-10 px-8 pb-16 w-full">
           <div className="space-y-6">
             <div className="space-y-2">
               <span className="inline-block px-3 py-1 rounded-full bg-primary-container/30 backdrop-blur-md text-primary-fixed text-xs font-semibold tracking-widest uppercase">
-                Fair-Ride Logistics
+                SARVA LOGISTICS
               </span>
               <h2 className="font-headline text-5xl font-bold text-white leading-[1.1] tracking-tight">
-                Architectural <br /> Delivery.
+                We Grow When You Grow
               </h2>
               <p className="text-surface-variant font-body text-lg max-w-md opacity-90 leading-relaxed">
                 Experience a new standard in logistics. Reliable, precise, and built for the modern enterprise.

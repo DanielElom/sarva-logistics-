@@ -1,4 +1,4 @@
-# Fair-Ride — Build Progress Log
+# Sarva — Build Progress Log
 
 ## ✅ Completed
 ### Backend (11 modules)
@@ -50,7 +50,7 @@
 8. Wire real Google Maps API key
 9. Wire real Paystack live keys
 10. Wire Africa's Talking SMS for real OTP delivery
-11. Configure custom domain (fairride.ng)
+11. Configure custom domain (sarvalogistics.ng)
 12. Test full flow on production
 
 ## 💡 Key Architectural Decisions

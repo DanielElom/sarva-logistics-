@@ -1,10 +1,10 @@
 /**
  * @module AuthService
- * @description Handles all authentication flows for Fair-Ride.
+ * @description Handles all authentication flows for Sarva.
  *
  * TOKEN STRATEGY
  * ==============
- * Fair-Ride uses a dual-token system for seamless UX:
+ * Sarva uses a dual-token system for seamless UX:
  *
  * Access Token (JWT, 30 days):
  *   Used for all API calls via Authorization: Bearer header.
@@ -72,7 +72,7 @@ export class AuthService {
     await this.sms.sendOtp(phone, otp);
 
     process.stdout.write(
-      `\x1b[32m\n╔════════════════════════════════╗\n║         FAIR-RIDE OTP          ║\n╠════════════════════════════════╣\n║ Phone: ${phone.padEnd(23)}║\n║ OTP:   ${otp.padEnd(23)}║\n╚════════════════════════════════╝\x1b[0m\n\n`,
+      `\x1b[32m\n╔════════════════════════════════╗\n║           SARVA OTP            ║\n╠════════════════════════════════╣\n║ Phone: ${phone.padEnd(23)}║\n║ OTP:   ${otp.padEnd(23)}║\n╚════════════════════════════════╝\x1b[0m\n\n`,
     );
 
     const db = this.prisma as any;
@@ -239,7 +239,7 @@ export class AuthService {
     await this.sms.sendOtp(phone, otp);
 
     process.stdout.write(
-      `\x1b[33m\n╔════════════════════════════════╗\n║      FAIR-RIDE RESET OTP       ║\n╠════════════════════════════════╣\n║ Phone: ${phone.padEnd(23)}║\n║ OTP:   ${otp.padEnd(23)}║\n╚════════════════════════════════╝\x1b[0m\n\n`,
+      `\x1b[33m\n╔════════════════════════════════╗\n║        SARVA RESET OTP         ║\n╠════════════════════════════════╣\n║ Phone: ${phone.padEnd(23)}║\n║ OTP:   ${otp.padEnd(23)}║\n╚════════════════════════════════╝\x1b[0m\n\n`,
     );
 
     const db = this.prisma as any;

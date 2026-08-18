@@ -87,7 +87,7 @@ export default function SoundsSettingsPage() {
             </button>
             <h1 className="font-headline font-bold text-lg tracking-tight">Sound Settings</h1>
           </div>
-          <span className="font-headline font-extrabold text-emerald-900">Fair-Ride</span>
+          <span className="font-headline font-extrabold text-emerald-900">Sarva</span>
         </div>
       </header>
 

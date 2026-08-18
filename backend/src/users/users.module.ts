@@ -1,6 +1,6 @@
 /**
  * @module UsersModule
- * @description Customer profile management for Fair-Ride users.
+ * @description Customer profile management for Sarva users.
  *
  * Covers: profile completion (name, email, avatar), saved addresses,
  * business account registration, and account deletion.

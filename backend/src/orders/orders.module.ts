@@ -1,6 +1,6 @@
 /**
  * @module OrdersModule
- * @description Core order lifecycle management for Fair-Ride.
+ * @description Core order lifecycle management for Sarva.
  *
  * Three controllers:
  *   PublicOrdersController  — unauthenticated: GET /orders/estimate, GET /orders/places

@@ -81,7 +81,7 @@ export default function HomePage() {
           >
             <span className="material-symbols-outlined" style={{ fontSize: '24px' }}>menu</span>
           </button>
-          <span className="font-headline font-black text-xl text-primary tracking-tight">Fair-Ride</span>
+          <span className="font-headline font-black text-xl text-primary tracking-tight">Sarva</span>
         </div>
 
         <button

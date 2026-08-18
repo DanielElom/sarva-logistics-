@@ -25,7 +25,7 @@ export function middleware(request: NextRequest) {
   // Root path is always accessible (handles its own redirect)
   if (pathname === '/') return NextResponse.next()
 
-  const token = request.cookies.get('fair-ride-token')?.value
+  const token = request.cookies.get('sarva-token')?.value
   if (!token) {
     return NextResponse.redirect(new URL('/welcome', request.url))
   }

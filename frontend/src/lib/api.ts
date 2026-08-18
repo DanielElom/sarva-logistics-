@@ -1,6 +1,6 @@
 /**
  * @lib api.ts
- * @description Central Axios instance for all Fair-Ride API calls.
+ * @description Central Axios instance for all Sarva API calls.
  *
  * REQUEST INTERCEPTOR
  * Reads the JWT access token from localStorage and attaches it as
@@ -20,8 +20,8 @@
  *      to /welcome so the user must log in again.
  *
  * Token storage strategy:
- *   localStorage['fair-ride-token']  — read by this interceptor for API calls
- *   document.cookie fair-ride-token  — read by Next.js middleware for SSR routing
+ *   localStorage['sarva-token']  — read by this interceptor for API calls
+ *   document.cookie sarva-token  — read by Next.js middleware for SSR routing
  *   Zustand store (persisted)        — source of truth for UI state
  */
 'use client'
@@ -36,7 +36,7 @@ const api = axios.create({
 
 api.interceptors.request.use((config) => {
   if (typeof window !== 'undefined') {
-    const token = localStorage.getItem('fair-ride-token')
+    const token = localStorage.getItem('sarva-token')
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
@@ -63,7 +63,7 @@ api.interceptors.response.use(
       // Pre-auth 401 (e.g. wrong OTP, bad credentials on a public endpoint).
       // No token means the user was never authenticated — don't wipe state or
       // redirect. Just let the error propagate to the call-site catch block.
-      const hasToken = !!localStorage.getItem('fair-ride-token')
+      const hasToken = !!localStorage.getItem('sarva-token')
       if (!hasToken && !refreshToken) {
         return Promise.reject(error)
       }

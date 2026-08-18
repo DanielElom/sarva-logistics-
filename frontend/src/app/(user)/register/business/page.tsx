@@ -250,7 +250,7 @@ export default function BusinessRegisterPage() {
             verified
           </span>
           <p className="text-sm text-on-surface leading-relaxed">
-            Verification helps us maintain a secure ecosystem for Fair-Ride business partners. Your documents are encrypted and stored securely.
+            Verification helps us maintain a secure ecosystem for Sarva business partners. Your documents are encrypted and stored securely.
           </p>
         </div>
 
@@ -409,7 +409,7 @@ export default function BusinessRegisterPage() {
 
         {/* terms */}
         <p className="text-center text-xs text-on-surface-variant px-4">
-          By proceeding, you agree to Fair-Ride's{' '}
+          By proceeding, you agree to Sarva's{' '}
           <button onClick={() => toast('Coming soon', { icon: '📄' })} className="text-primary font-bold underline underline-offset-2">
             Business Terms of Service
           </button>

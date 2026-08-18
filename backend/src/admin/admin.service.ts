@@ -1,6 +1,6 @@
 /**
  * @module AdminService
- * @description Back-office operations service for Fair-Ride platform operators.
+ * @description Back-office operations service for Sarva platform operators.
  *
  * PRICING CONFIG
  * Dynamic pricing values are stored in Redis for zero-downtime updates.

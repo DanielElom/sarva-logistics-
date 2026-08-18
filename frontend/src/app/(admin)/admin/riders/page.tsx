@@ -73,7 +73,7 @@ export default function AdminRidersPage() {
     const csv = [headers, ...rows].map(row => row.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n')
     const blob = new Blob([csv], { type: 'text/csv' })
     const url = URL.createObjectURL(blob)
-    const a = document.createElement('a'); a.href = url; a.download = 'fair-ride-riders.csv'; a.click()
+    const a = document.createElement('a'); a.href = url; a.download = 'sarva-riders.csv'; a.click()
     URL.revokeObjectURL(url)
   }
 

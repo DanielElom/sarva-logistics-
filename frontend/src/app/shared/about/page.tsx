@@ -1,6 +1,6 @@
 /**
  * @page AboutPage
- * @description About Fair-Ride — mission, team, version info, and legal links.
+ * @description About Sarva — mission, team, version info, and legal links.
  * @route /shared/about
  */
 'use client'
@@ -43,7 +43,7 @@ export default function AboutPage() {
           </span>
         </button>
         <h1 className="font-['Manrope'] font-bold text-lg text-primary tracking-tight">
-          About Fair-Ride
+          About Sarva
         </h1>
       </header>
 
@@ -65,14 +65,14 @@ export default function AboutPage() {
             </div>
           </div>
           <h2 className="font-['Manrope'] font-extrabold text-3xl tracking-tight text-on-surface mb-1">
-            Fair-Ride Logistics
+            Sarva Logistics
           </h2>
           <p className="text-on-surface-variant text-sm font-semibold uppercase tracking-widest mb-3">
-            Architectural Delivery.
+            We Grow When You Grow
           </p>
           <div className="flex items-center gap-2">
             <span className="px-3 py-1 rounded-full bg-surface-container-high text-xs font-bold text-on-surface-variant">
-              Version 1.0.0
+              Sarva Logistics v1.0.0
             </span>
             <span className="px-3 py-1 rounded-full bg-primary/10 text-xs font-bold text-primary uppercase tracking-wide">
               Beta
@@ -92,13 +92,13 @@ export default function AboutPage() {
             <h3 className="font-['Manrope'] font-bold text-on-surface text-lg">Our Mission</h3>
           </div>
           <p className="text-sm text-on-surface-variant leading-relaxed mb-3">
-            Fair-Ride is building Abuja's most reliable last-mile delivery network — one verified rider at a time. We believe that access to fast, professional logistics should not be a luxury reserved for large corporations.
+            Sarva is building Abuja's most reliable last-mile delivery network — one verified rider at a time. We believe that access to fast, professional logistics should not be a luxury reserved for large corporations.
           </p>
           <p className="text-sm text-on-surface-variant leading-relaxed mb-3">
-            Our "Architectural Courier" philosophy means treating every delivery as a precisely engineered operation: the right rider, the right route, the right timing. Every parcel handled with the care of a skilled craftsman.
+            "Sarva" means all — everyone, everything, the whole. That is the promise in the name: a delivery network that serves the whole of Abuja, not just the parts that are easy to reach. Every parcel is handled with the care of a skilled craftsman.
           </p>
           <p className="text-sm text-on-surface-variant leading-relaxed">
-            From individual senders in Garki to restaurants in Wuse 2, Fair-Ride is designed to serve the full spectrum of Abuja's economy — with transparency, accountability, and community at its core.
+            From individual senders in Garki to restaurants in Wuse 2, Sarva is designed to serve the full spectrum of Abuja's economy — with transparency, accountability, and community at its core.
           </p>
         </section>
 
@@ -224,10 +224,10 @@ export default function AboutPage() {
         {/* ── Footer ── */}
         <footer className="text-center py-4 space-y-2">
           <p className="text-on-surface font-['Manrope'] font-bold text-sm">
-            Built with ❤️ in Nigeria
+            Built in Nigeria, for Nigeria
           </p>
           <p className="text-xs text-on-surface-variant/60 leading-relaxed">
-            © 2026 Fair-Ride Logistics. All rights reserved.
+            © 2026 Sarva Logistics. All rights reserved.
             <br />
             Designed for efficiency, built for the community.
           </p>

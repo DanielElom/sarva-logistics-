@@ -122,7 +122,7 @@ export default function ResetOtpPage() {
             </span>
           </button>
           <span className="font-headline font-bold text-lg tracking-tight text-primary">
-            Fair-Ride
+            Sarva
           </span>
         </div>
         <span className="text-sm font-extrabold text-primary tracking-tighter pr-1">

@@ -1,6 +1,6 @@
 /**
  * @module OrdersService
- * @description Core order lifecycle management for Fair-Ride.
+ * @description Core order lifecycle management for Sarva.
  *
  * DYNAMIC PRICING FORMULA
  * =======================

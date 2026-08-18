@@ -39,7 +39,7 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('Fair-Ride API')
+    .setTitle('Sarva API')
     .setDescription(
       'Logistics & dispatch platform — on-demand, scheduled, and same-day delivery for the Nigerian market.',
     )
@@ -72,7 +72,7 @@ async function bootstrap() {
   // container is reachable by Railway's healthcheck/edge proxy.
   const port = process.env.PORT || 3001;
   await app.listen(port, '0.0.0.0');
-  console.log(`Fair-Ride backend running on port ${port}`);
+  console.log(`Sarva backend running on port ${port}`);
   console.log(`Swagger UI: http://localhost:${port}/api`);
 }
 bootstrap();

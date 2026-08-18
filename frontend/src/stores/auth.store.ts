@@ -1,16 +1,16 @@
 /**
  * @store AuthStore
- * @description Global authentication state for Fair-Ride, persisted to localStorage.
+ * @description Global authentication state for Sarva, persisted to localStorage.
  *
  * PERSISTENCE
- * Persisted under key 'fair-ride-auth' via Zustand persist middleware.
+ * Persisted under key 'sarva-auth' via Zustand persist middleware.
  * Every field is persisted (partialize returns all state fields) so the
  * user remains logged in across page refreshes and browser restarts.
  *
  * TOKEN DUAL-WRITE
  * setAuth and setAccessToken both write the token to two places:
- *   1. localStorage['fair-ride-token'] — read by the Axios request interceptor
- *   2. document.cookie fair-ride-token — read by Next.js middleware for SSR redirects
+ *   1. localStorage['sarva-token'] — read by the Axios request interceptor
+ *   2. document.cookie sarva-token — read by Next.js middleware for SSR redirects
  * clearAuth deletes both to ensure a full logout regardless of which layer checks.
  *
  * PENDING FLOW STATE
@@ -84,8 +84,8 @@ export const useAuthStore = create<AuthState>()(
 
       setAuth: (user, accessToken, refreshToken) => {
         if (typeof window !== 'undefined') {
-          localStorage.setItem('fair-ride-token', accessToken)
-          document.cookie = `fair-ride-token=${accessToken}; path=/; max-age=2592000; SameSite=Lax`
+          localStorage.setItem('sarva-token', accessToken)
+          document.cookie = `sarva-token=${accessToken}; path=/; max-age=2592000; SameSite=Lax`
         }
         set({
           user,
@@ -98,16 +98,16 @@ export const useAuthStore = create<AuthState>()(
 
       setAccessToken: (token) => {
         if (typeof window !== 'undefined') {
-          localStorage.setItem('fair-ride-token', token)
-          document.cookie = `fair-ride-token=${token}; path=/; max-age=2592000; SameSite=Lax`
+          localStorage.setItem('sarva-token', token)
+          document.cookie = `sarva-token=${token}; path=/; max-age=2592000; SameSite=Lax`
         }
         set({ token })
       },
 
       clearAuth: () => {
         if (typeof window !== 'undefined') {
-          localStorage.removeItem('fair-ride-token')
-          document.cookie = 'fair-ride-token=; path=/; max-age=0; SameSite=Lax'
+          localStorage.removeItem('sarva-token')
+          document.cookie = 'sarva-token=; path=/; max-age=0; SameSite=Lax'
         }
         set({
           user: null,
@@ -130,7 +130,7 @@ export const useAuthStore = create<AuthState>()(
       clearResetOtp: () => set({ resetOtp: null }),
     }),
     {
-      name: 'fair-ride-auth',
+      name: 'sarva-auth',
       partialize: (state) => ({
         user: state.user,
         token: state.token,

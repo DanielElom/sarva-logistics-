@@ -43,7 +43,7 @@ export default function AdminTripsPage() {
     const csv = [headers, ...rows].map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n')
     const blob = new Blob([csv], { type: 'text/csv' })
     const url = URL.createObjectURL(blob)
-    const a = document.createElement('a'); a.href = url; a.download = 'fair-ride-trips.csv'; a.click()
+    const a = document.createElement('a'); a.href = url; a.download = 'sarva-trips.csv'; a.click()
     URL.revokeObjectURL(url)
   }
 

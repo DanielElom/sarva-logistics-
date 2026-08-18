@@ -18,7 +18,7 @@ const MENU_ITEMS = [
   { icon: 'settings', label: 'Account Settings', href: '/settings', section: 'Account' },
   /* V2_FEATURE: SUBSCRIPTIONS — { icon: 'subscriptions', label: 'Subscriptions', ... } */
   { icon: 'support_agent', label: 'Support Center', href: '/shared/support', section: 'Help' },
-  { icon: 'info', label: 'About Fair-Ride', href: '/shared/about', section: 'Help' },
+  { icon: 'info', label: 'About Sarva', href: '/shared/about', section: 'Help' },
 ]
 
 const SECTIONS = ['Services', 'Account', 'Help']

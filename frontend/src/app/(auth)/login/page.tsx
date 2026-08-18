@@ -71,7 +71,7 @@ export default function LoginPage() {
             </span>
           </button>
           <span className="font-headline font-bold text-lg tracking-tight text-primary">
-            Fair-Ride
+            Sarva
           </span>
         </div>
       </header>
@@ -81,7 +81,7 @@ export default function LoginPage() {
         {/* Brand hero strip */}
         <div className="w-full rounded-2xl editorial-gradient overflow-hidden mb-8 p-6 flex flex-col justify-between" style={{ minHeight: '160px' }}>
           <p className="font-headline font-extrabold text-on-primary/60 tracking-tighter text-xs uppercase">
-            The Architectural Courier
+            Sarva Logistics
           </p>
           <div>
             <h2 className="font-headline font-bold text-xl text-on-primary leading-snug mb-3">

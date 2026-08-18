@@ -10,7 +10,7 @@ export function getSocket(): Socket {
   if (!socket) {
     const token =
       typeof window !== 'undefined'
-        ? localStorage.getItem('fair-ride-token') ?? ''
+        ? localStorage.getItem('sarva-token') ?? ''
         : ''
 
     socket = io(SOCKET_URL, {
@@ -25,7 +25,7 @@ export function getSocket(): Socket {
 export function getChatSocket(): Socket {
   const token =
     typeof window !== 'undefined'
-      ? localStorage.getItem('fair-ride-token') ?? ''
+      ? localStorage.getItem('sarva-token') ?? ''
       : ''
 
   return io(`${SOCKET_URL}/chat`, {

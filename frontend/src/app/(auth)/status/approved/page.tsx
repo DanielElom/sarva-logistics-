@@ -19,11 +19,11 @@ const ROLE_DESTINATIONS: Record<string, string> = {
 }
 
 const ROLE_MESSAGES: Record<string, string> = {
-  RIDER: 'Welcome to the Fair-Ride fleet. You can now start accepting deliveries.',
+  RIDER: 'Welcome to the Sarva fleet. You can now start accepting deliveries.',
   VENDOR: 'Your vendor account is active. Start booking deliveries for your business.',
   RESTAURANT: 'Your restaurant account is active. Book riders to deliver your orders.',
   CORPORATE: 'Your corporate account is active. Manage all your business deliveries.',
-  INDIVIDUAL: 'Your account has been verified. You can now use all Fair-Ride features.',
+  INDIVIDUAL: 'Your account has been verified. You can now use all Sarva features.',
 }
 
 export default function ApprovedPage() {
@@ -50,7 +50,7 @@ export default function ApprovedPage() {
         <div className="flex items-center gap-4">
           <span className="font-['Manrope'] font-bold text-lg text-primary">Application Status</span>
         </div>
-        <span className="font-['Manrope'] font-extrabold text-xl text-primary tracking-tighter">Fair-Ride</span>
+        <span className="font-['Manrope'] font-extrabold text-xl text-primary tracking-tighter">Sarva</span>
       </header>
 
       <main className="flex-grow flex items-center justify-center px-6 pt-20 pb-24">

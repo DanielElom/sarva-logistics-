@@ -1,6 +1,6 @@
 /**
  * @module MatchingModule
- * @description Real-time rider-order matching engine for Fair-Ride.
+ * @description Real-time rider-order matching engine for Sarva.
  *
  * MatchingService   — 5-step geo+EMA matching algorithm (see matching.service.ts)
  * MatchingGateway   — Socket.io gateway: riders connect, go online, accept/reject

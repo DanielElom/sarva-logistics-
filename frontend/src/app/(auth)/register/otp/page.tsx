@@ -140,7 +140,7 @@ export default function RegisterOtpPage() {
             </span>
           </button>
           <span className="font-headline font-bold text-lg tracking-tight text-primary">
-            Fair-Ride
+            Sarva
           </span>
         </div>
         <span className="text-sm font-extrabold text-primary tracking-tighter pr-1">
@@ -214,7 +214,7 @@ export default function RegisterOtpPage() {
             <div>
               <p className="text-sm font-bold text-primary mb-1">Secure Verification</p>
               <p className="text-xs text-on-surface-variant leading-relaxed">
-                Never share your OTP with anyone. Fair-Ride staff will never ask for your code.
+                Never share your OTP with anyone. Sarva staff will never ask for your code.
               </p>
             </div>
           </div>

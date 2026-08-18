@@ -190,7 +190,7 @@ export default function AdminSettingsAdvancedPage() {
                   <div className="w-3 h-3 rounded-full bg-amber-500" />
                   <div className="w-3 h-3 rounded-full bg-green-500" />
                 </div>
-                <span className="text-gray-400 text-xs">fair-ride-dispatch — debug console</span>
+                <span className="text-gray-400 text-xs">sarva-dispatch — debug console</span>
               </div>
               <div className="flex gap-3">
                 <span className="text-[10px] font-bold text-green-400 bg-green-400/10 px-2 py-1 rounded">LIVE</span>

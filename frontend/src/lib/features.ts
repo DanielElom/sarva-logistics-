@@ -1,5 +1,5 @@
 /**
- * Fair-Ride Feature Flags
+ * Sarva Feature Flags
  * =======================
  * V1 Launch configuration — Individual + Rider + Admin only
  *

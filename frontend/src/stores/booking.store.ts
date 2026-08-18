@@ -1,6 +1,6 @@
 /**
  * @store BookingStore
- * @description Multi-step booking flow state for Fair-Ride, persisted to localStorage.
+ * @description Multi-step booking flow state for Sarva, persisted to localStorage.
  *
  * BOOKING FLOW STEPS
  * The booking wizard spans 4 screens that accumulate state here:
@@ -10,7 +10,7 @@
  *   Step 4 — payment/page.tsx:     setPaymentMethod → POST /orders → clears store
  *
  * PERSISTENCE
- * Persisted under key 'fair-ride-booking' so an interrupted booking survives
+ * Persisted under key 'sarva-booking' so an interrupted booking survives
  * a page refresh. clearBooking() resets all fields to null after order creation
  * or on manual cancellation.
  *
@@ -102,6 +102,6 @@ export const useBookingStore = create<BookingState>()(
 
       clearBooking: () => set({ ...empty }),
     }),
-    { name: 'fair-ride-booking' },
+    { name: 'sarva-booking' },
   ),
 )

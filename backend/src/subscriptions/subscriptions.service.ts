@@ -176,7 +176,7 @@ export class SubscriptionsService {
     const callbackUrl = `${process.env['APP_URL'] || 'http://localhost:3000'}/subscription/verify?ref=${reference}`;
 
     const paystackResult = await this.paystack.initializeTransaction(
-      user.email || `${user.phone}@fairride.ng`,
+      user.email || `${user.phone}@sarvalogistics.ng`,
       amountKobo,
       reference,
       callbackUrl,
@@ -292,7 +292,7 @@ export class SubscriptionsService {
           s.userId,
           NotificationType.SYSTEM,
           'Subscription Expired',
-          'Your Fair-Ride subscription has expired. Renew to keep your benefits.',
+          'Your Sarva subscription has expired. Renew to keep your benefits.',
         ),
       ),
     );

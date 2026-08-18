@@ -34,7 +34,7 @@ export default function DeliveryCancelPage() {
     if (!isAuthenticated) { router.replace('/welcome'); return }
     if (role === 'RIDER' || role === 'ADMIN') { router.replace('/home'); return }
 
-    const stored = localStorage.getItem('fair-ride-cancel-info')
+    const stored = localStorage.getItem('sarva-cancel-info')
     if (stored) {
       try { setData(JSON.parse(stored)) } catch { /* ignore */ }
     } else {
@@ -70,7 +70,7 @@ export default function DeliveryCancelPage() {
             <span className="material-symbols-outlined">menu</span>
           </button>
           <span className="font-['Manrope'] font-extrabold text-[#003418] italic text-lg tracking-tight">
-            Fair-Ride
+            Sarva
           </span>
         </div>
         <div className="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center">

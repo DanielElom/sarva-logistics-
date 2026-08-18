@@ -40,8 +40,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <span className="material-symbols-outlined text-on-primary">architecture</span>
           </div>
           <div>
-            <h2 className="font-headline font-extrabold text-primary text-sm leading-tight">Admin Panel</h2>
-            <p className="text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">Fair-Ride</p>
+            <h2 className="font-headline font-extrabold text-primary text-sm leading-tight">Sarva Admin</h2>
+            <p className="text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">Sarva</p>
           </div>
         </div>
 
@@ -69,7 +69,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         <div className="pt-4 border-t border-outline-variant/20 space-y-1">
           <a
-            href="mailto:support@fair-ride.com"
+            href="mailto:support@sarvalogistics.ng"
             className="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg text-sm transition-all"
           >
             <span className="material-symbols-outlined text-[20px]">contact_support</span>

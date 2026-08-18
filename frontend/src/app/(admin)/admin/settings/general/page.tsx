@@ -9,10 +9,10 @@ import { useState, useRef } from 'react'
 import api from '@/lib/api'
 
 export default function AdminSettingsGeneralPage() {
-  const [platformName, setPlatformName] = useState('Fair-Ride')
+  const [platformName, setPlatformName] = useState('Sarva')
   const [currency, setCurrency] = useState('NGN')
   const [timezone, setTimezone] = useState('GMT+1')
-  const [supportEmail, setSupportEmail] = useState('support@fair-ride.com')
+  const [supportEmail, setSupportEmail] = useState('support@sarvalogistics.ng')
   const [supportPhone, setSupportPhone] = useState('+234 800 123 4567')
   const [saved, setSaved] = useState(false)
   const [logoPreview, setLogoPreview] = useState<string | null>(null)

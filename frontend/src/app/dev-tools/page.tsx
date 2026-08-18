@@ -701,7 +701,7 @@ function SocketMonitorTab() {
 
   function connect() {
     if (socketRef.current) { socketRef.current.disconnect(); socketRef.current = null }
-    const t = token || (typeof window !== 'undefined' ? localStorage.getItem('fair-ride-token') ?? '' : '')
+    const t = token || (typeof window !== 'undefined' ? localStorage.getItem('sarva-token') ?? '' : '')
     const sock = io(API, { query: { token: t }, transports: ['websocket'] })
     const ALL_EVENTS = ['rider_location','order_assigned','job_request','no_riders_available','new_message','order_status_update','connect','disconnect','error']
     ALL_EVENTS.forEach(ev => sock.on(ev, (data) => {
@@ -925,7 +925,7 @@ export default function DevToolsPage() {
       <div className="bg-gray-900 text-white px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <span className="text-lg">🧪</span>
-          <span className="font-bold tracking-tight">Fair-Ride Test Suite</span>
+          <span className="font-bold tracking-tight">Sarva Test Suite</span>
           <span className="px-2 py-0.5 bg-red-600 rounded text-[11px] font-bold uppercase tracking-wider">DEV ONLY</span>
         </div>
         <span className="text-xs text-gray-400">localhost:3001 backend</span>
