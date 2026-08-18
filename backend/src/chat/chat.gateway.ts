@@ -66,8 +66,15 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
       return;
     }
 
+    const secret = process.env['JWT_SECRET'];
+    if (!secret) {
+      // Fail closed: without a secret every token would have to be trusted.
+      this.logger.error('JWT_SECRET is not set — refusing chat socket connection');
+      client.disconnect();
+      return;
+    }
+
     try {
-      const secret = process.env['JWT_SECRET'] || 'fallback-secret';
       const payload = jwt.verify(token, secret) as {
         sub: string;
         role: string;

@@ -62,7 +62,7 @@ export default function ChatPage() {
 
     // Socket
     if (!userId) return
-    const sock = io('http://localhost:3001/chat', {
+    const sock = io(`${process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'}/chat`, {
       auth: { token: typeof window !== 'undefined' ? localStorage.getItem('sarva-token') ?? '' : '' },
       transports: ['websocket'],
     })

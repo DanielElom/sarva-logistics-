@@ -18,13 +18,14 @@ import { PassportModule } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtStrategy } from './jwt.strategy';
+import { getJwtSecret } from '../config/jwt.config';
 
 @Module({
   imports: [
     PassportModule,
     JwtModule.registerAsync({
       useFactory: () => ({
-        secret: process.env.JWT_SECRET || 'fallback-secret',
+        secret: getJwtSecret(),
         signOptions: { expiresIn: '7d' },
       }),
     }),

@@ -9,7 +9,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import { io, Socket } from 'socket.io-client'
 
 /* ── constants ───────────────────────────────────────────────────── */
-const API = 'http://localhost:3001'
+const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'
 const TABS = ['Accounts', 'Delivery Sim', 'Rider Sim', 'Admin Tools', 'Socket Monitor', 'Quick Reset'] as const
 type Tab = typeof TABS[number]
 

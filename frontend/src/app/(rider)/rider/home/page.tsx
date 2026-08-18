@@ -82,7 +82,7 @@ export default function RiderHomePage() {
   useEffect(() => {
     if (!token || !isAuthenticated || role !== 'RIDER') return
 
-    const socket = io('http://localhost:3001', {
+    const socket = io(process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001', {
       auth: { token, userId: storeUser?.id },
       transports: ['websocket'],
     })

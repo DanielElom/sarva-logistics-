@@ -42,7 +42,7 @@ export default function InTransitPage() {
 
   useEffect(() => {
     if (!token || !order) return
-    const socket = io('http://localhost:3001', { auth: { token }, transports: ['websocket'] })
+    const socket = io(process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001', { auth: { token }, transports: ['websocket'] })
     socketRef.current = socket
     watchRef.current = navigator.geolocation.watchPosition(
       (pos) => {
