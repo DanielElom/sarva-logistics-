@@ -10,6 +10,11 @@ export default defineConfig({
     seed: "ts-node --transpile-only --project tsconfig.seed.json prisma/seed.ts",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    // Prisma CLI only (migrate/introspect). Supabase's pooled connection (port 6543)
+    // can't run DDL or advisory locks, so migrations use the direct connection when
+    // DIRECT_URL is set. The app runtime keeps using pooled DATABASE_URL via the
+    // driver adapter in src/prisma/prisma.service.ts. Prisma 7 removed `directUrl`,
+    // so the equivalent is expressed here. See https://pris.ly/d/config-datasource
+    url: process.env["DIRECT_URL"] ?? process.env["DATABASE_URL"],
   },
 });
